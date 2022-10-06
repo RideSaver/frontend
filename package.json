@@ -1,0 +1,24 @@
+{
+    "name": "ride-saver",
+    "version": "0.0.1-alpha",
+    "devDependencies": {
+        "eslint": "^8.24.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "gitlab-ci-local": "^4.33.1",
+        "jest": "^29.0.3",
+        "prettier": "^2.7.1",
+        "prettier-eslint": "^15.0.1"
+    },
+    "scripts": {
+        "test:ci": "gitlab-ci-local --no-artifacts-to-source",
+        "test": "jest"
+    },
+    "workspaces": [
+        "packages/*"
+    ],
+    "author": {
+        "name": "Elias Schablowski",
+        "email": "eschabl@calstatela.edu"
+    },
+    "private": true
+}
