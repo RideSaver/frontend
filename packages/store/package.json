@@ -1,0 +1,13 @@
+{
+  "name": "@ride-saver/store",
+  "version": "0.0.1",
+  "description": "The RideSaver Redux store",
+  "main": "src/index.ts",
+  "author": "Elias Schablowski",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.5",
+    "redux": "^4.2.0"
+  }
+}
