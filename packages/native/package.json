@@ -12,7 +12,7 @@
     "@react-navigation/native": "^6.0.13",
     "@ride-saver/components": "0.0.1",
     "@ride-saver/store": "0.0.1",
-    "expo": "~46.0.9",
+    "expo": "~46.0.15",
     "expo-status-bar": "~1.4.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
