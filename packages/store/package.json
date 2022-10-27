@@ -1,5 +1,5 @@
 {
-  "name": "@ride-saver/store",
+  "name": "@ridesaver/store",
   "version": "0.0.1",
   "description": "The RideSaver Redux store",
   "main": "src/index.ts",
@@ -8,6 +8,8 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
+    "@ridesaver/api": "0.0.1",
+    "@ridesaver/internationalization": "0.0.1",
     "redux": "^4.2.0"
   }
 }
