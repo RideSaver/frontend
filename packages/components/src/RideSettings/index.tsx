@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import NumericInput from "react-native-numeric-input";
 
-import { rideSettings } from "@ride-saver/store";
+import { rideSettings } from "@ridesaver/store";
 
 export default () => {
     const dispatch = useDispatch();

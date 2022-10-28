@@ -17,10 +17,11 @@
         "vscode": {
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
-                "dbaeumer.vscode-eslint",
-                "rvest.vs-code-prettier-eslint",
-                "esbenp.prettier-vscode"
-            ]
+				"dbaeumer.vscode-eslint",
+				"rvest.vs-code-prettier-eslint",
+				"esbenp.prettier-vscode",
+				"Orta.vscode-jest"
+			]
         }
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.

@@ -1,0 +1,1 @@
+/*eslint-disable*/export const messages={"Very Weak":"Vēŕŷ Ŵēàķ","Weak":"Ŵēàķ","Medium":"Mēďĩũm","Strong":"Śţŕōńĝ","Very Strong":"Vēŕŷ Śţŕōńĝ","{0}":[["0"]],"language":"ĺàńĝũàĝē"};
