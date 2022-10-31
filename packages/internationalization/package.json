@@ -1,0 +1,19 @@
+{
+  "name": "@ridesaver/internationalization",
+  "version": "0.0.1",
+  "description": "The translation files for RideSaver",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest",
+    "extract": "lingui extract",
+    "compile": "lingui compile"
+  },
+  "dependencies": {
+    "@lingui/cli": "^3.14.0",
+    "@lingui/core": "^3.14.0",
+    "@lingui/macro": "^3.14.0",
+    "make-plural": "^7.1.0"
+  },
+  "author": "Elias Schablowski",
+  "license": "MIT"
+}

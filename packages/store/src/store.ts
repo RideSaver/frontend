@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { slice as rideSettingsSlice } from "./slices/rideSettingsSelector";
+import { slice as languageSlice } from "./slices/language";
 
 const store = configureStore({
     reducer: {
         rideSettings: rideSettingsSlice.reducer,
+        language: languageSlice.reducer
     },
 });
 export default store;

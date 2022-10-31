@@ -1,5 +1,5 @@
 {
-  "name": "@ride-saver/native",
+  "name": "@ridesaver/native",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@react-navigation/native": "^6.0.13",
-    "@ride-saver/components": "0.0.1",
-    "@ride-saver/store": "0.0.1",
+    "@ridesaver/components": "0.0.1",
+    "@ridesaver/store": "0.0.1",
     "expo": "~46.0.9",
     "expo-status-bar": "~1.4.0",
     "react": "18.0.0",

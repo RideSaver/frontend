@@ -1,5 +1,5 @@
 {
-  "name": "@ride-saver/components",
+  "name": "@ridesaver/components",
   "version": "0.0.1",
   "description": "The shared components of RideSaver",
   "main": "src/index.ts",
@@ -10,10 +10,13 @@
     "RideSaver;react-native"
   ],
   "dependencies": {
-    "@ride-saver/api": "0.0.1",
-    "@ride-saver/store": "0.0.1",
+    "@lingui/core": "^3.14.0",
+    "@lingui/macro": "^3.14.0",
+    "@ridesaver/store": "0.0.1",
+    "@zxcvbn-ts/core": "^2.1.0",
     "formik": "^2.2.9",
     "react-native-numeric-input": "^1.9.1",
+    "react-native-paper": "5.0.0-rc.8",
     "react-redux": "^8.0.4",
     "redux": "^4.2.0"
   },

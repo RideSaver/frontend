@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as reducers from "./reducers";
 
-import { Location } from "@ride-saver/api";
+import { Location } from "@RideSaver/api";
 
 // Define a type for the slice state
-interface CounterState {
+interface SettingsState {
     seats: number;
     startPoint: Location;
     endPoint: Location;
 }
 
 // Define the initial state using that type
-const initialState: CounterState = {
+const initialState: SettingsState = {
     seats: 1,
     startPoint: {
         latitude: 0,

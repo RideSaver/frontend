@@ -4,7 +4,7 @@ import {
   LocationSelector,
   RideList,
   RideSettings,
-} from "@ride-saver/components";
+} from "@ridesaver/components";
 
 export default () => {
 
