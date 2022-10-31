@@ -20,6 +20,8 @@ export default {
     sourceLocale: "en_US",
     pseudoLocale: "en_PS",
     fallbackLocales: {
+        default: "en_US",
         en_PS: "en_US",
+        en_UK: "en_US",
     },
 } as Partial<LinguiConfig>;

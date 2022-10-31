@@ -1,7 +1,17 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
-
 module.exports = {
-    preset: 'ts-jest',
-    testEnvironment: 'node',
-    projects: require("./package.json").workspaces
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  transform: {
+    '^.+\\.[tj]sx?$': ['ts-jest', {
+      tsconfig: './tsconfig.json',
+    }],
+  },
+  projects: [
+    "packages/*"
+  ],
+  clearMocks: true, // Clears the state of all mocks between tests (Why isn't this standard?)
+  fakeTimers: {
+    enableGlobally: true // Allows for automated manipulation of timers.
+  },
 };

@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { name } from ".";
 import { locale, downloadMessages } from "@ridesaver/internationalization";
 import { AppDispatch, RootState } from "../../store";
+import * as intl from "@ridesaver/internationalization";
 
 export const loadLocale = createAsyncThunk(
-    `${name}/load`,
+    `language/load`,
     async (localeId: locale, thunkAPI) => {
-        const response = await downloadMessages(localeId);
+        const response = await intl.downloadMessages(localeId);
         return response;
     }
 );
@@ -18,8 +18,9 @@ export const switchLocale = createAsyncThunk<
         dispatch: AppDispatch;
         state: RootState;
     }
->(`${name}/switch`, async (localeId, thunkAPI) => {
-    if (thunkAPI.getState().language.messages[localeId] === undefined) {
+>(`language/switch`, async (localeId, thunkAPI) => {
+    const state = thunkAPI.getState().language;
+    if (state.messages[localeId] === undefined && !state.loadingLocales.includes(localeId)) {
         await thunkAPI.dispatch(loadLocale(localeId));
     }
     return localeId;

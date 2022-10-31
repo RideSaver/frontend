@@ -1,9 +1,7 @@
 import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
-import getLocale from "./locale_detector";
 import { loadLocale, switchLocale } from "./thunks";
 import i18n, {
     locale,
-    locales,
     loadLocale as i18nLoad,
 } from "@ridesaver/internationalization";
 
@@ -11,6 +9,7 @@ import i18n, {
 interface LanguageState {
     locale?: locale;
     pendingLocale?: locale;
+    loadingLocales: locale[];
     messages: {
         [id in locale]?: any;
     };
@@ -23,18 +22,23 @@ const rideSettingsSlice = createSlice<
     name: "language",
     // `createSlice` will infer the state type from the `initialState` argument
     initialState: {
-        locale: i18n.locale as any,
-        messages: i18n._messages,
+        locale: i18n?.locale as any,
+        messages: i18n?._messages || {},
+        loadingLocales: []
     },
     reducers: {},
     extraReducers(builder) {
         builder
+            .addCase(loadLocale.pending, (state, action) => {
+                state.loadingLocales.push(action.meta.arg);
+            })
             .addCase(loadLocale.fulfilled, (state, action) => {
-                console.log(i18n);
-                state.messages[action.payload.locale] = action.payload.messages;
+                state.messages[action.meta.arg] = action.payload;
+                state.loadingLocales = state.loadingLocales.filter(locale => locale !== action.meta.arg);
                 i18nLoad(
                     action.meta.arg,
-                    state.messages[action.payload.locale]
+                    state.messages[action.meta.arg],
+                    i18n
                 );
             })
             .addCase(switchLocale.fulfilled, (state, action) => {

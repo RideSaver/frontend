@@ -1,7 +1,7 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 
 module.exports = {
-    displayName: "Redux Store",
+    displayName: "Internationalization",
     preset: 'ts-jest',
     testEnvironment: 'node',
     transform: {

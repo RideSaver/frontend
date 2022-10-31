@@ -2,18 +2,16 @@
 
 exports[`loads language load en_PS : en_PS messages 1`] = `
 {
-  "messages": {
-    "Medium": "Mēďĩũm",
-    "Strong": "Śţŕōńĝ",
-    "Very Strong": "Vēŕŷ Śţŕōńĝ",
-    "Very Weak": "Vēŕŷ Ŵēàķ",
-    "Weak": "Ŵēàķ",
-    "language": "ĺàńĝũàĝē",
-    "{0}": [
-      [
-        "0",
-      ],
+  "Medium": "Mēďĩũm",
+  "Strong": "Śţŕōńĝ",
+  "Very Strong": "Vēŕŷ Śţŕōńĝ",
+  "Very Weak": "Vēŕŷ Ŵēàķ",
+  "Weak": "Ŵēàķ",
+  "language": "ĺàńĝũàĝē",
+  "{0}": [
+    [
+      "0",
     ],
-  },
+  ],
 }
 `;
