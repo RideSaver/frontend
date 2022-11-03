@@ -3,7 +3,7 @@
         "target": "ESNext",
         "esModuleInterop": true,
         "moduleResolution": "node",
-        "module": "CommonJS",
+        "module": "ESNext",
         "jsx": "preserve"
     }
 }
