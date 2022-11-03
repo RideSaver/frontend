@@ -12,11 +12,14 @@
   "dependencies": {
     "@lingui/core": "^3.14.0",
     "@lingui/macro": "^3.14.0",
+    "@lingui/react": "^3.14.0",
     "@ridesaver/store": "0.0.1",
     "@zxcvbn-ts/core": "^2.1.0",
+    "babel-plugin-macros": "^3.1.0",
     "formik": "^2.2.9",
-    "react-native-numeric-input": "^1.9.1",
+    "react": "^18.2.0",
     "react-native-paper": "5.0.0-rc.8",
+    "react-native-vector-icons": "^9.2.0",
     "react-redux": "^8.0.4",
     "redux": "^4.2.0"
   },

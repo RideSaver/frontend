@@ -9,6 +9,7 @@
     "compile": "lingui compile"
   },
   "dependencies": {
+    "@babel/core": "^7.19.6",
     "@lingui/cli": "^3.14.0",
     "@lingui/core": "^3.14.0",
     "@lingui/macro": "^3.14.0",

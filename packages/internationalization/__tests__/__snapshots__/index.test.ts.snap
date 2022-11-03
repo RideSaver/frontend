@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`locales locales should not change (without reason) 1`] = `
-[
+Array [
   "en_US",
   "en_UK",
   "en_PS",

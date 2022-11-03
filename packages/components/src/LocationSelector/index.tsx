@@ -1,42 +1,81 @@
-import React, { useCallback } from "react";
-import { TextInput, View } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useState } from "react";
+import { HelperText, TextInput, TextInputProps } from "react-native-paper";
+import { Text, View, StyleSheet } from "react-native";
+import { Trans } from "@lingui/macro";
 
-import { rideSettings } from "@ride-saver/store";
+type location = {
+    latitude: number;
+    longitude: number;
+};
 
-export default ({location}: {location: "endPoint" | "startPoint"}) => {
-    const dispatch = useDispatch();
+interface Props extends Partial<TextInputProps> {
+    location?: location;
+    onUpdateLocation: (location: location) => void;
+}
 
-    const normalizedLocation: Capitalize<typeof location> = location.charAt(0).toUpperCase() + location.substring(1) as any;
-
-    const locationState = useSelector(rideSettings["set"+normalizedLocation]) as {
-        latitude: number;
-        longitude: number;
-    };
-    const latitudeDispatch = useCallback(
-        (latitude: number) => dispatch(rideSettings["set"+normalizedLocation]({
-            ...locationState,
-            latitude
-        })),
-        []
+export default (options: Props) => {
+    const [location, setLocation] = useState("");
+    useCallback(
+        () =>
+            options.location &&
+            setLocation(
+                `${Math.abs(options.location.longitude)}${
+                    options.location.longitude > 0 ? "N" : "S"
+                }${Math.abs(options.location.latitude)}${
+                    options.location.latitude > 0 ? "E" : "W"
+                }`
+            ),
+        [options.location]
     );
-    const longitudeDispatch = useCallback(
-        (longitude: number) => dispatch(rideSettings["set"+normalizedLocation]({
-            ...locationState,
-            longitude
-        })),
-        []
-    );
+    const [error, setError] = useState<React.ReactElement>();
     return (
         <View>
             <TextInput
-                onChange={(event) => latitudeDispatch(parseInt("0"+event.nativeEvent.text))}
-                value={locationState.latitude + ""}
+                onChangeText={(text: string) => {
+                    setLocation(text);
+                    const matches =
+                        /^(?<longitude>\d{1,3}(\.\d+)(N|S))(?<latitude>\d{1,3}(\.\d+)(E|W))$/.exec(
+                            text
+                        );
+                    if (
+                        "latitude" in matches.groups &&
+                        "longitude" in matches.groups
+                    ) {
+                        options.onUpdateLocation({
+                            latitude: parseFloat(matches.groups.latitude),
+                            longitude: parseFloat(matches.groups.longitude),
+                        });
+                        matches.groups.latitude;
+                    } else {
+                        setError(() => (
+                            <Trans>
+                                Expected format is{" "}
+                                <Text style={styles.helperTextExtraEmphasis}>
+                                    {(Math.random() * 180).toFixed(
+                                        Math.random() * 4
+                                    )}
+                                    {Math.random() > 0.5 ? "N" : "S"}
+                                    {(Math.random() * 180).toFixed(
+                                        Math.random() * 4
+                                    )}
+                                    {Math.random() > 0.5 ? "E" : "W"}
+                                </Text>
+                            </Trans>
+                        ));
+                    }
+                }}
+                value={location}
+                {...options}
             />
-            <TextInput
-                onChange={(event) => longitudeDispatch(parseInt("0"+event.nativeEvent.text))}
-                value={locationState.longitude + ""}
-            />
+            <HelperText type="error" visible={error !== undefined}>
+                {error}
+            </HelperText>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    helperTextExtraEmphasis: {
+        fontWeight: "bold",
+    },
+});
