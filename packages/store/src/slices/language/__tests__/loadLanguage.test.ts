@@ -1,6 +1,6 @@
 import { jest, describe, expect, test } from "@jest/globals";
 import { configureStore } from "@reduxjs/toolkit";
-import i18n, { locales, loadLocale as i18nLoadLocale } from "@ridesaver/internationalization";
+import i18n, { locales, loadLocale as i18nLoadLocale, downloadMessages } from "@ridesaver/internationalization";
 
 const { slice, loadLocale } = require("..") as typeof import("..");
 
@@ -14,10 +14,16 @@ function setupStore() {
 
 describe("loads language", () => {
     test("load en_PS ", async () => {
+        // Some dummy messages that should NEVER be in the real application
+        const msgs = {
+            cagfd: "ajfklds",
+            cagfds: "ajfklfdsads"
+        };
+        (downloadMessages as any).mockImplementationOnce((locale)=>locale === "en_PS" ? msgs : {});
         expect.assertions(1);
         const store = setupStore();
         const messages = await store.dispatch(loadLocale("en_PS")).unwrap();
-        expect(messages).toMatchSnapshot("en_PS messages");
+        expect(messages).toBe(msgs);
     });
     test("loads all possible locales correctly", async () => {
         const store = setupStore();

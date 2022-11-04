@@ -17,28 +17,28 @@ msgstr ""
 msgid "Expected format is <0>{0}{1}{2}{3}</0>"
 msgstr ""
 
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:25
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:33
 msgid "{0, select, veryweak {Very Weak} weak {Weak} average {Average} strong {Strong} verystrong {Very Strong} other {Average}}, Time to Crack: {1}"
 msgstr ""
 
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:53
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:61
 msgid "{seconds} seconds"
 msgstr ""
 
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:55
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:63
 msgid "{0} minutes"
 msgstr ""
 
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:57
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:65
 msgid "{0} hours"
 msgstr ""
 
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:59
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:67
 msgid "{0} days"
 msgstr ""
 
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:61
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:63
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:69
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:71
 msgid "{0} years"
 msgstr ""
 
@@ -46,36 +46,40 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: packages/native/src/App.tsx:62
+#: packages/web/src/App.tsx:55
+msgid "{0} - RideSaver"
+msgstr ""
+
+#: packages/native/src/App.tsx:76
+#: packages/web/src/App.tsx:69
+msgid "Login"
+msgstr ""
+
+#: packages/native/src/App.tsx:83
+#: packages/web/src/App.tsx:76
+msgid "Sign Up"
+msgstr ""
+
+#: packages/native/src/App.tsx:94
+#: packages/web/src/App.tsx:87
+msgid "Home"
+msgstr ""
+
 #: packages/screens/src/Login/index.tsx:30
 #: packages/screens/src/SignUp/index.tsx:30
 msgid "Username"
 msgstr ""
 
-#: packages/screens/src/Login/index.tsx:39
+#: packages/screens/src/Login/index.tsx:40
 #: packages/screens/src/SignUp/index.tsx:36
 msgid "Error: Invalid Username or Password"
 msgstr ""
 
-#: packages/screens/src/Login/index.tsx:41
+#: packages/screens/src/Login/index.tsx:42
 msgid "<0>Sign Up</0><1>Login</1>"
 msgstr ""
 
 #: packages/screens/src/SignUp/index.tsx:38
 msgid "<0>Login</0><1>Sign Up</1>"
-msgstr ""
-
-#: packages/web/src/App.tsx:48
-msgid "{0} - RideSaver"
-msgstr ""
-
-#: packages/web/src/App.tsx:61
-msgid "Login"
-msgstr ""
-
-#: packages/web/src/App.tsx:68
-msgid "Sign Up"
-msgstr ""
-
-#: packages/web/src/App.tsx:79
-msgid "Home"
 msgstr ""
