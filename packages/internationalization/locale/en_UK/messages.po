@@ -13,36 +13,73 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. Used to notify that the user has entered a very weak password on the sign up screen
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:11
-msgid "Very Weak"
-msgstr "Very Weak"
+#: packages/components/src/LocationSelector/index.tsx:51
+msgid "Expected format is <0>{0}{1}{2}{3}</0>"
+msgstr ""
 
-#. Used to notify that the user has entered a weak password on the sign up screen
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:16
-msgid "Weak"
-msgstr "Weak"
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:33
+msgid "{0, select, veryweak {Very Weak} weak {Weak} average {Average} strong {Strong} verystrong {Very Strong} other {Average}}, Time to Crack: {1}"
+msgstr ""
 
-#. Used to notify that the user has entered a medium password on the sign up screen
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:21
-msgid "Medium"
-msgstr "Medium"
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:61
+msgid "{seconds} seconds"
+msgstr ""
 
-#. Used to notify that the user has entered a strong password on the sign up screen
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:26
-msgid "Strong"
-msgstr "Strong"
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:63
+msgid "{0} minutes"
+msgstr ""
 
-#. Used to notify that the user has entered a very strong password on the sign up screen
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:31
-msgid "Very Strong"
-msgstr "Very Strong"
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:65
+msgid "{0} hours"
+msgstr ""
 
-#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:49
-msgid "{0}"
-msgstr "{0}"
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:67
+msgid "{0} days"
+msgstr ""
 
-#. Please input the language name (with extra specifiers, such as en_UK would be "English UK".
-#: packages/store/src/slices/language/__tests__/switchLanguage.ts:18
-msgid "language"
-msgstr "English International"
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:69
+#: packages/components/src/PasswordInput/PasswordStrengthIndicator.tsx:71
+msgid "{0} years"
+msgstr ""
+
+#: packages/components/src/PasswordInput/index.tsx:21
+msgid "Password"
+msgstr ""
+
+#: packages/native/src/App.tsx:62
+#: packages/web/src/App.tsx:55
+msgid "{0} - RideSaver"
+msgstr ""
+
+#: packages/native/src/App.tsx:76
+#: packages/web/src/App.tsx:69
+msgid "Login"
+msgstr ""
+
+#: packages/native/src/App.tsx:83
+#: packages/web/src/App.tsx:76
+msgid "Sign Up"
+msgstr ""
+
+#: packages/native/src/App.tsx:94
+#: packages/web/src/App.tsx:87
+msgid "Home"
+msgstr ""
+
+#: packages/screens/src/Login/index.tsx:30
+#: packages/screens/src/SignUp/index.tsx:30
+msgid "Username"
+msgstr ""
+
+#: packages/screens/src/Login/index.tsx:40
+#: packages/screens/src/SignUp/index.tsx:36
+msgid "Error: Invalid Username or Password"
+msgstr ""
+
+#: packages/screens/src/Login/index.tsx:42
+msgid "<0>Sign Up</0><1>Login</1>"
+msgstr ""
+
+#: packages/screens/src/SignUp/index.tsx:38
+msgid "<0>Login</0><1>Sign Up</1>"
+msgstr ""

@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
-import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import NumericInput from "react-native-numeric-input";
+import { TextInput } from "react-native-paper";
 
 import { rideSettings } from "@ridesaver/store";
 
@@ -13,12 +12,25 @@ export default () => {
     );
     const seats = useSelector(rideSettings.getSeats);
     return (
-        <View>
-            <NumericInput
-                onChange={(seats) => seatsDispatch(seats)}
-                value={seats}
-                minValue={0}
+        <TextInput
+                mode="outlined"
+                label="Riders"
+                left={
+                    <TextInput.Icon
+                        icon="account-multiple-minus"
+                        onPress={() => seatsDispatch(seats - 1)}
+                    />
+                }
+                right={
+                    <TextInput.Icon
+                        icon="account-multiple-plus"
+                        onPress={() => seatsDispatch(seats + 1)}
+                    />
+                }
+                value={`${seats}`}
+                onTextInput={({ nativeEvent: text }) =>
+                    seatsDispatch(parseInt(text.text))
+                }
             />
-        </View>
     );
 };

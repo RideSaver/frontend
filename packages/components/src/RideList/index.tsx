@@ -1,5 +1,5 @@
 import React from "react";
-import { Estimate } from "@ride-saver/api";
+import { Estimate } from "@RideSaver/api";
 import { Text, View } from "react-native";
 
 export default ({ estimates }: { estimates: Estimate[] }) => {
