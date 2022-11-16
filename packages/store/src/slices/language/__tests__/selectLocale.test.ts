@@ -1,43 +1,51 @@
-import { jest, describe, expect, test, beforeEach } from "@jest/globals";
+/**
+ * Tests redux state language/locale selection.
+ * @author Elias Schablowski
+ * @format
+ */
+
+import { describe, expect, test } from "@jest/globals";
 import type { Mocked } from "jest-mock";
 import { configureStore } from "@reduxjs/toolkit";
+import type { RootState } from "../../../store";
+import type { AnyAction, ReducersMapObject } from "@reduxjs/toolkit";
 
-import i18n, {
-    downloadMessages,
-    loadLocale as i18nLoadLocale,
-} from "@ridesaver/internationalization";
+import { downloadMessages } from "@ridesaver/internationalization";
 
-const { slice, loadLocale, switchLocale, getLocale } =
-    require("..") as typeof import("..");
+const { slice, switchLocale, getLocale } = jest.requireActual(
+    ".."
+) as typeof import("..");
 
 function setupStore() {
-    return configureStore({
+    return configureStore<RootState>({
         reducer: {
             language: slice.reducer,
-        },
+        } as ReducersMapObject<RootState, AnyAction>,
     });
 }
 
 describe("select language", () => {
     test("languages should be the same when selected", async () => {
         const store = setupStore();
-        await store.dispatch((switchLocale as any)("en_US"));
-        expect(getLocale(store.getState() as any)).toBe("en_US");
+        await store.dispatch(
+            (switchLocale as Mocked<typeof switchLocale>)("en-US")
+        );
+        expect(getLocale(store.getState())).toBe("en-US");
     });
     test("language should not change until loaded", async () => {
         const store = setupStore();
-        await store.dispatch((switchLocale as any)("en_US"));
+        await store.dispatch(switchLocale("en-US"));
         (
             downloadMessages as Mocked<typeof downloadMessages>
-        ).mockImplementationOnce(() => new Promise(() => {}));
-        store.dispatch((switchLocale as any)("en_UK"));
-        expect(getLocale(store.getState() as any)).toBe("en_US");
+        ).mockImplementationOnce(() => Promise.resolve({}));
+        store.dispatch(switchLocale("en-UK"));
+        expect(getLocale(store.getState())).toBe("en-US");
     });
 
     test("language should always change to the loaded language", async () => {
         const store = setupStore();
-        await store.dispatch((switchLocale as any)("en_US"));
-        await store.dispatch((switchLocale as any)("en_UK"));
-        expect(getLocale(store.getState() as any)).toBe("en_UK");
+        await store.dispatch(switchLocale("en-US"));
+        await store.dispatch(switchLocale("en-UK"));
+        expect(getLocale(store.getState())).toBe("en-UK");
     });
 });

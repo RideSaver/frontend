@@ -1,6 +1,12 @@
+/**
+ * The Main lingui.js config. @see lingui.js.org
+ * @author Elias Schablowski
+ * @format
+ */
+
 import { LinguiConfig } from "@lingui/conf";
 
-export const locales = ["en_US", "en_UK", "en_PS"] as const;
+export const locales = ["en-US", "en-UK", "en-PS"] as const;
 
 export type locale = typeof locales extends readonly (infer ElementType)[]
     ? ElementType
@@ -13,15 +19,15 @@ export default {
             exclude: ["**/node_modules/**"],
         },
     ],
-    locales: locales as any,
+    locales: [].concat(locales),
     format: "po",
     compileNamespace: "ts",
     orderBy: "origin",
-    sourceLocale: "en_US",
-    pseudoLocale: "en_PS",
+    sourceLocale: "en-US",
+    pseudoLocale: "en-PS",
     fallbackLocales: {
-        default: "en_US",
-        en_PS: "en_US",
-        en_UK: "en_US",
+        default: "en-US",
+        "en-PS": "en-US",
+        "en-UK": "en-US",
     },
 } as Partial<LinguiConfig>;

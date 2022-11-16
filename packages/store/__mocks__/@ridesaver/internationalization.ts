@@ -1,30 +1,26 @@
+/**
+ * Mock for internationalization, tries to mimic the API (albeit with empty returns) used to verify that all functions are called correctly for internationalization.
+ * @author Elias Schablowski
+ * @format
+ */
+
 import { jest } from "@jest/globals";
-import { setupI18n } from "@lingui/core";
 
-type expT = typeof import("@ridesaver/internationalization");
-
-const originalModule = jest.requireActual<
-    typeof import("@ridesaver/internationalization")
->("@ridesaver/internationalization");
-
-let mock = {
+module.exports = {
     __esModule: true,
-    ...originalModule,
+    locales: ["en-US", "en-PS", "te-ST"],
     default: {
         activate: jest.fn(),
         load: jest.fn(),
         loadLocaleData: jest.fn(),
         _: jest.fn(),
     },
-    downloadMessages: jest.fn(originalModule.downloadMessages),
+    downloadMessages: jest
+        .fn<(locale: string) => Promise<{ messages: object }>>()
+        .mockResolvedValue({
+            messages: {
+                locale: "testLocaleString",
+            },
+        }),
     loadLocale: jest.fn(),
 };
-
-jest.mock<typeof import("@ridesaver/internationalization")>(
-    "@ridesaver/internationalization",
-    () => mock as any
-);
-
-export const { downloadMessages, loadLocale, locales } = mock;
-
-export default mock.default;

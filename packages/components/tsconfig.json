@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "module": "CommonJS",
+        "jsx": "preserve",
+        "allowJs": true,
+        "outDir": "build"
+    }
+}

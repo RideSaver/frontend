@@ -1,0 +1,11 @@
+module.exports = {
+    presets: [
+        "@babel/preset-typescript",
+        "@babel/preset-react",
+        "module:metro-react-native-babel-preset",
+    ],
+    plugins: [
+        "@babel/plugin-proposal-export-namespace-from"
+    ]
+    // rootMode: "upward"
+};
