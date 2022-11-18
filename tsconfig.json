@@ -4,6 +4,8 @@
         "esModuleInterop": true,
         "moduleResolution": "node",
         "module": "ESNext",
-        "jsx": "preserve"
+        "jsx": "react",
+        "allowJs": true,
+        "outDir": "build"
     }
 }
