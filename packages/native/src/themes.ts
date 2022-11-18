@@ -1,3 +1,9 @@
+/**
+ * Theme definitions for light and dark native themes.
+ * @author Elias Schablowski
+ * @format
+ */
+
 import {
     DarkTheme,
     DefaultTheme as LightTheme,
