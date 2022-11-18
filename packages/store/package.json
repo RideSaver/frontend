@@ -7,11 +7,11 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@RideSaver/api": "0.1.0-main-SNAPSHOT.20221018233359570",
+    "@RideSaver/api": "^0.0.6",
     "@react-native-async-storage/async-storage": "^1.17.10",
-    "@reduxjs/toolkit": "^1.8.5",
+    "@reduxjs/toolkit": "^1.9.0",
     "@ridesaver/internationalization": "0.0.1",
-    "react-redux": "^8.0.4",
+    "react-redux": "^8.0.5",
     "redux": "^4.2.0"
   },
   "devDependencies": {
