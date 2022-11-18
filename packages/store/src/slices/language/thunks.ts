@@ -1,12 +1,17 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+/**
+ * Define thunks for language actions.
+ * @author Elias Schablowski
+ * @format
+ */
+
+import { createAsyncThunk, ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 import { locale, downloadMessages } from "@ridesaver/internationalization";
 import { RootState } from "../../store";
 
 export const loadLocale = createAsyncThunk(
     `language/load`,
-    async (localeId: locale, thunkAPI) => {
-        const response = await downloadMessages(localeId);
-        return response;
+    async (localeId: locale) => {
+        return downloadMessages(localeId);
     }
 );
 
@@ -14,7 +19,7 @@ export const switchLocale = createAsyncThunk<
     locale,
     locale,
     {
-        dispatch: any;
+        dispatch: ThunkDispatch<RootState, undefined, AnyAction>;
         state: RootState;
     }
 >(`language/switch`, async (localeId, thunkAPI) => {
@@ -23,7 +28,7 @@ export const switchLocale = createAsyncThunk<
         state.messages[localeId] === undefined &&
         !state.loadingLocales.includes(localeId)
     ) {
-        await thunkAPI.dispatch(loadLocale(localeId));
+        await thunkAPI.dispatch(loadLocale(localeId)).unwrap();
     }
     return localeId;
 });

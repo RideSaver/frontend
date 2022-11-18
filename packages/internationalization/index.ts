@@ -1,3 +1,9 @@
+/**
+ * A collection of utility functions and constants for dealing with internationalization.
+ * @author Elias Schablowski
+ * @format
+ */
+
 import config, { locales } from "../../lingui.config";
 import { I18n, Messages, setupI18n } from "@lingui/core";
 
@@ -13,19 +19,21 @@ const defaultLocale: string = [
     config?.locales[0], // Use first locale if that fails
 ].filter((l) => typeof l === "string")[0] as string;
 
-let i18n = setupI18n({
+const i18n = setupI18n({
     locale: defaultLocale,
-    locales: locales as any,
+    locales: [].concat(locales),
     messages: {
         [defaultLocale]: require(`./locale/${defaultLocale}/messages.ts`),
     },
     localeData: {
-        [defaultLocale]: plurals[defaultLocale.split("_")[0]],
+        [defaultLocale]: {
+            plurals: plurals[defaultLocale.split("-")[0]],
+        },
     },
 });
 export default i18n;
 
-export async function downloadMessages(locale: locale, _i18n: I18n = i18n) {
+export async function downloadMessages(locale: locale) {
     const messages = await import(`./locale/${locale}/messages.ts`);
     return messages.messages;
 }
@@ -35,6 +43,6 @@ export async function loadLocale(
     messages: Messages,
     _i18n: I18n
 ) {
-    _i18n.loadLocaleData(plurals[locale.split("_")[0]]);
+    _i18n.loadLocaleData(plurals[locale.split("-")[0]]);
     _i18n.load(locale, messages);
 }

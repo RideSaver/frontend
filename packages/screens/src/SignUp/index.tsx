@@ -1,8 +1,14 @@
+/**
+ * The SignUp screen for RideSaver.
+ * @author Elias Schablowski
+ * @format
+ */
+
 import React, { useCallback, useState } from "react";
 import { View } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
 import { t, Trans } from "@lingui/macro";
-import { useLinkProps, Link } from "@react-navigation/native";
+import { useLinkProps } from "@react-navigation/native";
 import { PasswordInput } from "@ridesaver/components";
 import { user, useDispatch } from "@ridesaver/store";
 import i18n from "@ridesaver/internationalization";
@@ -10,7 +16,11 @@ import i18n from "@ridesaver/internationalization";
 export default () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+
+    const [usernameExists, setUsernameExists] = useState(false);
 
     const dispatch = useDispatch();
     const { onPress: onLogin, ...loginProps } = useLinkProps({
@@ -29,18 +39,40 @@ export default () => {
                 mode="outlined"
                 label={t(i18n)`Username`}
                 value={username}
-                onTextInput={({ nativeEvent: text }) => setUsername(text.text)}
+                onChangeText={(text) => setUsername(text)}
+                error={usernameExists}
             />
+            <HelperText type="error" visible={usernameExists}>
+                <Trans>Error: Username is already used.</Trans>
+            </HelperText>
             <PasswordInput showStrength={true} onPasswordChange={setPassword} />
-            <HelperText type="error" visible={error}>
-                <Trans>Error: Invalid Username or Password</Trans>
+            <TextInput
+                mode="outlined"
+                label={t(i18n)`Name`}
+                value={name}
+                onChangeText={(text) => setName(text)}
+            />
+            <TextInput
+                mode="outlined"
+                label={t(i18n)`E-Mail`}
+                value={email}
+                onChangeText={(text) => setEmail(text)}
+            />
+            <HelperText type="info" visible={true}>
+                <Trans>Optional</Trans>
+            </HelperText>
+
+            <TextInput
+                mode="outlined"
+                label={t(i18n)`Phone Number`}
+                value={email}
+                onChangeText={(text) => setPhone(text)}
+            />
+            <HelperText type="info" visible={true}>
+                <Trans>Optional</Trans>
             </HelperText>
             <Trans>
-                <Button
-                    mode="outlined"
-                    onPress={onLogin}
-                    {...loginProps}
-                >
+                <Button mode="outlined" onPress={onLogin} {...loginProps}>
                     Login
                 </Button>
                 <Button
@@ -48,13 +80,15 @@ export default () => {
                     onPress={() => {
                         dispatch(
                             user.signUp({
-                                // username,
+                                username,
                                 password,
-                            } as any)
+                                email,
+                                phone,
+                            })
                         )
                             .unwrap()
                             .catch(() => {
-                                setError(true);
+                                setUsernameExists(true);
                             });
                     }}
                 >

@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { View, useColorScheme } from "react-native";
+/**
+ * The main provider and screen setup for the ReactNative app.
+ * @author Elias Schablowski
+ * @format
+ */
+
+import React from "react";
+import { View, useColorScheme, StyleSheet } from "react-native";
 import { Provider as ReduxProvider } from "react-redux";
 import * as Screens from "@ridesaver/screens";
 import { store } from "@ridesaver/store";
@@ -17,9 +23,8 @@ import * as Themes from "./themes";
 
 export default function App() {
     const state = store.getState();
-    const [scheme, setScheme] = useState(useColorScheme());
+    const scheme = useColorScheme();
     const theme = scheme === "dark" ? Themes.dark : Themes.light;
-    console.log(theme.colors);
 
     if (state.user.isLoading) {
         // We haven't finished checking for the token yet
@@ -28,7 +33,7 @@ export default function App() {
 
     const Stack = createNativeStackNavigator();
 
-    const backgroundStyle = Stylesheet.create({
+    const backgroundStyle = StyleSheet.create({
         backgroundContainer: {
             backgroundColor: theme.colors.background,
         },

@@ -1,3 +1,9 @@
+/**
+ * The Login Screen for RideSaver.
+ * @author Elias Schablowski
+ * @format
+ */
+
 import React, { useCallback, useState } from "react";
 import { View } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
@@ -16,7 +22,7 @@ export default () => {
     const { onPress: onSignUp, ...signUpProps } = useLinkProps({
         to: {
             screen: "SignUp",
-        }
+        },
     });
 
     useCallback(() => {
@@ -31,10 +37,12 @@ export default () => {
                 value={username}
                 onChangeText={(text: string) => setUsername(text)}
                 accessibilityLabel="Username"
+                error={error}
             />
             <PasswordInput
                 showStrength={false}
                 onPasswordChange={setPassword}
+                error={error}
             />
             <HelperText type="error" visible={error}>
                 <Trans>Error: Invalid Username or Password</Trans>
@@ -43,7 +51,6 @@ export default () => {
                 <Button
                     mode="outlined"
                     onPress={(...args) => {
-                        console.log("signup");
                         onSignUp(...args);
                     }}
                     {...signUpProps}

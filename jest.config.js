@@ -1,17 +1,25 @@
+/* eslint-env node */
 module.exports = {
     preset: "ts-jest",
     testEnvironment: "node",
     transform: {
-        "^.+\\.[tj]sx?$": [
-            "ts-jest",
-            {
-                tsconfig: "./tsconfig.json",
-            },
-        ],
+        "^.+\\.[jt]sx?$": "babel-jest",
     },
-    projects: ["packages/*"],
+    projects: ["packages/*/jest.config.js", "packages/*/jest.config.*.js"],
     clearMocks: true, // Clears the state of all mocks between tests (Why isn't this standard?)
     fakeTimers: {
-        enableGlobally: true
+        enableGlobally: true,
     },
+    collectCoverageFrom: [
+        "**/*.{js,jsx,ts,tsx}",
+        "!**/node_modules/**",
+        "!**/vendor/**",
+        "!**/*.config.{js,ts}",
+    ],
+    // coverageProvider: "v8",
+    watchPlugins: [
+        "select-projects",
+        "typeahead/filename",
+        "typeahead/testname",
+    ],
 };

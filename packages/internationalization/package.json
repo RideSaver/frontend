@@ -9,10 +9,10 @@
     "compile": "lingui compile"
   },
   "dependencies": {
-    "@babel/core": "^7.19.6",
-    "@lingui/cli": "^3.14.0",
-    "@lingui/core": "^3.14.0",
-    "@lingui/macro": "^3.14.0",
+    "@babel/core": "^7.20.2",
+    "@lingui/cli": "^3.15.0",
+    "@lingui/core": "^3.15.0",
+    "@lingui/macro": "^3.15.0",
     "make-plural": "^7.1.0"
   },
   "author": "Elias Schablowski",

@@ -2,11 +2,15 @@
 
 module.exports = {
     displayName: "Internationalization",
-    preset: 'ts-jest',
-    testEnvironment: 'node',
+    preset: "ts-jest",
+    testEnvironment: "node",
     transform: {
-        '^.+\\.[tj]sx?$': ['ts-jest', {
-            tsconfig: './tsconfig.json',
-        }],
+        "^.+\\.[tj]sx?$": [
+            "ts-jest",
+            {
+                tsconfig: "./tsconfig.json",
+            },
+        ],
     },
+    coveragePathIgnorePatterns: ["locale/*"],
 };

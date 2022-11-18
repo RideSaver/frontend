@@ -1,8 +1,15 @@
+/**
+ * Define redux state for user information.
+ * @author Elias Schablowski
+ * @format
+ */
+
 import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 import { load, login, signUp } from "./thunks";
 
 // Define a type for the slice state
-interface UserState {
+export interface UserState {
+    avatar?: string;
     username?: string;
     token?: string;
     name?: string;
@@ -20,7 +27,7 @@ const rideSettingsSlice = createSlice<UserState, SliceCaseReducers<UserState>>({
     reducers: {},
     extraReducers(builder) {
         builder
-            .addCase(load.pending, (state, action) => {
+            .addCase(load.pending, (state) => {
                 state.isLoading = true;
             })
             .addCase(load.fulfilled, (state, action) => {

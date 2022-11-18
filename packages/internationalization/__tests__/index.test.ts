@@ -1,17 +1,21 @@
-import { jest, describe, test, expect } from "@jest/globals";
+/**
+ * Testing for all utility functions for localization.
+ * @author Elias Schablowski
+ * @format
+ */
+
+import { jest, describe, test, expect, beforeEach } from "@jest/globals";
 import { I18n } from "@lingui/core";
 
 import i18n, { locales, downloadMessages, loadLocale } from "..";
 
-// jest.mock("@lingui/core");
+beforeEach(() => {
+    jest.resetModules();
+});
 
 describe("i18n", () => {
     test("should conform to I18n", () => {
         expect(i18n).toBeInstanceOf(I18n);
-    });
-
-    test("should always be the same", () => {
-        expect(i18n).toBe(require("..").default);
     });
 });
 
@@ -37,7 +41,7 @@ describe("loadLocale", () => {
         const loadLocaleDataSpy = jest.spyOn(i18n, "loadLocaleData");
 
         loadLocale(
-            "en_US",
+            "en-US",
             {
                 locale: "en_US",
             },
@@ -54,12 +58,12 @@ describe("defaults", () => {
         jest.resetModules();
         jest.mock("../../../lingui.config.ts", () => ({
             fallbackLocales: {
-                default: "ar_winnie the poo",
+                default: "ar-winnie the poo",
             },
-            locales: ["ar_winnie the poo"],
+            locales: ["ar-winnie the poo"],
         }));
         jest.mock(
-            "../locale/ar_winnie the poo/messages.ts",
+            "../locale/ar-winnie the poo/messages.ts",
             () => {
                 return {
                     locale: "Working",
@@ -68,10 +72,10 @@ describe("defaults", () => {
             },
             { virtual: true }
         );
-        const i18n = require("..").default as I18n;
-        expect(i18n.locale).toBe("ar_winnie the poo");
+        const { default: i18n } = jest.requireActual<typeof import("..")>("..");
+        expect(i18n.locale).toBe("ar-winnie the poo");
         expect(i18n._messages).toMatchObject({
-            "ar_winnie the poo": {
+            "ar-winnie the poo": {
                 locale: "Working",
                 activity: "Eating honey",
             },
@@ -94,7 +98,7 @@ describe("defaults", () => {
             },
             { virtual: true }
         );
-        const i18n = require("..").default as I18n;
+        const { default: i18n } = jest.requireActual<typeof import("..")>("..");
         expect(i18n.locale).toBe("ar_winnie the poo");
         expect(i18n._messages).toMatchObject({
             "ar_winnie the poo": {
@@ -105,7 +109,6 @@ describe("defaults", () => {
     });
 
     test("Falls back to first locale if no source locale or default fallback is given", () => {
-        jest.resetModules();
         jest.mock("../../../lingui.config.ts", () => ({
             locales: ["ar_winnie the poo"],
         }));
@@ -119,7 +122,7 @@ describe("defaults", () => {
             },
             { virtual: true }
         );
-        const i18n = require("..").default as I18n;
+        const { default: i18n } = jest.requireActual<typeof import("..")>("..");
         expect(i18n.locale).toBe("ar_winnie the poo");
         expect(i18n._messages).toMatchObject({
             "ar_winnie the poo": {
