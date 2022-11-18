@@ -1,4 +1,10 @@
-import React, { useCallback, useState } from "react";
+/**
+ * TextInput with specializations for location input.
+ * @author Elias Schablowski
+ * @format
+ */
+
+import React, { useState } from "react";
 import { HelperText, TextInput, TextInputProps } from "react-native-paper";
 import { Text, View, StyleSheet } from "react-native";
 import { Trans } from "@lingui/macro";
@@ -14,61 +20,66 @@ interface Props extends Partial<TextInputProps> {
 }
 
 export default (options: Props) => {
-    const [location, setLocation] = useState("");
-    useCallback(
-        () =>
-            options.location &&
-            setLocation(
-                `${Math.abs(options.location.longitude)}${
-                    options.location.longitude > 0 ? "N" : "S"
-                }${Math.abs(options.location.latitude)}${
-                    options.location.latitude > 0 ? "E" : "W"
-                }`
-            ),
-        [options.location]
+    const [location, setLocation] = useState(
+        (options.location &&
+            `${Math.abs(options.location.latitude)}${
+                options.location.latitude > 0 ? "N" : "S"
+            }${Math.abs(options.location.longitude)}${
+                options.location.longitude > 0 ? "E" : "W"
+            }`) ||
+            ""
     );
-    const [error, setError] = useState<React.ReactElement>();
+    const [error, setError] = useState<boolean>(false);
     return (
         <View>
             <TextInput
                 onChangeText={(text: string) => {
+                    /**
+                     * @TODO Cleanup the coordinate parsing logic, it is rather ugly
+                     */
                     setLocation(text);
+                    // Parse each part of the coordinate
                     const matches =
-                        /^(?<longitude>\d{1,3}(\.\d+)(N|S))(?<latitude>\d{1,3}(\.\d+)(E|W))$/.exec(
+                        /^(?<latitude>\d{1,3}(\.\d+)?(N|S))(?<longitude>\d{1,3}(\.\d+)?(E|W))$/i.exec(
                             text
                         );
+
+                    // Did we match the regex?
                     if (
+                        matches &&
                         "latitude" in matches.groups &&
                         "longitude" in matches.groups
                     ) {
+                        // Normalize the capitalization
+                        const lat: string =
+                            matches.groups.latitude.toUpperCase();
+                        const long: string =
+                            matches.groups.longitude.toUpperCase();
                         options.onUpdateLocation({
-                            latitude: parseFloat(matches.groups.latitude),
-                            longitude: parseFloat(matches.groups.longitude),
+                            latitude:
+                                parseFloat(lat) * (lat.includes("N") ? 1 : -1),
+                            longitude:
+                                parseFloat(long) *
+                                (long.includes("E") ? 1 : -1),
                         });
-                        matches.groups.latitude;
                     } else {
-                        setError(() => (
-                            <Trans>
-                                Expected format is{" "}
-                                <Text style={styles.helperTextExtraEmphasis}>
-                                    {(Math.random() * 180).toFixed(
-                                        Math.random() * 4
-                                    )}
-                                    {Math.random() > 0.5 ? "N" : "S"}
-                                    {(Math.random() * 180).toFixed(
-                                        Math.random() * 4
-                                    )}
-                                    {Math.random() > 0.5 ? "E" : "W"}
-                                </Text>
-                            </Trans>
-                        ));
+                        setError(true);
                     }
                 }}
                 value={location}
                 {...options}
             />
-            <HelperText type="error" visible={error !== undefined}>
-                {error}
+            <HelperText
+                type="error"
+                visible={error !== undefined}
+                testID="location-error-message"
+            >
+                <Trans>
+                    Expected format is{" "}
+                    <Text style={styles.helperTextExtraEmphasis}>
+                        35.67N132.342W
+                    </Text>
+                </Trans>
             </HelperText>
         </View>
     );

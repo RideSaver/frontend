@@ -1,26 +1,40 @@
-import React from "react";
+/**
+ * A Strength Indicator for passwords, supports localization, as well as
+ * @author Elias Schablowski
+ * @format
+ */
+
+import React, { useState } from "react";
 import { View } from "react-native";
-import { zxcvbn } from "@zxcvbn-ts/core";
-import { t, Trans, defineMessage, Select } from "@lingui/macro";
+import { zxcvbn, ZxcvbnResult } from "@zxcvbn-ts/core";
+import { Trans, Select, SelectOrdinal } from "@lingui/macro";
 import { HelperText, ProgressBar, useTheme } from "react-native-paper";
-import { I18n } from "@lingui/core";
 import { useLingui } from "@lingui/react";
 
-export default ({ password }: { password: string }) => {
+const crackTypes = [
+    "offlineFastHashing1e10PerSecond",
+    "offlineSlowHashing1e4PerSecond",
+    "onlineNoThrottling10PerSecond",
+    "onlineThrottling100PerHour",
+] as unknown as keyof ZxcvbnResult["crackTimesSeconds"];
+
+export default ({
+    password,
+    testID,
+}: {
+    password: string;
+    testID?: string;
+}) => {
     const { i18n } = useLingui();
     const strength = zxcvbn(password);
     const theme = useTheme();
-
-    const messageClass = {
-        0: "very_weak",
-        1: "weak",
-        2: "average",
-        3: "strong",
-        4: "very_strong",
-    };
+    const [timeScenario, setTimeScenario] = useState<number>(1);
+    const saneTime = saneUnit(
+        strength.crackTimesSeconds[crackTypes[timeScenario]]
+    );
 
     return (
-        <View>
+        <View testID={testID}>
             <ProgressBar
                 progress={strength.score / 4}
                 color={
@@ -28,46 +42,69 @@ export default ({ password }: { password: string }) => {
                         ? theme.colors.error
                         : theme.colors.secondary
                 }
+                testID="password-score-bar"
             />
-            <HelperText type="info" visible={password.length > 0}>
-                <Trans>
-                    <Select
-                        value={messageClass[strength.score]}
-                        very_weak="Very Weak"
-                        weak="Weak"
-                        average="Average"
-                        strong="Strong"
-                        very_strong="Very Strong"
-                        other={"Average"}
+            <HelperText
+                type="info"
+                visible={password.length > 0}
+                testID="password-strength-text"
+                onPress={() =>
+                    setTimeScenario(
+                        timeScenario < crackTypes.length - 1
+                            ? timeScenario + 1
+                            : 0
+                    )
+                }
+            >
+                <Trans comment="Number has an added unit">
+                    <SelectOrdinal
+                        value={strength.score}
+                        _0="Very Weak"
+                        _1="Weak"
+                        _2="Average"
+                        _3="Strong"
+                        _4="Very Strong"
                     />
                     , Time to Crack:{" "}
-                    {convertToTimeString(
-                        strength.crackTimesSeconds
-                            .offlineSlowHashing1e4PerSecond,
-                        i18n
-                    )}
+                    {Intl.NumberFormat(i18n.locale, {
+                        style: "unit",
+                        unit: saneTime[1],
+                        maximumSignificantDigits: 3,
+                        notation: "engineering",
+                        unitDisplay: "long",
+                    }).format(saneTime[0])}
+                    ,
+                    <Select
+                        value={crackTypes[timeScenario]}
+                        offlineFastHashing1e10PerSecond="Offline Cracking, needs Data Breach AND cryptographic failure"
+                        offlineSlowHashing1e4PerSecond="Offline Cracking, needs Data Breach"
+                        onlineNoThrottling10PerSecond="Online Cracking, rate limiting bypassed"
+                        onlineThrottling100PerHour="Online Cracking"
+                        other={undefined}
+                    />
                 </Trans>
             </HelperText>
         </View>
     );
 };
 
-function convertToTimeString(seconds: number, i18n: I18n) {
+function saneUnit(
+    seconds: number
+): [number, "second" | "minute" | "hour" | "day" | "year"] {
     const secondsInMinute = 60;
     const secondsInHour = secondsInMinute * 60;
-    const secondsInDay = secondsInHour * 60;
+    const secondsInDay = secondsInHour * 24;
     const secondsInYear = secondsInDay * 365.25;
+
     if (seconds < secondsInMinute) {
-        return t(i18n)`${seconds} seconds`;
+        return [seconds, "second"];
     } else if (seconds < secondsInHour) {
-        return t(i18n)`${Math.ceil(seconds / secondsInHour)} minutes`;
+        return [seconds / secondsInMinute, "minute"];
     } else if (seconds < secondsInDay) {
-        return t(i18n)`${Math.ceil(seconds / secondsInDay)} hours`;
+        return [seconds / secondsInHour, "hour"];
     } else if (seconds < secondsInYear) {
-        return t(i18n)`${Math.ceil(seconds / secondsInYear)} days`;
-    } else if (seconds < 1000 * secondsInYear) {
-        return t(i18n)`${Math.ceil(seconds / secondsInYear)} years`;
+        return [seconds / secondsInDay, "day"];
     } else {
-        return t(i18n)`${(seconds / secondsInYear).toExponential(3)} years`;
+        return [seconds / secondsInYear, "year"];
     }
 }
