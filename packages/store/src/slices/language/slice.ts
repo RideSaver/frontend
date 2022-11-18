@@ -1,5 +1,12 @@
+/**
+ * Create reducers, and initial state for language state.
+ * @author Elias Schablowski
+ * @format
+ */
+
 import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 import { loadLocale, switchLocale } from "./thunks";
+import type { Messages } from "@lingui/core";
 import i18n, {
     locale,
     loadLocale as i18nLoad,
@@ -11,7 +18,7 @@ interface LanguageState {
     pendingLocale?: locale;
     loadingLocales: locale[];
     messages: {
-        [id in locale]?: any;
+        [id in locale]?: Messages;
     };
 }
 
@@ -22,9 +29,9 @@ const rideSettingsSlice = createSlice<
     name: "language",
     // `createSlice` will infer the state type from the `initialState` argument
     initialState: {
-        locale: i18n?.locale as any,
+        locale: i18n?.locale as unknown as locale,
         messages: i18n?._messages || {},
-        loadingLocales: []
+        loadingLocales: [],
     },
     reducers: {},
     extraReducers(builder) {
@@ -34,7 +41,9 @@ const rideSettingsSlice = createSlice<
             })
             .addCase(loadLocale.fulfilled, (state, action) => {
                 state.messages[action.meta.arg] = action.payload;
-                state.loadingLocales = state.loadingLocales.filter(locale => locale !== action.meta.arg);
+                state.loadingLocales = state.loadingLocales.filter(
+                    (locale) => locale !== action.meta.arg
+                );
                 i18nLoad(
                     action.meta.arg,
                     state.messages[action.meta.arg],
