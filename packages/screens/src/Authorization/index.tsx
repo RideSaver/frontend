@@ -2,15 +2,19 @@
  * The Home Screen for RideSaver.
  * @author Elias Schablowski
  * @format
- * @TODO Upload Avatar
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import { t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { user, useSelector, useDispatch } from "@RideSaver/store";
-import { useDebounce } from "@RideSaver/components";
+import {
+    LocationSelector,
+    NumberInput,
+    RideEstimate,
+    useDebounce,
+} from "@RideSaver/components";
 import { TextInput, Avatar, TouchableRipple } from "react-native-paper";
 import ImagePicker from "expo-image-picker";
 
@@ -25,12 +29,13 @@ export default () => {
     const debouncedUser = {
         email: useDebounce(email, 500),
         name: useDebounce(name, 500),
-        phoneNumber: useDebounce(phone, 500)
+        phoneNumber: useDebounce(phone, 500),
+        avatar: avatar,
     };
 
     useEffect(() => {
         dispatch(user.update(debouncedUser));
-    }, [debouncedUser]);
+    });
 
     return (
         <View>
@@ -47,7 +52,6 @@ export default () => {
                                 allowsEditing: true,
                             }
                         );
-                        setAvatar(image.assets[0].uri);
                     }}
                 >
                     <Avatar.Image

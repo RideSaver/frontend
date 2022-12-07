@@ -1,5 +1,5 @@
 {
-  "name": "@ridesaver/internationalization",
+  "name": "@RideSaver/internationalization",
   "version": "0.0.1",
   "description": "The translation files for RideSaver",
   "main": "index.ts",
@@ -9,7 +9,7 @@
     "compile": "lingui compile"
   },
   "dependencies": {
-    "@babel/core": "^7.20.2",
+    "@babel/core": "^7.20.5",
     "@lingui/cli": "^3.15.0",
     "@lingui/core": "^3.15.0",
     "@lingui/macro": "^3.15.0",

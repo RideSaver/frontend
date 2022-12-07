@@ -9,7 +9,7 @@ import { HelperText, TextInput, TextInputProps } from "react-native-paper";
 import { Text, View, StyleSheet } from "react-native";
 import { Trans } from "@lingui/macro";
 
-type location = {
+export type location = {
     latitude: number;
     longitude: number;
 };

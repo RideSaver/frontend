@@ -9,9 +9,9 @@ import { View } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
 import { t, Trans } from "@lingui/macro";
 import { useLinkProps } from "@react-navigation/native";
-import { PasswordInput } from "@ridesaver/components";
-import { user, useDispatch } from "@ridesaver/store";
-import i18n from "@ridesaver/internationalization";
+import { PasswordInput } from "@RideSaver/components";
+import { user, useDispatch } from "@RideSaver/store";
+import i18n from "@RideSaver/internationalization";
 
 export default () => {
     const [username, setUsername] = useState("");

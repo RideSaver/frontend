@@ -3,7 +3,7 @@
         "target": "ESNext",
         "esModuleInterop": true,
         "moduleResolution": "node",
-        "module": "ESNext",
+        "module": "CommonJS",
         "jsx": "react",
         "allowJs": true,
         "outDir": "build",

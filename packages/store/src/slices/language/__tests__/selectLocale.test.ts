@@ -10,7 +10,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import type { RootState } from "../../../store";
 import type { AnyAction, ReducersMapObject } from "@reduxjs/toolkit";
 
-import { downloadMessages } from "@ridesaver/internationalization";
+import { downloadMessages } from "@RideSaver/internationalization";
 
 const { slice, switchLocale, getLocale } = jest.requireActual(
     ".."

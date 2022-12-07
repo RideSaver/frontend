@@ -7,11 +7,11 @@
 import React, { useCallback } from "react";
 import { useColorScheme } from "react-native";
 import { Provider as ReduxProvider } from "react-redux";
-import * as Screens from "@ridesaver/screens";
-import { store } from "@ridesaver/store";
+import * as Screens from "@RideSaver/screens";
+import { store } from "@RideSaver/store";
 import { ActivityIndicator } from "react-native-paper";
 import { I18nProvider } from "@lingui/react";
-import i18n from "@ridesaver/internationalization";
+import i18n from "@RideSaver/internationalization";
 import { t } from "@lingui/macro";
 import { Provider as PaperProvider } from "react-native-paper";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -20,7 +20,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 import * as Themes from "./themes";
-import { language } from "@ridesaver/store";
+import { language } from "@RideSaver/store";
 
 export default function App() {
     const state = store.getState();

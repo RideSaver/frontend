@@ -10,7 +10,7 @@ import type { Messages } from "@lingui/core";
 import i18n, {
     locale,
     loadLocale as i18nLoad,
-} from "@ridesaver/internationalization";
+} from "@RideSaver/internationalization";
 
 // Define a type for the slice state
 interface LanguageState {

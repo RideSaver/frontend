@@ -9,7 +9,7 @@ import { View } from "react-native";
 import { TextInput, TextInputProps } from "react-native-paper";
 import PasswordStrengthIndicator from "./PasswordStrengthIndicator";
 import { t } from "@lingui/macro";
-import i18n from "@ridesaver/internationalization";
+import i18n from "@RideSaver/internationalization";
 
 export default ({
     password = "",

@@ -1,8 +1,8 @@
 {
-    "name": "@ridesaver/test_envs",
+    "name": "@RideSaver/test_envs",
     "version": "0.0.1",
     "dependencies": {
-        "@babel/core": "^7.20.2",
+        "@babel/core": "^7.20.5",
         "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
         "@babel/preset-env": "^7.20.2",
         "@babel/preset-react": "^7.18.6",

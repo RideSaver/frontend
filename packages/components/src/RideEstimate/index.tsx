@@ -5,6 +5,7 @@
  */
 
 import React from "react";
+import { useLingui } from "@lingui/react";
 import { Estimate } from "@RideSaver/api";
 import { Card, Title, Button, Paragraph } from "react-native-paper";
 
@@ -13,7 +14,7 @@ export default ({ estimate }: { estimate: Estimate }) => {
     return (
         <Card>
             <Card.Title
-                title="uberPOOL"
+                title={estimate.displayName}
                 right={() => (
                     <Title>
                         {Intl.NumberFormat(i18n.locale, {
@@ -24,7 +25,7 @@ export default ({ estimate }: { estimate: Estimate }) => {
                 )}
             />
             <Card.Content>
-                <Paragraph></Paragraph>
+                <Paragraph> </Paragraph>
             </Card.Content>
             <Card.Actions>
                 <Button>Request</Button>
