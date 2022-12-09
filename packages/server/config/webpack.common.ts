@@ -45,7 +45,7 @@ export default {
     },
     plugins: [
         new webpack.BannerPlugin({
-            banner: "#!/usr/local/bin/node\nrequire('source-map-support').install();",
+            banner: "#!/usr/local/bin/node",
             raw: true,
         }),
         new CopyPlugin({
