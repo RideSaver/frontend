@@ -28,4 +28,4 @@ COPY --from=builder /build/packages/server/build /server/build
 RUN chmod agu+x /server/build/cli.js && npm i -g source-map-support
 
 # Setup entrypoint, etc.
-ENTRYPOINT /server/build/cli.js
+ENTRYPOINT /server/build/cli.js serve --httpPort 80

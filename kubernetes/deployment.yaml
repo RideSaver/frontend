@@ -18,9 +18,6 @@ spec:
             containers:
                 - name: rendering-server
                   image: ghcr.io/ridesaver/ui_server:latest
-                  command:
-                    - serve
-                    - --httpPort 80
                   ports:
                       - containerPort: 80
                       - containerPort: 443
