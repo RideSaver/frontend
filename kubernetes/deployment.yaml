@@ -16,7 +16,7 @@ spec:
                 type: rendering-server
         spec:
             containers:
-                - name: lyft
+                - name: rendering-server
                   image: ghcr.io/ridesaver/ui_server:latest
                   ports:
                       - containerPort: 80
