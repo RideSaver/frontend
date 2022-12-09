@@ -16,7 +16,7 @@ WORKDIR /build/packages/server
 RUN yarn build
 
 ##### PRODUCTION IMAGE #####
-FROM node-18.12.1:alpine
+FROM node:18.12.1-alpine
 
 # Copy all dependency files
 COPY ./packages/server/package.json /server/package.json
