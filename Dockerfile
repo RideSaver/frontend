@@ -6,7 +6,7 @@ COPY ./*/yarn.lock /build/
 
 # Install dependencies
 WORKDIR /build
-RUN yarn --frozen-lockfile
+RUN yarn
 
 # Copy all source files
 COPY . /build
