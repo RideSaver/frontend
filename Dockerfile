@@ -25,6 +25,7 @@ WORKDIR /server
 
 # Copy built server
 COPY --from=builder /build/packages/server/build /server/build
+RUN chmod agu+x /server/build/cli.js
 
 # Setup entrypoint, etc.
 ENTRYPOINT /server/build/cli.js
