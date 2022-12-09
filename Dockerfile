@@ -11,6 +11,9 @@ RUN echo //npm.pkg.github.com/:_authToken=$github_token >> .npmrc
 RUN yarn
 
 # Build the webserver
+WORKDIR /build/packages/web
+RUN yarn build
+# Build the webserver
 WORKDIR /build/packages/server
 RUN yarn build
 
@@ -21,7 +24,7 @@ FROM node:18.12.1-alpine
 WORKDIR /server
 
 # Copy built server
-COPY --from=builder /build/package/server/build /server/build
+COPY --from=builder /build/packages/server/build /server/build
 
 # Setup entrypoint, etc.
 ENTRYPOINT /server/build/cli.js
