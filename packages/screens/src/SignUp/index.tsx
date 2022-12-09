@@ -84,7 +84,7 @@ export default () => {
                                 password,
                                 email,
                                 phone,
-                            })
+                            } as unknown)
                         )
                             .unwrap()
                             .catch(() => {
