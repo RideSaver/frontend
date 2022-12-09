@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: ui-server
-    namespace: ui
+    namespace: server
     labels:
         type: rendering-server
 spec:
