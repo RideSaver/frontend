@@ -1,15 +1,11 @@
 FROM node:lts AS builder
 
-# Copy all dependency files
-COPY ./*/package.json /build/
-COPY ./*/yarn.lock /build/
-
 # Install dependencies
 WORKDIR /build
-RUN yarn
 
 # Copy all source files
 COPY . /build
+RUN yarn
 
 # Build the webserver
 WORKDIR /build/packages/server
