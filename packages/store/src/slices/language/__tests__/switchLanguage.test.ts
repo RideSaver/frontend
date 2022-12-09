@@ -11,7 +11,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import i18n, {
     downloadMessages,
     loadLocale as i18nLoadLocale,
-} from "@ridesaver/internationalization";
+} from "@RideSaver/internationalization";
 
 const { slice, loadLocale, switchLocale } = jest.requireActual(
     ".."

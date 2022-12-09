@@ -13,7 +13,7 @@ import "@testing-library/jest-native/extend-expect";
 import StrengthIndicator from "../PasswordStrengthIndicator";
 import { zxcvbn } from "@zxcvbn-ts/core";
 
-import i18n from "@ridesaver/internationalization";
+import i18n from "@RideSaver/internationalization";
 import { I18nProvider } from "@lingui/react";
 
 const TestingProvider = ({ children }) => (

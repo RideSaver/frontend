@@ -11,7 +11,7 @@ import "react-native/jest/setup";
 [
     "react-native-paper",
     "@react-native-async-storage/async-storage",
-    "@ridesaver/internationalization",
+    "@RideSaver/internationalization",
     "@zxcvbn-ts/core",
 ].forEach((module) =>
     jest.mock(module, jest.requireActual(`./mocks/${module}`))

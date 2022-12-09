@@ -12,7 +12,7 @@ import "@testing-library/jest-native/extend-expect";
 
 import NumberInput from "..";
 
-import i18n from "@ridesaver/internationalization";
+import i18n from "@RideSaver/internationalization";
 import { I18nProvider } from "@lingui/react";
 
 const TestingProvider = ({ children }) => (

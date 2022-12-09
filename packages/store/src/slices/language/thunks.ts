@@ -5,7 +5,7 @@
  */
 
 import { createAsyncThunk, ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
-import { locale, downloadMessages } from "@ridesaver/internationalization";
+import { locale, downloadMessages } from "@RideSaver/internationalization";
 import { RootState } from "../../store";
 
 export const loadLocale = createAsyncThunk(

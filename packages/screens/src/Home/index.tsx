@@ -7,21 +7,35 @@
 import React, { useCallback, useState } from "react";
 import { View } from "react-native";
 import { t } from "@lingui/macro";
-import { user, useDispatch } from "@ridesaver/store";
+import { user, useDispatch } from "@RideSaver/store";
 import {
     LocationSelector,
     NumberInput,
     RideEstimate,
-} from "@ridesaver/components";
-import type { Estimate } from "@RideSaver/api";
+} from "@RideSaver/components";
+import { useGetEstimatesQuery } from "@RideSaver/api/redux";
+
+import type { location } from "@RideSaver/components/src/LocationSelector";
 
 export default () => {
     const dispatch = useDispatch();
 
-    const [startPoint, setStartPoint] = useState(undefined);
-    const [endPoint, setEndPoint] = useState(undefined);
+    const [startPoint, setStartPoint] = useState<location>(undefined);
+    const [endPoint, setEndPoint] = useState<location>(undefined);
     const [riders, setRiders] = useState(1);
-    const estimates: Estimate[] = [];
+    const estimates =
+        startPoint && endPoint
+            ? useGetEstimatesQuery({
+                  startPoint: {
+                      latitude: startPoint.latitude,
+                      longitude: startPoint.longitude,
+                  },
+                  endPoint: {
+                      latitude: endPoint.latitude,
+                      longitude: endPoint.longitude,
+                  },
+              }).data
+            : [];
 
     useCallback(() => {
         dispatch(user.load());

@@ -11,7 +11,7 @@ import i18n, {
     locales,
     loadLocale as i18nLoadLocale,
     downloadMessages,
-} from "@ridesaver/internationalization";
+} from "@RideSaver/internationalization";
 
 const { slice, loadLocale } = jest.requireActual("..") as typeof import("..");
 
