@@ -6,7 +6,7 @@ WORKDIR /build
 # Copy all source files
 COPY . /build
 ARG github_token
-RUN echo //registry.npmjs.org/:_authToken=$github_token > ~/.npmrc
+RUN echo //npm.pkg.github.com/:_authToken=$github_token > ~/.npmrc
 
 RUN yarn
 
