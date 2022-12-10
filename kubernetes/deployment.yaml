@@ -21,5 +21,12 @@ spec:
                   ports:
                       - containerPort: 80
                       - containerPort: 443
+                  livenessProbe:
+                      exec:
+                          command:
+                            - cat
+                            - /tmp/healthy
+                      initialDelaySeconds: 5
+                      periodSeconds: 5
             imagePullSecrets:
                 - name: ridesaver-registry-credentials
