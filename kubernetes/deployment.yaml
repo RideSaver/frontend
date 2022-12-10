@@ -24,8 +24,7 @@ spec:
                   livenessProbe:
                       exec:
                           command:
-                            - cat
-                            - /tmp/healthy
+                            - true
                       initialDelaySeconds: 5
                       periodSeconds: 5
             imagePullSecrets:
