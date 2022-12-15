@@ -4,6 +4,8 @@
  * @format
  */
 
+import "./App.css";
+
 import React, { useCallback } from "react";
 import { useColorScheme } from "react-native";
 import { Provider as ReduxProvider } from "react-redux";
@@ -29,6 +31,7 @@ export default function App() {
     useCallback(() => {
         store.dispatch(language.switchLocale("en-US"));
     }, []);
+    document.body.style.backgroundColor = theme.colors.backdrop;
 
     if (state.user.isLoading) {
         // We haven't finished checking for the token yet
@@ -102,16 +105,6 @@ export default function App() {
                     </NavigationContainer>
                 </ReduxProvider>
             </I18nProvider>
-            <style type="text/css">
-                {`@font-face {
-                    font-family: 'MaterialCommunityIcons';
-                    src: url(${require("react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf")}) format('truetype');
-                    font-display: swap
-                }
-                body {
-                    background-color: ${theme.colors.background}
-                }`}
-            </style>
         </PaperProvider>
     );
 }

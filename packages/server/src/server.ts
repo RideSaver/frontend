@@ -27,9 +27,11 @@ export default (options: yargs.ArgumentsCamelCase<ServerArgs>) => {
         })
     );
 
-
-
-    app.use(express.static(path.resolve(__dirname, "public")));
+    app.use(
+        express.static(path.resolve(__dirname, "public"), {
+            index: false,
+        })
+    );
 
     app.use("*", render(logger));
 

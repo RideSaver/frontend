@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 import webpack from "webpack";
 import CopyPlugin from "copy-webpack-plugin";
-console.log(path.dirname(require.resolve("@RideSaver/web/build/manifest.json")));
+
 const imageInlineSizeLimit = 32;
 export default {
     target: "node",

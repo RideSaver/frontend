@@ -1,0 +1,30 @@
+body > #root {
+    max-width: 75vh;
+    flex: 1;
+    display: flex;
+    margin: auto;
+    height: 100vh;
+}
+
+@font-face {
+    font-family: 'MaterialCommunityIcons';
+    src: url("react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf") format('truetype');
+    font-display: swap
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #222;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: whitesmoke;
+    }
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}

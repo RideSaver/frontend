@@ -26,9 +26,10 @@
         "webpack-node-externals": "^3.0.0"
     },
     "scripts": {
-        "build": "webpack --config ./config/webpack.prod.ts",
+        "build": "webpack --config ./config/webpack.prod.ts --progress",
+        "build:dev": "webpack --config ./config/webpack.dev.ts --progress",
         "start": "node ./build/cli.js",
-        "watch": "webpack --config ./config/webpack.dev.ts --watch",
+        "watch": "webpack --config ./config/webpack.dev.ts --watch --progress",
         "dev": "yarn watch & nodemon build/cli.js"
     }
 }
