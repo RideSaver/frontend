@@ -26,64 +26,93 @@ msgstr "{0, selectordinal, =0 {Very Weak} =1 {Weak} =2 {Average} =3 {Strong} =4 
 msgid "Password"
 msgstr "Password"
 
+#: packages/components/src/RideHistory/index.tsx:27
+msgid "Date"
+msgstr "Date"
+
+#: packages/components/src/RideHistory/index.tsx:30
+msgid "RideShare Service"
+msgstr "RideShare Service"
+
+#: packages/components/src/RideHistory/index.tsx:33
+msgid "Price"
+msgstr "Price"
+
+#: packages/components/src/RideHistory/index.tsx:36
+msgid "More Information"
+msgstr "More Information"
+
 #: packages/native/src/App.tsx:67
-#: packages/web/src/App.tsx:64
+#: packages/web/src/App.tsx:72
 msgid "{0} - RideSaver"
 msgstr "{0} - RideSaver"
 
 #: packages/native/src/App.tsx:81
-#: packages/web/src/App.tsx:78
 msgid "Login"
 msgstr "Login"
 
 #: packages/native/src/App.tsx:88
-#: packages/web/src/App.tsx:85
+#: packages/web/src/App.tsx:95
 msgid "Sign Up"
 msgstr "Sign Up"
 
 #: packages/native/src/App.tsx:99
-#: packages/web/src/App.tsx:96
+#: packages/web/src/App.tsx:106
 msgid "Home"
 msgstr "Home"
 
-#: packages/screens/src/Home/index.tsx:37
-msgid "Riders"
-msgstr "Riders"
-
-#: packages/screens/src/Login/index.tsx:36
-#: packages/screens/src/SignUp/index.tsx:40
-msgid "Username"
-msgstr "Username"
-
-#: packages/screens/src/Login/index.tsx:48
-msgid "Error: Invalid Username or Password"
-msgstr "Error: Invalid Username or Password"
-
-#: packages/screens/src/Login/index.tsx:50
-msgid "<0>Sign Up</0><1>Login</1>"
-msgstr "<0>Sign Up</0><1>Login</1>"
-
-#: packages/screens/src/SignUp/index.tsx:46
-msgid "Error: Username is already used."
-msgstr "Error: Username is already used."
-
-#: packages/screens/src/SignUp/index.tsx:51
+#: packages/screens/src/Authorization/index.tsx:65
+#: packages/screens/src/SignUp/index.tsx:81
+#: packages/screens/src/User/index.tsx:65
 msgid "Name"
 msgstr "Name"
 
-#: packages/screens/src/SignUp/index.tsx:57
+#: packages/screens/src/Authorization/index.tsx:70
+#: packages/screens/src/SignUp/index.tsx:87
+#: packages/screens/src/User/index.tsx:70
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: packages/screens/src/SignUp/index.tsx:62
-#: packages/screens/src/SignUp/index.tsx:72
-msgid "Optional"
-msgstr "Optional"
-
-#: packages/screens/src/SignUp/index.tsx:67
+#: packages/screens/src/Authorization/index.tsx:75
+#: packages/screens/src/SignUp/index.tsx:97
+#: packages/screens/src/User/index.tsx:75
 msgid "Phone Number"
 msgstr "Phone Number"
 
-#: packages/screens/src/SignUp/index.tsx:74
+#: packages/screens/src/Home/index.tsx:51
+msgid "Riders"
+msgstr "Riders"
+
+#: packages/screens/src/Login/index.tsx:46
+#: packages/screens/src/SignUp/index.tsx:57
+msgid "Username"
+msgstr "Username"
+
+#: packages/screens/src/Login/index.tsx:58
+msgid "Error: Invalid Username or Password"
+msgstr "Error: Invalid Username or Password"
+
+#: packages/screens/src/Login/index.tsx:60
+msgid "<0>Sign Up</0><1>Login</1>"
+msgstr "<0>Sign Up</0><1>Login</1>"
+
+#: packages/screens/src/SignUp/index.tsx:51
+msgid "Something went wrong, please try again in 30 seconds."
+msgstr "Something went wrong, please try again in 30 seconds."
+
+#: packages/screens/src/SignUp/index.tsx:76
+msgid "Error: Username is already used."
+msgstr "Error: Username is already used."
+
+#: packages/screens/src/SignUp/index.tsx:92
+#: packages/screens/src/SignUp/index.tsx:102
+msgid "Optional"
+msgstr "Optional"
+
+#: packages/screens/src/SignUp/index.tsx:104
 msgid "<0>Login</0><1>Sign Up</1>"
 msgstr "<0>Login</0><1>Sign Up</1>"
+
+#: packages/web/src/App.tsx:88
+msgid "Log in"
+msgstr "Log in"

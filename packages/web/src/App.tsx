@@ -6,7 +6,7 @@
 
 import "./App.css";
 
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useColorScheme } from "react-native";
 import { Provider as ReduxProvider } from "react-redux";
 import * as Screens from "@RideSaver/screens";
@@ -15,7 +15,7 @@ import { ActivityIndicator } from "react-native-paper";
 import { I18nProvider } from "@lingui/react";
 import i18n from "@RideSaver/internationalization";
 import { t } from "@lingui/macro";
-import { Provider as PaperProvider } from "react-native-paper";
+import { Provider as PaperProvider, Surface } from "react-native-paper";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -27,13 +27,17 @@ import { language } from "@RideSaver/store";
 export default function App() {
     const state = store.getState();
     const scheme = useColorScheme();
+    console.log(scheme);
     const theme = scheme === "dark" ? Themes.dark : Themes.light;
-    useCallback(() => {
+    useEffect(() => {
         store.dispatch(language.switchLocale("en-US"));
     }, []);
-    document.body.style.backgroundColor = theme.colors.backdrop;
+    useEffect(() => {
+        if (typeof document !== "undefined")
+            document.body.style.backgroundColor = theme.colors.backdrop;
+    }, [theme.colors.backdrop]);
 
-    if (state.user.isLoading) {
+    if (state.auth.isLoading) {
         // We haven't finished checking for the token yet
         return <ActivityIndicator />;
     }
@@ -49,60 +53,64 @@ export default function App() {
         >
             <I18nProvider i18n={i18n}>
                 <ReduxProvider store={store}>
-                    <NavigationContainer
-                        linking={{
-                            prefixes: [
-                                "ridesaver://",
-                                ...["https://", "http://", "//", ""].map(
-                                    (protocol) =>
-                                        protocol + window.location.host
-                                ),
-                            ],
-                            config: {
-                                screens: Screens.paths,
-                            },
-                        }}
-                        documentTitle={{
-                            formatter: (options, route) =>
-                                t(i18n)`${
-                                    options?.title ?? route?.name
-                                } - RideSaver`,
-                        }}
-                        theme={theme}
-                    >
-                        <Stack.Navigator>
-                            {state.user.token === undefined ? (
-                                // No token found, user isn't signed in
-                                <>
-                                    <Stack.Screen
-                                        name="Login"
-                                        component={Screens.Login}
-                                        options={{
-                                            title: t(i18n)`Login`,
-                                        }}
-                                    />
-                                    <Stack.Screen
-                                        name="SignUp"
-                                        component={Screens.SignUp}
-                                        options={{
-                                            title: t(i18n)`Sign Up`,
-                                        }}
-                                    />
-                                </>
-                            ) : (
-                                // User is signed in
-                                <>
-                                    <Stack.Screen
-                                        name="Home"
-                                        component={Screens.Home}
-                                        options={{
-                                            title: t(i18n)`Home`,
-                                        }}
-                                    />
-                                </>
-                            )}
-                        </Stack.Navigator>
-                    </NavigationContainer>
+                    <div id="app-root">
+                        <NavigationContainer
+                            linking={{
+                                prefixes: [
+                                    "ridesaver://",
+                                    ...["https://", "http://", "//", ""].map(
+                                        (protocol) =>
+                                            protocol + window.location.host
+                                    ),
+                                ],
+                                config: {
+                                    screens: Screens.paths,
+                                },
+                            }}
+                            documentTitle={{
+                                formatter: (options, route) =>
+                                    t(i18n)`${
+                                        options?.title ?? route?.name
+                                    } - RideSaver`,
+                            }}
+                            theme={theme}
+                        >
+                            <Stack.Navigator
+                                screenListeners={{ transitionStart: () => console.log("Transition") }}
+                            >
+                                {state.auth.token === undefined ? (
+                                    // No token found, user isn't signed in
+                                    <>
+                                        <Stack.Screen
+                                            name="Login"
+                                            component={Screens.Login}
+                                            options={{
+                                                title: t(i18n)`Log in`,
+                                            }}
+                                        />
+                                        <Stack.Screen
+                                            name="SignUp"
+                                            component={Screens.SignUp}
+                                            options={{
+                                                title: t(i18n)`Sign Up`,
+                                            }}
+                                        />
+                                    </>
+                                ) : (
+                                    // User is signed in
+                                    <>
+                                        <Stack.Screen
+                                            name="Home"
+                                            component={Screens.Home}
+                                            options={{
+                                                title: t(i18n)`Home`,
+                                            }}
+                                        />
+                                    </>
+                                )}
+                            </Stack.Navigator>
+                        </NavigationContainer>
+                    </div>
                 </ReduxProvider>
             </I18nProvider>
         </PaperProvider>

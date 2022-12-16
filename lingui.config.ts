@@ -16,7 +16,7 @@ export default {
         {
             path: "<rootDir>/packages/internationalization/locale/{locale}/messages",
             include: ["<rootDir>"],
-            exclude: ["**/node_modules/**"],
+            exclude: ["**/node_modules/**", "**/build/**"],
         },
     ],
     locales: [].concat(locales),

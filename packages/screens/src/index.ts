@@ -15,10 +15,6 @@ export const paths: PathConfigMap<ReactNavigation.RootParamList> = {
     Home: {
         path: "/",
     },
-    SignUp: {
-        path: "/signup",
-    },
-    Login: {
-        path: "/login",
-    },
+    SignUp: "/signup",
+    Login: "/login",
 };

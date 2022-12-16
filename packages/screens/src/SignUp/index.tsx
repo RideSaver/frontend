@@ -4,14 +4,16 @@
  * @format
  */
 
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
 import { t, Trans } from "@lingui/macro";
-import { useLinkProps } from "@react-navigation/native";
+import { useLinkProps, useLinkTo } from "@react-navigation/native";
 import { PasswordInput } from "@RideSaver/components";
-import { user, useDispatch } from "@RideSaver/store";
 import i18n from "@RideSaver/internationalization";
+import { useSignUpMutation } from "@RideSaver/api/redux";
+import type { SerializedError } from "@reduxjs/toolkit";
+import { user, useDispatch } from "@RideSaver/store";
 
 export default () => {
     const [username, setUsername] = useState("");
@@ -20,29 +22,57 @@ export default () => {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
 
-    const [usernameExists, setUsernameExists] = useState(false);
-
-    const dispatch = useDispatch();
+    const [signUp, signUpResult] = useSignUpMutation();
     const { onPress: onLogin, ...loginProps } = useLinkProps({
         to: {
             screen: "Login",
         },
     });
+    const linkTo = useLinkTo();
+    const dispatch = useDispatch();
 
-    useCallback(() => {
-        dispatch(user.load());
-    }, []);
+    // Go to home screen if signed up
+    if(signUpResult.isSuccess && typeof signUpResult.data == "object" && "token" in signUpResult.data) {
+        dispatch(user.slice.actions.setToken(signUpResult.data.token));
+        linkTo('/home');
+    }
 
     return (
         <View>
+            <HelperText
+                type="error"
+                visible={
+                    signUpResult.isError &&
+                    parseInt(
+                        (signUpResult.error as unknown as SerializedError).code
+                    ) >= 500
+                }
+            >
+                <Trans>
+                    Something went wrong, please try again in 30 seconds.
+                </Trans>
+            </HelperText>
             <TextInput
                 mode="outlined"
                 label={t(i18n)`Username`}
                 value={username}
                 onChangeText={(text) => setUsername(text)}
-                error={usernameExists}
+                error={
+                    signUpResult.isError &&
+                    parseInt(
+                        (signUpResult.error as unknown as SerializedError).code
+                    ) < 500
+                }
             />
-            <HelperText type="error" visible={usernameExists}>
+            <HelperText
+                type="error"
+                visible={
+                    signUpResult.isError &&
+                    parseInt(
+                        (signUpResult.error as unknown as SerializedError).code
+                    ) < 500
+                }
+            >
                 <Trans>Error: Username is already used.</Trans>
             </HelperText>
             <PasswordInput showStrength={true} onPasswordChange={setPassword} />
@@ -72,24 +102,27 @@ export default () => {
                 <Trans>Optional</Trans>
             </HelperText>
             <Trans>
-                <Button mode="outlined" onPress={onLogin} {...loginProps}>
+                <Button
+                    mode="outlined"
+                    onPress={onLogin}
+                    {...loginProps}
+                    disabled={signUpResult.isLoading}
+                >
                     Login
                 </Button>
                 <Button
                     mode="contained"
                     onPress={() => {
-                        dispatch(
-                            user.signUp({
+                        signUp({
+                            body: {
                                 username,
                                 password,
+                                name,
+                                phone_number: phone,
                                 email,
-                                phone,
-                            } as unknown)
-                        )
-                            .unwrap()
-                            .catch(() => {
-                                setUsernameExists(true);
-                            });
+                                authorized_services: [],
+                            },
+                        });
                     }}
                 >
                     Sign Up

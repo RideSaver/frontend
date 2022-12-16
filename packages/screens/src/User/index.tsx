@@ -5,11 +5,12 @@
  * @TODO Upload Avatar
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import { t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { user, useSelector, useDispatch } from "@RideSaver/store";
+import { usePatchUserMutation } from "@RideSaver/api/redux";
 import { useDebounce } from "@RideSaver/components";
 import { TextInput, Avatar, TouchableRipple } from "react-native-paper";
 import ImagePicker from "expo-image-picker";
@@ -28,20 +29,23 @@ export default () => {
         phoneNumber: useDebounce(phone, 500)
     };
 
+    const [updateUser, updateUserResult] = usePatchUserMutation();
     useEffect(() => {
-        dispatch(user.update(debouncedUser));
-    }, [debouncedUser]);
+        updateUser({
+            body: debouncedUser
+        })
+    }, [debouncedUser])
 
     return (
         <View>
             <View>
                 <TouchableRipple
                     onPress={async () => {
-                        const { accessPrivilidges } =
+                        const { accessPrivileges } =
                             await ImagePicker.requestMediaLibraryPermissionsAsync(
                                 false
                             );
-                        if (accessPrivilidges === "none") return;
+                        if (accessPrivileges === "none") return;
                         const image = await ImagePicker.launchImageLibraryAsync(
                             {
                                 allowsEditing: true,

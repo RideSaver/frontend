@@ -15,7 +15,7 @@ import { ridesaverAPI } from "@RideSaver/api/redux";
 const store = configureStore({
     reducer: {
         language: languageSlice.reducer,
-        user: userSlice.reducer,
+        auth: userSlice.reducer,
         [ridesaverAPI.reducerPath]: ridesaverAPI.reducer,
     },
     middleware: (getDefaultMiddleware) =>

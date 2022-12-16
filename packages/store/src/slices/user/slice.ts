@@ -4,43 +4,38 @@
  * @format
  */
 
-import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
-import { load, login, signUp } from "./thunks";
+import { createSlice, PayloadAction, SliceCaseReducers } from "@reduxjs/toolkit";
+import { load } from "./thunks";
+import {User} from "@RideSaver/api/redux";
 
-// Define a type for the slice state
-export interface UserState {
-    avatar?: string;
-    username?: string;
+export interface StateType extends Partial<User> {
     token?: string;
-    name?: string;
-    email?: string;
-    phoneNumber?: string;
     isLoading: boolean;
+    username?: string;
+    avatar?: string;
 }
 
-const rideSettingsSlice = createSlice<UserState, SliceCaseReducers<UserState>>({
-    name: "user",
+const rideSettingsSlice = createSlice<StateType, SliceCaseReducers<StateType>>({
+    name: "auth",
     // `createSlice` will infer the state type from the `initialState` argument
     initialState: {
-        isLoading: false,
+        isLoading: false
     },
-    reducers: {},
+    reducers: {
+        setToken: (state, action) => state = action.payload
+    },
     extraReducers(builder) {
         builder
             .addCase(load.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(load.fulfilled, (state, action) => {
-                state.isLoading = false;
-                Object.assign(state, action.payload);
+            .addCase(load.fulfilled, (state, action: PayloadAction<string>) => {
+                if (state.isLoading) {
+                    state.isLoading = false;
+                    state.token = action.payload;
+                }
             })
-            .addCase(login.fulfilled, (state, action) => {
-                Object.assign(state, action.payload);
-            })
-            .addCase(signUp.fulfilled, (state, action) => {
-                Object.assign(state, action.payload);
-            });
-    },
+    }
 });
 
 export default rideSettingsSlice;

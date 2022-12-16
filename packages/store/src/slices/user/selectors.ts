@@ -7,9 +7,9 @@
 
 import { RootState } from "../../store";
 
-export const getEmail = (state: RootState) => state.user.email;
-export const getName = (state: RootState) => state.user.name;
-export const getPhone = (state: RootState) => state.user.phoneNumber;
-export const getUsername = (state: RootState) => state.user.username;
-export const getAvatar = (state: RootState) => state.user.avatar;
-export const getToken = (state: RootState) => state.user.token;
+export const getEmail = (state: RootState) => state.auth.email;
+export const getName = (state: RootState) => state.auth.name;
+export const getPhone = (state: RootState) => state.auth.phone_number;
+export const getUsername = (state: RootState) => state.auth.username;
+export const getAvatar = (state: RootState) => state.auth.avatar;
+export const getToken = (state: RootState) => state.auth.token;

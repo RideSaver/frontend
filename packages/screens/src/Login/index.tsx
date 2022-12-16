@@ -4,30 +4,40 @@
  * @format
  */
 
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
 import { t, Trans } from "@lingui/macro";
-import { useLinkProps } from "@react-navigation/native";
+import { useLinkProps, useLinkTo } from "@react-navigation/native";
 import { PasswordInput } from "@RideSaver/components";
-import { user, useDispatch } from "@RideSaver/store";
 import i18n from "@RideSaver/internationalization";
+import { useAuthenticateMutation } from "@RideSaver/api/redux";
+import { user } from "@RideSaver/store";
+import { useDispatch } from "react-redux";
 
 export default () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
 
-    const dispatch = useDispatch();
+    const [login, loginResult] = useAuthenticateMutation();
     const { onPress: onSignUp, ...signUpProps } = useLinkProps({
         to: {
             screen: "SignUp",
         },
     });
+    const dispatch = useDispatch();
 
-    useCallback(() => {
-        dispatch(user.load());
-    }, []);
+    useEffect(() => {
+        // Go to home screen if signed up
+        if (
+            loginResult.isSuccess &&
+            typeof loginResult.data == "object" &&
+            "token" in loginResult.data
+        ) {
+            dispatch(user.slice.actions.setToken(loginResult.data.token));
+        }
+    }, [loginResult.isSuccess, loginResult.data]);
 
     return (
         <View>
@@ -51,6 +61,7 @@ export default () => {
                 <Button
                     mode="outlined"
                     onPress={(...args) => {
+                        console.log("Sign Up")
                         onSignUp(...args);
                     }}
                     {...signUpProps}
@@ -60,16 +71,12 @@ export default () => {
                 <Button
                     mode="contained"
                     onPress={() => {
-                        dispatch(
-                            user.login({
+                        login({
+                            userLogin: {
                                 username,
                                 password,
-                            })
-                        )
-                            .unwrap()
-                            .catch(() => {
-                                setError(true);
-                            });
+                            },
+                        });
                     }}
                 >
                     Login
