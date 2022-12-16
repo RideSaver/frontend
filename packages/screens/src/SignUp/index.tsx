@@ -118,7 +118,7 @@ export default () => {
                                 username,
                                 password,
                                 name,
-                                phone_number: phone,
+                                phonenumber: phone,
                                 email,
                                 authorized_services: [],
                             },
