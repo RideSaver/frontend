@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@RideSaver/api@^0.1.5":
-  version "0.1.5"
-  resolved "https://npm.pkg.github.com/download/@RideSaver/api/0.1.5/acc132b4883a73831f69ec30557e60c3aaeba5d6#acc132b4883a73831f69ec30557e60c3aaeba5d6"
-  integrity sha512-CDVqcGrs0EsAc9i2bxumNKKC0uBewWouzSow2WSaM4Aqbcvy7+3eei6ZapkZoDLtLT8AOSK5380qO+dye0xifw==
+"@RideSaver/api@^0.1.10":
+  version "0.1.10"
+  resolved "https://npm.pkg.github.com/download/@RideSaver/api/0.1.10/2039e05919f8273c4dd727c517a2d7deea1f078e#2039e05919f8273c4dd727c517a2d7deea1f078e"
+  integrity sha512-LFsF4vCbRifnQqOrfbvFWm9w9uA3eUFOgSCyrMczQisdAG3GZIRUX/iyyi46goiqOF5N/VTpnGcpKewwRWa9oA==
   dependencies:
     "@reduxjs/toolkit" "^1.9.1"
     axios "^1.2.1"
@@ -57,7 +57,7 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.20.5.tgz#86f172690b093373a933223b4745deeb6049e733"
   integrity sha512-KZXo2t10+/jxmkhNXc7pZTqRvSOIvVv/+lJwHS+B2rErwOyjuVRh60yVpb7liQ1U5t7lLJ1bz+t8tSypUZdm0g==
 
-"@babel/core@^7.11.1", "@babel/core@^7.11.6", "@babel/core@^7.12.3", "@babel/core@^7.13.16", "@babel/core@^7.14.0", "@babel/core@^7.16.0", "@babel/core@^7.19.6", "@babel/core@^7.20.2", "@babel/core@^7.20.5":
+"@babel/core@^7.11.1", "@babel/core@^7.11.6", "@babel/core@^7.12.3", "@babel/core@^7.13.16", "@babel/core@^7.14.0", "@babel/core@^7.16.0", "@babel/core@^7.19.6", "@babel/core@^7.20.0", "@babel/core@^7.20.2", "@babel/core@^7.20.5":
   version "7.20.5"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.20.5.tgz#45e2114dc6cd4ab167f81daf7820e8fa1250d113"
   integrity sha512-UdOWmk4pNWTm/4DlPUl/Pt4Gz4rcEMb7CY0Y3eJl5Yz1vI8ZJGmHWaVE55LoxRjdpx0z259GE9U5STA9atUinQ==
@@ -531,7 +531,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
 
-"@babel/plugin-syntax-flow@^7.0.0", "@babel/plugin-syntax-flow@^7.18.6", "@babel/plugin-syntax-flow@^7.2.0":
+"@babel/plugin-syntax-flow@^7.0.0", "@babel/plugin-syntax-flow@^7.18.0", "@babel/plugin-syntax-flow@^7.18.6", "@babel/plugin-syntax-flow@^7.2.0":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-flow/-/plugin-syntax-flow-7.18.6.tgz#774d825256f2379d06139be0c723c4dd444f3ca1"
   integrity sha512-LUbR+KNTBWCUAqRG9ex5Gnzu2IOkt8jRJbHHXFT9q+L9zm7M/QQbEqXyw1n1pohYvOyWC8CjeyjrSaIwiYjK7A==
@@ -2304,17 +2304,17 @@
     react-is "^16.13.0"
     use-latest-callback "^0.1.5"
 
-"@react-navigation/elements@^1.3.11":
-  version "1.3.11"
-  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.3.11.tgz#135c2cb3ae4a31bc835bb731110fd1ef9c38e237"
-  integrity sha512-o4J0g4ofJbbn68e4TpuGkuZLtq5mLll7Ndz9C4O4RvD2chchLuGQ5TycIPTKP428cz8JzuTCFqUe/ZhOPSsudw==
+"@react-navigation/elements@^1.3.12":
+  version "1.3.12"
+  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.3.12.tgz#14ac1189e0778039c178bd4a6f8da075094896b4"
+  integrity sha512-iVcLIYg/XJk1p6X1rSFhNhCjAJ3ORqNT2/bJqw7I/liujeJAoz1oZ5JDoEcZaA0wMDts1txxLuqAYJmhCgU2aA==
 
-"@react-navigation/native-stack@^6.9.4":
-  version "6.9.6"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native-stack/-/native-stack-6.9.6.tgz#d88cc332f19415fa2c57b8f2b9a6fc2cabf9733e"
-  integrity sha512-Puqo5Y7MwYZvGELN73nMzaWTMdJu58stp9M809h4eoi4SzS0u/mFtypquEcW1gXdmRlDMmqXTtR/NBPSc2kLJg==
+"@react-navigation/native-stack@^6.9.7":
+  version "6.9.7"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native-stack/-/native-stack-6.9.7.tgz#9211fc8933825a41f19011b935133a6ed58b4ce1"
+  integrity sha512-YsBv4LldFErwQbqLCI/aWWDTpMf9SFS4IW3Qcefm+TZli9Ee7XpZMmFdotiZTz4KoYHbqhO1fuExjl2O7ZHrAQ==
   dependencies:
-    "@react-navigation/elements" "^1.3.11"
+    "@react-navigation/elements" "^1.3.12"
     warn-once "^0.1.0"
 
 "@react-navigation/native@^6.0.16":
@@ -2334,12 +2334,12 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@react-navigation/stack@^6.3.7":
-  version "6.3.9"
-  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-6.3.9.tgz#e4e2b6aa25973b3bc59200b7e3bf980e93cb5b4f"
-  integrity sha512-mTT0ZM/Zvp46s8UnphAspg2MR5Ds0mqZa/bEjzFgaYo+cLfjIXttUZYgsMG2fhvoTHpU7QFcZ/0kVhi4jVlzKQ==
+"@react-navigation/stack@^6.3.10":
+  version "6.3.10"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-6.3.10.tgz#8a17377c97d978baa5a87a67932463267cfa54cd"
+  integrity sha512-mghQpCbGBI9jpwYmhXDI5drGOxz6F9hLxQgLeu1IsTSA9767Edov7TDt5n/PTJqhpOru7/xoNMs4yhp9ykVhng==
   dependencies:
-    "@react-navigation/elements" "^1.3.11"
+    "@react-navigation/elements" "^1.3.12"
     color "^4.2.3"
     warn-once "^0.1.0"
 
@@ -2584,10 +2584,10 @@
     lodash "^4.17.15"
     redent "^3.0.0"
 
-"@testing-library/jest-native@^5.2.0":
-  version "5.3.2"
-  resolved "https://registry.yarnpkg.com/@testing-library/jest-native/-/jest-native-5.3.2.tgz#d76a1a5ef68407c5a1673ffa5e239e3e64b783e8"
-  integrity sha512-jbOjMtm6ZRmM+qeJqBZ8jPmm8z4oe1KUGIvb8MRDdRbeTVkHIAEOdc6zS83DMHkerDDRnImc23J4eN2yJnIwhQ==
+"@testing-library/jest-native@^5.3.3":
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/@testing-library/jest-native/-/jest-native-5.3.3.tgz#8f7c97504d1373d20ded0704586e110a26f9ba1a"
+  integrity sha512-oakP6c4xHR5PyLbw6H6NiUxvTZmsIHNjQRMsI6P3aSLhDSBvzRQ3+KdEwhlhiU2oNMWW45XQakKZN3cf2BG5Dw==
   dependencies:
     chalk "^4.1.2"
     jest-diff "^29.0.1"
@@ -5573,10 +5573,10 @@ dot-case@^3.0.4:
     no-case "^3.0.4"
     tslib "^2.0.3"
 
-dotenv-expand@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-9.0.0.tgz#1fd37e2cd63ea0b5f7389fb87256efc38b035b26"
-  integrity sha512-uW8Hrhp5ammm9x7kBLR6jDfujgaDarNA02tprvZdyrJ7MpdzD1KyrIHG4l+YoC2fJ2UcdFdNWNWIjt+sexBHJw==
+dotenv-expand@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-10.0.0.tgz#12605d00fb0af6d0a592e6558585784032e4ef37"
+  integrity sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A==
 
 dotenv@16.0.3, dotenv@^16.0.3:
   version "16.0.3"
@@ -9228,12 +9228,12 @@ metro-react-native-babel-preset@0.72.3:
     "@babel/template" "^7.0.0"
     react-refresh "^0.4.0"
 
-metro-react-native-babel-preset@^0.73.4:
-  version "0.73.4"
-  resolved "https://registry.yarnpkg.com/metro-react-native-babel-preset/-/metro-react-native-babel-preset-0.73.4.tgz#c09af120e027cbb616ff147cc0ac87fdc3ba9f4d"
-  integrity sha512-cMh25Iww6gTUIj9pYP62MK2nFKWbk/pshdp3m3FtflLYwxFjMn3niUZMVPJd87GUjXrc06XXbS7QtqZWO3Nz3A==
+metro-react-native-babel-preset@^0.73.6:
+  version "0.73.6"
+  resolved "https://registry.yarnpkg.com/metro-react-native-babel-preset/-/metro-react-native-babel-preset-0.73.6.tgz#dea0a8a4442608993691a528bd2f4e2c82931ffe"
+  integrity sha512-JyClNoUbWHLD5aUthOhYmuYrunyDCflv7DiSIYoeHCgnqSp+R2y2BIHF6yHAK/5aHHdwwFIykGDa2t1SCeS/xQ==
   dependencies:
-    "@babel/core" "^7.14.0"
+    "@babel/core" "^7.20.0"
     "@babel/plugin-proposal-async-generator-functions" "^7.0.0"
     "@babel/plugin-proposal-class-properties" "^7.0.0"
     "@babel/plugin-proposal-export-default-from" "^7.0.0"
@@ -9243,7 +9243,7 @@ metro-react-native-babel-preset@^0.73.4:
     "@babel/plugin-proposal-optional-chaining" "^7.0.0"
     "@babel/plugin-syntax-dynamic-import" "^7.0.0"
     "@babel/plugin-syntax-export-default-from" "^7.0.0"
-    "@babel/plugin-syntax-flow" "^7.2.0"
+    "@babel/plugin-syntax-flow" "^7.18.0"
     "@babel/plugin-syntax-nullish-coalescing-operator" "^7.0.0"
     "@babel/plugin-syntax-optional-chaining" "^7.0.0"
     "@babel/plugin-transform-arrow-functions" "^7.0.0"
@@ -11303,15 +11303,7 @@ react-native-gradle-plugin@^0.70.3:
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.70.3.tgz#cbcf0619cbfbddaa9128701aa2d7b4145f9c4fc8"
   integrity sha512-oOanj84fJEXUg9FoEAQomA8ISG+DVIrTZ3qF7m69VQUJyOGYyDZmPqKcjvRku4KXlEH6hWO9i4ACLzNBh8gC0A==
 
-react-native-paper@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-5.0.0.tgz#a2f42c9cdf5d69287291100ac0ef8f9b81e2ff1e"
-  integrity sha512-ixorD8S7y21xXNAgs5OvHdLjSbE8gniRR4W6wmSeqiyh12fHIJYEl0a0gMibaYR7N2HyoRZvkope+81cLmdF5A==
-  dependencies:
-    "@callstack/react-theme-provider" "^3.0.8"
-    color "^3.1.2"
-
-react-native-paper@^5.0.0:
+react-native-paper@5.0.2, react-native-paper@^5.0.0:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-5.0.2.tgz#1ea77d394988c0b8be9e933a1a7f6c16a180adc5"
   integrity sha512-PRH2QtlpXovfbs82affDQO9BT7vK3lKa04daK56ov3YXezPmbJnPy1dAAyERrLUswtxyY/e6dQhnIMkkKg3k0Q==

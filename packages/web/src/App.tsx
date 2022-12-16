@@ -34,8 +34,12 @@ export default function App() {
     }, []);
     useEffect(() => {
         if (typeof document !== "undefined")
+        {
             document.body.style.backgroundColor = theme.colors.backdrop;
-    }, [theme.colors.backdrop]);
+            document.getElementById("root").style.backgroundColor = theme.colors.background;
+        }
+
+    }, [theme.colors.background]);
 
     if (state.auth.isLoading) {
         // We haven't finished checking for the token yet
@@ -53,7 +57,7 @@ export default function App() {
         >
             <I18nProvider i18n={i18n}>
                 <ReduxProvider store={store}>
-                    <div id="app-root">
+                    <div style={{ backgroundColor: theme.colors.primaryContainer }}>
                         <NavigationContainer
                             linking={{
                                 prefixes: [
@@ -76,7 +80,10 @@ export default function App() {
                             theme={theme}
                         >
                             <Stack.Navigator
-                                screenListeners={{ transitionStart: () => console.log("Transition") }}
+                                screenListeners={{
+                                    transitionStart: () =>
+                                        console.log("Transition"),
+                                }}
                             >
                                 {state.auth.token === undefined ? (
                                     // No token found, user isn't signed in

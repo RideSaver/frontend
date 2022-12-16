@@ -10,6 +10,9 @@ RUN echo //npm.pkg.github.com/:_authToken=$github_token >> .npmrc
 
 RUN yarn
 
+# Compile the localizations
+RUN yarn lingui compile
+
 # Build the webserver
 WORKDIR /build/packages/web
 RUN yarn build

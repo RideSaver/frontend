@@ -15,6 +15,8 @@ export const light = {
     colors: {
         ...MD3LightTheme.colors,
         ...LightTheme.colors,
+        background: "#FFF",
+        backdrop: "#AAA",
     },
 };
 export const dark = {
@@ -23,5 +25,7 @@ export const dark = {
     colors: {
         ...MD3DarkTheme.colors,
         ...DarkTheme.colors,
+        background: "#000",
+        backdrop: "#333",
     },
 };
