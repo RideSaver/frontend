@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@RideSaver/api@^0.1.10":
-  version "0.1.10"
-  resolved "https://npm.pkg.github.com/download/@RideSaver/api/0.1.10/2039e05919f8273c4dd727c517a2d7deea1f078e#2039e05919f8273c4dd727c517a2d7deea1f078e"
-  integrity sha512-LFsF4vCbRifnQqOrfbvFWm9w9uA3eUFOgSCyrMczQisdAG3GZIRUX/iyyi46goiqOF5N/VTpnGcpKewwRWa9oA==
+"@RideSaver/api@^0.1.11":
+  version "0.1.11"
+  resolved "https://npm.pkg.github.com/download/@RideSaver/api/0.1.11/314fb88815f060c3181f355df663827f89de01bf#314fb88815f060c3181f355df663827f89de01bf"
+  integrity sha512-gts6XdgLpwLcd5Ua8Wln3ZHB5QByPdaF+i8QzL2O/U0k/4QbjVsnofNPU/oC5B0eXr3JryxXVFXhBtBsRNf8kw==
   dependencies:
     "@reduxjs/toolkit" "^1.9.1"
     axios "^1.2.1"
