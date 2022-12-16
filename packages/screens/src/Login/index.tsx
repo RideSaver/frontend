@@ -35,7 +35,7 @@ export default () => {
             typeof loginResult.data == "object" &&
             "token" in loginResult.data
         ) {
-            dispatch(user.slice.actions.setToken(loginResult.data.token || loginResult.data.jwtToken));
+            dispatch(user.slice.actions.setToken(loginResult.data.token || (loginResult.data as any).jwtToken));
         }
     }, [loginResult.isSuccess, loginResult.data]);
 
