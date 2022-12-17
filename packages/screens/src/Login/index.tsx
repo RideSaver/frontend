@@ -33,9 +33,9 @@ export default () => {
         if (
             loginResult.isSuccess &&
             typeof loginResult.data == "object" &&
-            "token" in loginResult.data
+            ("token" in loginResult.data || "jwtToken" in loginResult.data)
         ) {
-            dispatch(user.slice.actions.setToken(loginResult.data.token || (loginResult.data as any).jwtToken));
+            dispatch(user.slice.actions.setToken((loginResult.data as any).token || (loginResult.data as any).jwtToken));
         }
     }, [loginResult.isSuccess, loginResult.data]);
 
