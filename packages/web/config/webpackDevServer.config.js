@@ -4,6 +4,7 @@ const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMi
 const redirectServedPath = require('react-dev-utils/redirectServedPathMiddleware');
 const paths = require('./paths');
 const getHttpsConfig = require('./getHttpsConfig');
+const { createMockMiddleware } = require('openapi-mock-express-middleware');
 
 const host = process.env.HOST || '0.0.0.0';
 const sockHost = process.env.WDS_SOCKET_HOST;
@@ -109,6 +110,12 @@ module.exports = function (proxy, allowedHost) {
         // This registers user provided middleware for proxy reasons
         require(paths.proxySetup)(devServer.app);
       }
+      devServer.app.use("/api/v1", (req, res, next) => {
+        console.log(`Requested ${req.path}`);
+        next();
+      }, createMockMiddleware({
+        spec: require.resolve("@ridesaver/api/openapi.yaml")
+      }));
     },
     onAfterSetupMiddleware(devServer) {
       // Redirect to `PUBLIC_URL` or `homepage` from `package.json` if url not match
