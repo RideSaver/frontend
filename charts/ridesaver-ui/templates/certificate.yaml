@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "ridesaver-ui.fullname" . }}
+  labels:
+    {{ include "ridesaver-ui.labels" . | nindent 4 }}
+  {{ with .Values.serviceAccount.annotations }}
+  annotations:
+    {{ toYaml . | nindent 4 }}
+  {{ end }}
+spec:
+  secretName: {{ include "ridesaver-ui.fullname" . }}-certificate
+  dnsNames:
+    - {{ include "ridesaver-ui.fullname" . }}.{{ .Release.Namespace }}
+  subject:
+    organizations:
+      - RideSaver
+  usages:
+    - server auth
+  issuerRef:
+    name: {{ default "ridesaver-ca" .Values.ca.name }}
+    kind: {{ default "ClusterIssuer" .Values.ca.type }}
