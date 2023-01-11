@@ -5,11 +5,9 @@
  */
 
 import React, { useState } from "react";
-import { View } from "react-native";
-import { TextInput, TextInputProps } from "react-native-paper";
+import { Input, IInputProps, Icon, FormControl } from "native-base";
 import PasswordStrengthIndicator from "./PasswordStrengthIndicator";
-import { t } from "@lingui/macro";
-import i18n from "@RideSaver/internationalization";
+import { Trans } from "@lingui/macro";
 
 export default ({
     password = "",
@@ -25,18 +23,21 @@ export default ({
     onPasswordChange: (password: string) => void;
     visible?: boolean;
     onChangeVisibility?: (visibility: boolean) => void;
-} & Partial<TextInputProps>) => {
+} & Partial<IInputProps>) => {
     const [_password, setPassword] = useState(password);
     const [secure, setSecure] = React.useState(!visible);
     return (
-        <View>
-            <TextInput
-                mode="outlined"
-                label={t(i18n)`Password`}
+        <FormControl>
+            <FormControl.Label>
+                <Trans>
+                    Password
+                </Trans>
+            </FormControl.Label>
+            <Input
                 secureTextEntry={secure}
-                right={
-                    <TextInput.Icon
-                        icon="eye"
+                InputRightElement={
+                    <Icon
+                        name="eye"
                         onPress={() => {
                             setSecure(!secure);
                             onChangeVisibility(secure);
@@ -58,6 +59,6 @@ export default ({
                     testID="password-strength"
                 />
             ) : undefined}
-        </View>
+        </FormControl>
     );
 };

@@ -9,12 +9,10 @@ import { View, useColorScheme, StyleSheet } from "react-native";
 import { Provider as ReduxProvider } from "react-redux";
 import * as Screens from "@RideSaver/screens";
 import { store } from "@RideSaver/store";
-import { ActivityIndicator } from "react-native-paper";
+import { Spinner, NativeBaseProvider } from "native-base";
 import { I18nProvider } from "@lingui/react";
 import i18n from "@RideSaver/internationalization";
 import { t } from "@lingui/macro";
-import { Provider as PaperProvider } from "react-native-paper";
-import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -26,9 +24,9 @@ export default function App() {
     const scheme = useColorScheme();
     const theme = scheme === "dark" ? Themes.dark : Themes.light;
 
-    if (state.user.isLoading) {
+    if (state.auth.isLoading) {
         // We haven't finished checking for the token yet
-        return <ActivityIndicator />;
+        return <Spinner />;
     }
 
     const Stack = createNativeStackNavigator();
@@ -40,12 +38,7 @@ export default function App() {
     });
 
     return (
-        <PaperProvider
-            settings={{
-                icon: (props) => <MaterialIcon {...props} />,
-            }}
-            theme={theme}
-        >
+        <NativeBaseProvider>
             <View style={backgroundStyle.backgroundContainer}>
                 <I18nProvider i18n={i18n}>
                     <ReduxProvider store={store}>
@@ -106,6 +99,6 @@ export default function App() {
                     </ReduxProvider>
                 </I18nProvider>
             </View>
-        </PaperProvider>
+        </NativeBaseProvider>
     );
 }

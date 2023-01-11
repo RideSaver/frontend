@@ -4,24 +4,16 @@
  * @format
  */
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import { t } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import { user, useSelector, useDispatch } from "@RideSaver/store";
-import {
-    LocationSelector,
-    NumberInput,
-    RideEstimate,
-    useDebounce,
-} from "@RideSaver/components";
-import { TextInput, Avatar, TouchableRipple } from "react-native-paper";
+import { Trans } from "@lingui/macro";
+import { user, useSelector } from "@RideSaver/store";
+import { usePatchUserMutation } from "@RideSaver/api/redux";
+import { useDebounce } from "@RideSaver/components";
+import { Input, FormControl, Avatar, Pressable } from "native-base";
 import ImagePicker from "expo-image-picker";
 
 export default () => {
-    const dispatch = useDispatch();
-    const { i18n } = useLingui();
-
     const [email, setEmail] = useState(useSelector(user.getEmail) as string);
     const [name, setName] = useState(useSelector(user.getName) as string);
     const [phone, setPhone] = useState(useSelector(user.getPhone) as string);
@@ -33,20 +25,25 @@ export default () => {
         avatar: avatar,
     };
 
+    const [updateUser] = usePatchUserMutation();
+
     useEffect(() => {
-        dispatch(user.update(debouncedUser));
-    });
+        updateUser({
+            username: useSelector(user.getUsername) as string,
+            body: debouncedUser,
+        });
+    }, [debouncedUser]);
 
     return (
         <View>
             <View>
-                <TouchableRipple
+                <Pressable
                     onPress={async () => {
-                        const { accessPrivilidges } =
+                        const { accessPrivileges } =
                             await ImagePicker.requestMediaLibraryPermissionsAsync(
                                 false
                             );
-                        if (accessPrivilidges === "none") return;
+                        if (accessPrivileges === "none") return;
                         const image = await ImagePicker.launchImageLibraryAsync(
                             {
                                 allowsEditing: true,
@@ -54,28 +51,33 @@ export default () => {
                         );
                     }}
                 >
-                    <Avatar.Image
+                    <Avatar
                         source={{
                             uri: avatar,
                         }}
                     />
-                </TouchableRipple>
+                </Pressable>
                 <View>
-                    <TextInput
-                        label={t(i18n)`Name`}
-                        value={name}
-                        onChangeText={setName}
-                    />
-                    <TextInput
-                        label={t(i18n)`E-Mail`}
-                        value={email}
-                        onChangeText={setEmail}
-                    />
-                    <TextInput
-                        label={t(i18n)`Phone Number`}
-                        value={phone}
-                        onChangeText={setPhone}
-                    />
+                    <FormControl>
+                        <FormControl.Label>
+                            <Trans>Name</Trans>
+                        </FormControl.Label>
+                        <Input value={name} onChangeText={setName} />
+                    </FormControl>
+
+                    <FormControl>
+                        <FormControl.Label>
+                            <Trans>E-Mail</Trans>
+                        </FormControl.Label>
+                        <Input value={email} onChangeText={setEmail} />
+                    </FormControl>
+
+                    <FormControl>
+                        <FormControl.Label>
+                            <Trans>Phone Number</Trans>
+                        </FormControl.Label>
+                        <Input value={phone} onChangeText={setPhone} />
+                    </FormControl>
                 </View>
             </View>
         </View>

@@ -6,7 +6,8 @@
 
 import React from "react";
 import { Platform } from "react-native";
-import { TextInput, TextInputProps } from "react-native-paper";
+import { Input, IInputProps, Pressable, Icon } from "native-base";
+// import { MaterialIcons } from "react-native-vector-icons";
 
 export default ({
     value,
@@ -21,23 +22,28 @@ export default ({
     plusIcon?: string;
     minusIcon?: string;
     floatingPoint?: boolean;
-} & Omit<Partial<TextInputProps>, "value">) => {
+} & Omit<Partial<IInputProps>, "value">) => {
     return (
-        <TextInput
-            mode="outlined"
-            left={
-                <TextInput.Icon
-                    icon={minusIcon}
-                    onPress={() => onChangeValue(value - 1)}
-                    testID="decrement-button"
-                />
+        <Input
+            InputLeftElement={
+                <Pressable onPress={() => onChangeValue(value + 1)}>
+                    <Icon
+                        name={minusIcon}
+                        size={5}
+                        mr="2"
+                        color="muted.400"
+                    />
+                </Pressable>
             }
-            right={
-                <TextInput.Icon
-                    icon={plusIcon}
-                    onPress={() => onChangeValue(value + 1)}
-                    testID="increment-button"
-                />
+            InputRightElement={
+                <Pressable onPress={() => onChangeValue(value + 1)}>
+                    <Icon
+                        name={plusIcon}
+                        size={5}
+                        mr="2"
+                        color="muted.400"
+                    />
+                </Pressable>
             }
             value={`${value}`}
             onChangeText={(text) => {

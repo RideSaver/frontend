@@ -5,12 +5,10 @@
  */
 
 import React, { useState } from "react";
-import { View } from "react-native";
-import { Button, HelperText, TextInput } from "react-native-paper";
-import { t, Trans } from "@lingui/macro";
+import { Button, Input, FormControl } from "native-base";
+import { Trans } from "@lingui/macro";
 import { useLinkProps, useLinkTo } from "@react-navigation/native";
 import { PasswordInput } from "@RideSaver/components";
-import i18n from "@RideSaver/internationalization";
 import { useSignUpMutation } from "@RideSaver/api/redux";
 import type { SerializedError } from "@reduxjs/toolkit";
 import { user, useDispatch } from "@RideSaver/store";
@@ -32,78 +30,84 @@ export default () => {
     const dispatch = useDispatch();
 
     // Go to home screen if signed up
-    if(signUpResult.isSuccess && typeof signUpResult.data == "object" && "token" in signUpResult.data) {
+    if (
+        signUpResult.isSuccess &&
+        typeof signUpResult.data == "object" &&
+        "token" in signUpResult.data
+    ) {
         dispatch(user.slice.actions.setToken(signUpResult.data.token));
-        linkTo('/home');
+        linkTo("/home");
     }
 
     return (
-        <View>
-            <HelperText
-                type="error"
-                visible={
-                    signUpResult.isError &&
-                    parseInt(
-                        (signUpResult.error as unknown as SerializedError).code
-                    ) >= 500
-                }
-            >
+        <FormControl
+            isInvalid={
+                signUpResult.isError &&
+                parseInt(
+                    (signUpResult.error as unknown as SerializedError).code
+                ) >= 500
+            }
+        >
+            <FormControl.ErrorMessage>
                 <Trans>
                     Something went wrong, please try again in 30 seconds.
                 </Trans>
-            </HelperText>
-            <TextInput
-                mode="outlined"
-                label={t(i18n)`Username`}
-                value={username}
-                onChangeText={(text) => setUsername(text)}
-                error={
-                    signUpResult.isError &&
-                    parseInt(
-                        (signUpResult.error as unknown as SerializedError).code
-                    ) < 500
-                }
-            />
-            <HelperText
-                type="error"
-                visible={
+            </FormControl.ErrorMessage>
+            <FormControl
+                isInvalid={
                     signUpResult.isError &&
                     parseInt(
                         (signUpResult.error as unknown as SerializedError).code
                     ) < 500
                 }
             >
-                <Trans>Error: Username is already used.</Trans>
-            </HelperText>
+                <FormControl.Label>
+                    <Trans>Username</Trans>
+                </FormControl.Label>
+                <Input
+                    value={username}
+                    onChangeText={(text) => setUsername(text)}
+                />
+                <FormControl.ErrorMessage></FormControl.ErrorMessage>
+            </FormControl>
             <PasswordInput showStrength={true} onPasswordChange={setPassword} />
-            <TextInput
-                mode="outlined"
-                label={t(i18n)`Name`}
+            
+            <FormControl.Label>
+                <Trans>
+                    Name
+                </Trans>
+            </FormControl.Label>
+            <Input
                 value={name}
                 onChangeText={(text) => setName(text)}
             />
-            <TextInput
-                mode="outlined"
-                label={t(i18n)`E-Mail`}
+            <FormControl.Label>
+                <Trans>
+                    E-Mail
+                </Trans>
+            </FormControl.Label>
+            <Input
                 value={email}
                 onChangeText={(text) => setEmail(text)}
             />
-            <HelperText type="info" visible={true}>
+            <FormControl.HelperText>
                 <Trans>Optional</Trans>
-            </HelperText>
+            </FormControl.HelperText>
 
-            <TextInput
-                mode="outlined"
-                label={t(i18n)`Phone Number`}
-                value={email}
+            <FormControl.Label>
+                <Trans>
+                    Phone Number
+                </Trans>
+            </FormControl.Label>
+            <Input
+                value={phone}
                 onChangeText={(text) => setPhone(text)}
             />
-            <HelperText type="info" visible={true}>
+            <FormControl.HelperText>
                 <Trans>Optional</Trans>
-            </HelperText>
+            </FormControl.HelperText>
             <Trans>
                 <Button
-                    mode="outlined"
                     onPress={onLogin}
                     {...loginProps}
                     disabled={signUpResult.isLoading}
@@ -111,7 +115,6 @@ export default () => {
                     Login
                 </Button>
                 <Button
-                    mode="contained"
                     onPress={() => {
                         signUp({
                             body: {
@@ -128,6 +131,6 @@ export default () => {
                     Sign Up
                 </Button>
             </Trans>
-        </View>
+        </FormControl>
     );
 };

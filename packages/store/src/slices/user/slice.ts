@@ -7,6 +7,7 @@
 import { createSlice, PayloadAction, SliceCaseReducers } from "@reduxjs/toolkit";
 import { load } from "./thunks";
 import {User} from "@RideSaver/api/redux";
+import * as reducers from "./reducers";
 
 export interface StateType extends Partial<User> {
     token?: string;
@@ -21,9 +22,7 @@ const rideSettingsSlice = createSlice<StateType, SliceCaseReducers<StateType>>({
     initialState: {
         isLoading: false
     },
-    reducers: {
-        setToken: (state, action) => state = action.payload
-    },
+    reducers,
     extraReducers(builder) {
         builder
             .addCase(load.pending, (state) => {

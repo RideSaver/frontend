@@ -5,8 +5,7 @@
  */
 
 import React, { useState } from "react";
-import { HelperText, TextInput, TextInputProps } from "react-native-paper";
-import { Text, View, StyleSheet } from "react-native";
+import { Input, IInputProps, FormControl, Text } from "native-base";
 import { Trans } from "@lingui/macro";
 
 export type location = {
@@ -14,7 +13,7 @@ export type location = {
     longitude: number;
 };
 
-interface Props extends Partial<TextInputProps> {
+interface Props extends Partial<IInputProps> {
     location?: location;
     onUpdateLocation: (location: location) => void;
 }
@@ -31,8 +30,8 @@ export default (options: Props) => {
     );
     const [error, setError] = useState<boolean>(false);
     return (
-        <View>
-            <TextInput
+        <FormControl isInvalid={error}>
+            <Input
                 onChangeText={(text: string) => {
                     /**
                      * @TODO Cleanup the coordinate parsing logic, it is rather ugly
@@ -69,24 +68,14 @@ export default (options: Props) => {
                 value={location}
                 {...options}
             />
-            <HelperText
-                type="error"
-                visible={error !== undefined}
-                testID="location-error-message"
-            >
+            <FormControl.ErrorMessage testID="location-error-message">
                 <Trans>
                     Expected format is{" "}
-                    <Text style={styles.helperTextExtraEmphasis}>
+                    <Text bold>
                         35.67N132.342W
                     </Text>
                 </Trans>
-            </HelperText>
-        </View>
+            </FormControl.ErrorMessage>
+        </FormControl>
     );
 };
-
-const styles = StyleSheet.create({
-    helperTextExtraEmphasis: {
-        fontWeight: "bold",
-    },
-});

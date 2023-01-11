@@ -5,10 +5,9 @@
  */
 
 import React, { useState } from "react";
-import { View } from "react-native";
 import { zxcvbn, ZxcvbnResult } from "@zxcvbn-ts/core";
 import { Trans, Select, SelectOrdinal } from "@lingui/macro";
-import { HelperText, ProgressBar, useTheme } from "react-native-paper";
+import { FormControl, Pressable, Progress, VStack } from "native-base";
 import { useLingui } from "@lingui/react";
 
 const crackTypes = [
@@ -27,27 +26,19 @@ export default ({
 }) => {
     const { i18n } = useLingui();
     const strength = zxcvbn(password);
-    const theme = useTheme();
     const [timeScenario, setTimeScenario] = useState<number>(1);
     const saneTime = saneUnit(
         strength.crackTimesSeconds[crackTypes[timeScenario]]
     );
 
     return (
-        <View testID={testID}>
-            <ProgressBar
-                progress={strength.score / 4}
-                color={
-                    strength.score < 2
-                        ? theme.colors.error
-                        : theme.colors.secondary
-                }
+        <VStack testID={testID}>
+            <Progress
+                value={strength.score / 4}
+                colorScheme={strength.score < 2 ? "warning" : "emerald"}
                 testID="password-score-bar"
             />
-            <HelperText
-                type="info"
-                visible={password.length > 0}
-                testID="password-strength-text"
+            <Pressable
                 onPress={() =>
                     setTimeScenario(
                         timeScenario < crackTypes.length - 1
@@ -56,35 +47,37 @@ export default ({
                     )
                 }
             >
-                <Trans comment="Number has an added unit">
-                    <SelectOrdinal
-                        value={strength.score}
-                        _0="Very Weak"
-                        _1="Weak"
-                        _2="Average"
-                        _3="Strong"
-                        _4="Very Strong"
-                    />
-                    , Time to Crack:{" "}
-                    {Intl.NumberFormat(i18n.locale, {
-                        style: "unit",
-                        unit: saneTime[1],
-                        maximumSignificantDigits: 3,
-                        notation: "engineering",
-                        unitDisplay: "long",
-                    }).format(saneTime[0])}
-                    ,
-                    <Select
-                        value={crackTypes[timeScenario]}
-                        offlineFastHashing1e10PerSecond="Offline Cracking, needs Data Breach AND cryptographic failure"
-                        offlineSlowHashing1e4PerSecond="Offline Cracking, needs Data Breach"
-                        onlineNoThrottling10PerSecond="Online Cracking, rate limiting bypassed"
-                        onlineThrottling100PerHour="Online Cracking"
-                        other={undefined}
-                    />
-                </Trans>
-            </HelperText>
-        </View>
+                <FormControl.HelperText testID="password-strength-text">
+                    <Trans comment="Number has an added unit">
+                        <SelectOrdinal
+                            value={strength.score}
+                            _0="Very Weak"
+                            _1="Weak"
+                            _2="Average"
+                            _3="Strong"
+                            _4="Very Strong"
+                        />
+                        , Time to Crack:{" "}
+                        {Intl.NumberFormat(i18n.locale, {
+                            style: "unit",
+                            unit: saneTime[1],
+                            maximumSignificantDigits: 3,
+                            notation: "engineering",
+                            unitDisplay: "long",
+                        }).format(saneTime[0])}
+                        ,
+                        <Select
+                            value={crackTypes[timeScenario]}
+                            offlineFastHashing1e10PerSecond="Offline Cracking, needs Data Breach AND cryptographic failure"
+                            offlineSlowHashing1e4PerSecond="Offline Cracking, needs Data Breach"
+                            onlineNoThrottling10PerSecond="Online Cracking, rate limiting bypassed"
+                            onlineThrottling100PerHour="Online Cracking"
+                            other={undefined}
+                        />
+                    </Trans>
+                </FormControl.HelperText>
+            </Pressable>
+        </VStack>
     );
 };
 

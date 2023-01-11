@@ -48,7 +48,7 @@ export default () => {
             <NumberInput
                 value={riders}
                 onChangeValue={setRiders}
-                label={t`Riders`}
+                // label={t`Riders`}
             />
             {estimates.map((estimate) => (
                 <RideEstimate estimate={estimate} key={estimate.id} />
