@@ -13,7 +13,9 @@ import { useAuthenticateMutation } from "@RideSaver/api/redux";
 import { user } from "@RideSaver/store";
 import { useDispatch } from "react-redux";
 
-export default () => {
+export default ({
+    navigation
+}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
@@ -61,9 +63,10 @@ export default () => {
                     <Button
                         onPress={(...args) => {
                             console.log("Sign Up");
-                            onSignUp(...args);
+                            // onSignUp(...args);
+                            navigation.navigate("SignUp");
                         }}
-                        {...signUpProps}
+                        // {...signUpProps}
                     >
                         Sign Up
                     </Button>

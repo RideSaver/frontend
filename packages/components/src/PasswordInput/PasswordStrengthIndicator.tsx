@@ -34,7 +34,7 @@ export default ({
     return (
         <VStack testID={testID}>
             <Progress
-                value={strength.score / 4}
+                value={strength.score * 25}
                 colorScheme={strength.score < 2 ? "warning" : "emerald"}
                 testID="password-score-bar"
             />

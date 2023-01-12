@@ -13,3 +13,4 @@ export const getPhone = (state: RootState) => state.auth.phonenumber;
 export const getUsername = (state: RootState) => state.auth.username;
 export const getAvatar = (state: RootState) => state.auth.avatar;
 export const getToken = (state: RootState) => state.auth.token;
+export const getIsLoading = (state: RootState) => !!state.auth.isLoading;

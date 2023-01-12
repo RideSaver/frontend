@@ -9,6 +9,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import { I18nProvider } from "@lingui/react";
+import { NativeBaseProvider } from "native-base";
+import { Provider as ReduxProvider } from "react-redux";
+import i18n from "@RideSaver/internationalization";
+import { store } from "@RideSaver/store";
 /**
  * @brief
  */
@@ -16,7 +21,13 @@ const rootNode = document.getElementById("root");
 let root: ReactDOM.Root;
 const elem = (
     <React.StrictMode>
-        <App />
+        <NativeBaseProvider>
+            <I18nProvider i18n={i18n}>
+                <ReduxProvider store={store}>
+                        <App />
+                </ReduxProvider>
+            </I18nProvider>
+        </NativeBaseProvider>
     </React.StrictMode>
 );
 if (rootNode.childElementCount > 0) {
