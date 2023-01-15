@@ -1,5 +1,7 @@
 {
     "recommendations": [
-        "Orta.vscode-jest"
+        "orta.vscode-jest",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "eamodio.gitlens"
     ]
 }
