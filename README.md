@@ -1,6 +1,7 @@
 # RideSaver Frontend
  > Monorepository for the Web based and app based clients.
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
  ## Packages
 
  ### components

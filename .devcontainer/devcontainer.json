@@ -8,7 +8,7 @@
         // Append -bullseye or -buster to pin to an OS version.
         // Use -bullseye variants on local on arm64/Apple Silicon.
         "args": {
-            "VARIANT": "16-bullseye"
+            "VARIANT": "18-bullseye"
         }
     },
     // Configure tool-specific properties.
@@ -21,7 +21,9 @@
 				"rvest.vs-code-prettier-eslint",
 				"esbenp.prettier-vscode",
 				"Orta.vscode-jest",
-				"ms-kubernetes-tools.vscode-kubernetes-tools"
+				"ms-kubernetes-tools.vscode-kubernetes-tools",
+				"Tim-Koehler.helm-intellisense",
+				"EditorConfig.EditorConfig"
 			]
         }
     },
@@ -29,6 +31,7 @@
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
     // "postCreateCommand": "yarn install",
+    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
     // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "node",
     "mounts": [
