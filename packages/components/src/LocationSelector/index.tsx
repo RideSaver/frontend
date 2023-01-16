@@ -61,6 +61,7 @@ export default (options: Props) => {
                                 parseFloat(long) *
                                 (long.includes("E") ? 1 : -1),
                         });
+                        setError(false);
                     } else {
                         setError(true);
                     }
@@ -70,10 +71,7 @@ export default (options: Props) => {
             />
             <FormControl.ErrorMessage testID="location-error-message">
                 <Trans>
-                    Expected format is{" "}
-                    <Text bold>
-                        35.67N132.342W
-                    </Text>
+                    Expected format is <Text bold>35.67N132.342W</Text>
                 </Trans>
             </FormControl.ErrorMessage>
         </FormControl>

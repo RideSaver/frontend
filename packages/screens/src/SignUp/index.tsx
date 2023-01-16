@@ -111,6 +111,7 @@ export default () => {
                     onPress={onLogin}
                     {...loginProps}
                     disabled={signUpResult.isLoading}
+                    variant="outline"
                 >
                     Login
                 </Button>
