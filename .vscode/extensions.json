@@ -2,6 +2,7 @@
     "recommendations": [
         "orta.vscode-jest",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
-        "eamodio.gitlens"
+        "eamodio.gitlens",
+        "editorconfig.editorconfig"
     ]
 }
