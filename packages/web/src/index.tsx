@@ -14,6 +14,8 @@ import { NativeBaseProvider } from "native-base";
 import { Provider as ReduxProvider } from "react-redux";
 import i18n from "@RideSaver/internationalization";
 import { store } from "@RideSaver/store";
+import theme from "./theme";
+
 /**
  * @brief
  */
@@ -21,7 +23,7 @@ const rootNode = document.getElementById("root");
 let root: ReactDOM.Root;
 const elem = (
     <React.StrictMode>
-        <NativeBaseProvider>
+        <NativeBaseProvider theme={theme}>
             <I18nProvider i18n={i18n}>
                 <ReduxProvider store={store}>
                         <App />

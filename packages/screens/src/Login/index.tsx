@@ -63,10 +63,10 @@ export default ({
                     <Button
                         onPress={(...args) => {
                             console.log("Sign Up");
-                            // onSignUp(...args);
-                            navigation.navigate("SignUp");
+                            onSignUp(...args);
                         }}
-                        // {...signUpProps}
+                        variant="outline"
+                        {...signUpProps}
                     >
                         Sign Up
                     </Button>
