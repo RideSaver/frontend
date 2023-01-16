@@ -20,22 +20,31 @@ import type { location } from "@RideSaver/components/src/LocationSelector";
 export default () => {
     const dispatch = useDispatch();
 
-    const [startPoint, setStartPoint] = useState<location>(undefined);
-    const [endPoint, setEndPoint] = useState<location>(undefined);
+    const [startPoint, setStartPoint] = useState<location>({
+        latitude: 0,
+        longitude: 0
+    });
+    const [endPoint, setEndPoint] = useState<location>({
+        latitude: 0,
+        longitude: 0
+    });
     const [riders, setRiders] = useState(1);
-    const estimates =
-        startPoint && endPoint
-            ? useGetEstimatesQuery({
-                  startPoint: {
-                      latitude: startPoint.latitude,
-                      longitude: startPoint.longitude,
-                  },
-                  endPoint: {
-                      latitude: endPoint.latitude,
-                      longitude: endPoint.longitude,
-                  },
-              }).data
-            : [];
+    const estimates = useGetEstimatesQuery(
+        {
+            startPoint: {
+                latitude: startPoint.latitude,
+                longitude: startPoint.longitude,
+            },
+            endPoint: {
+                latitude: endPoint.latitude,
+                longitude: endPoint.longitude,
+            },
+            seats: riders
+        },
+        {
+            skip: !startPoint || !endPoint,
+        }
+    ).data || [];
 
     useCallback(() => {
         dispatch(user.load());

@@ -26,7 +26,7 @@ export default ({
     return (
         <Input
             InputLeftElement={
-                <Pressable onPress={() => onChangeValue(value + 1)}>
+                <Pressable onPress={() => onChangeValue(value - 1)}>
                     <Icon
                         name={minusIcon}
                         size={5}
