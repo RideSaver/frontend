@@ -11,7 +11,6 @@
         "eslint": "^8.27.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",
-        "gitlab-ci-local": "^4.35.0",
         "husky": "^8.0.3",
         "jest": "^29.3.1",
         "jest-watch-select-projects": "^2.0.0",
@@ -42,5 +41,6 @@
             "path": "cz-conventional-changelog"
         }
     },
-    "private": true
+    "private": true,
+    "packageManager": "yarn@3.3.1"
 }
