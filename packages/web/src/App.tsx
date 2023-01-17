@@ -63,30 +63,34 @@ export default function App() {
             >
                 {token === undefined ? (
                     // No token found, user isn't signed in
-                    <Stack.Screen
-                        name="Login"
-                        component={Screens.Login}
-                        options={{
-                            title: t(i18n)`Log in`,
-                        }}
-                    />
+                    <Stack.Group navigationKey={"guest"}>
+                        <Stack.Screen
+                            name="Login"
+                            component={Screens.Login}
+                            options={{
+                                title: t(i18n)`Log in`,
+                            }}
+                        />
+                        <Stack.Screen
+                            name="SignUp"
+                            component={Screens.SignUp}
+                            options={{
+                                title: t(i18n)`Sign Up`,
+                            }}
+                        />
+                    </Stack.Group>
                 ) : (
                     // User is signed in
-                    <Stack.Screen
-                        name="Home"
-                        component={Screens.Home}
-                        options={{
-                            title: t(i18n)`Home`,
-                        }}
-                    />
+                    <Stack.Group navigationKey={"user"}>
+                        <Stack.Screen
+                            name="Home"
+                            component={Screens.Home}
+                            options={{
+                                title: t(i18n)`Home`,
+                            }}
+                        />
+                    </Stack.Group>
                 )}
-                <Stack.Screen
-                    name="SignUp"
-                    component={Screens.SignUp}
-                    options={{
-                        title: t(i18n)`Sign Up`,
-                    }}
-                />
             </Stack.Navigator>
         </NavigationContainer>
     );
