@@ -1,6 +1,6 @@
 /** @jest-environment node */
 
-import { describe, test } from "@jest/globals";
+import { describe, test, jest, expect } from "@jest/globals";
 
 import * as webVitals from "web-vitals";
 jest.mock("web-vitals", async () => ({
