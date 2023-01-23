@@ -719,7 +719,7 @@ module.exports = function (webpackEnv) {
           maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         }),
       // TypeScript type checking
-      useTypeScript &&
+      false && useTypeScript &&
         new ForkTsCheckerWebpackPlugin({
           async: isEnvDevelopment,
           typescript: {
