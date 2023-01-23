@@ -1,8 +1,11 @@
 {
-    "recommendations": [
-        "orta.vscode-jest",
-        "ms-kubernetes-tools.vscode-kubernetes-tools",
-        "eamodio.gitlens",
-        "editorconfig.editorconfig"
-    ]
+  "recommendations": [
+    "orta.vscode-jest",
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "eamodio.gitlens",
+    "editorconfig.editorconfig",
+    "arcanis.vscode-zipfs",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
 }

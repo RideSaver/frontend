@@ -1,4 +1,4 @@
-import { describe, test } from "@jest/globals";
+import { describe, test, jest, expect } from "@jest/globals";
 import "@testing-library/jest-dom";
 
 import reportWebVitals from "../reportWebVitals";

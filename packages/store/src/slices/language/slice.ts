@@ -30,7 +30,7 @@ const rideSettingsSlice = createSlice<
     // `createSlice` will infer the state type from the `initialState` argument
     initialState: {
         locale: i18n?.locale as unknown as locale,
-        messages: i18n?._messages || {},
+        messages: (i18n as unknown as { _messages })?._messages || {},
         loadingLocales: [],
     },
     reducers: {},
