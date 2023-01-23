@@ -28,11 +28,11 @@
     "peerDependencies": {
         "@lingui/macro": "^3.16.0",
         "@types/react-dom": "*",
+        "native-base": "*",
         "react-dom": "*",
         "react-native": "*",
         "react-native-web": "*",
-        "react-redux": "*",
-        "native-base": "*"
+        "react-redux": "*"
     },
     "peerDependenciesMeta": {
         "@types/react-dom": {

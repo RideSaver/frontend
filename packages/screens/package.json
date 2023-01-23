@@ -33,11 +33,11 @@
   "peerDependencies": {
     "@types/react-dom": "*",
     "expo": "*",
+    "native-base": "*",
     "react-dom": "*",
     "react-native": "*",
     "react-native-web": "*",
-    "react-redux": "*",
-    "native-base": "*"
+    "react-redux": "*"
   },
   "peerDependenciesMeta": {
     "@types/react-dom": {
