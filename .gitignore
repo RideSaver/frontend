@@ -4,8 +4,10 @@ node_modules
 
 /coverage
 **/build
+
+# Yarn PnP
+.pnp.*
 .yarn/*
-!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
