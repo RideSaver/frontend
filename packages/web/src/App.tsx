@@ -10,7 +10,7 @@ import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
 import * as Screens from "@RideSaver/screens";
-import { NativeBaseProvider, Spinner, Button, Box } from "native-base";
+import { Spinner } from "native-base";
 import { t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useDispatch, useSelector, user } from "@RideSaver/store";
@@ -18,14 +18,8 @@ import { useDispatch, useSelector, user } from "@RideSaver/store";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { language } from "@RideSaver/store";
-import { LinearGradient } from "expo-linear-gradient";
-import IconSet from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconSet from "react-native-vector-icons/MaterialCommunityIcons";
 
-const config = {
-    dependencies: {
-      'linear-gradient': LinearGradient
-    }
-};
 const Drawer = createDrawerNavigator();
 
 export default function App() {
@@ -33,8 +27,6 @@ export default function App() {
     const dispatch = useDispatch();
     const isLoading = useSelector(user.getIsLoading) as boolean;
     const token = useSelector(user.getToken) as boolean;
-
-
 
     const scheme = useColorScheme();
     console.log(scheme);
@@ -48,7 +40,6 @@ export default function App() {
     }
 
     return (
-        <NativeBaseProvider config={config}>
         <NavigationContainer
             linking={{
                 prefixes: [
@@ -70,6 +61,28 @@ export default function App() {
                 screenListeners={{
                     transitionStart: () => console.log("Transition"),
                 }}
+                initalRouteName={token === undefined ? "Login" : "Estimates"}
+                useLegacyImplementation
+                options={({ navigation }) => ({
+                    headerTitleAlign: "center",
+                    headerStyle: {
+                        backgroundColor: "#27272a",
+                        borderBottomColor: "#0077e6",
+                    },
+                    headerTitleStyle: {
+                        fontFamily: "Roboto",
+                        fontWeight: "bold",
+                        color: "#f0f9ff",
+                    },
+                    headerLeft: () => (
+                        <IconSet
+                            name="menu"
+                            size={21}
+                            color="#E0E0E0"
+                            onPress={() => navigation.navigate("Home")}
+                        />
+                    ),
+                })}
             >
                 {token === undefined ? (
                     // No token found, user isn't signed in
@@ -77,24 +90,9 @@ export default function App() {
                         <Drawer.Screen
                             name="Request"
                             component={Screens.Request}
-                            options={({ navigation }) => ({ 
-                                title: t(i18n)`Request Details`,
-                                headerTitleAlign: "center",
-                                headerStyle:{
-                                  backgroundColor: '#27272a',
-                                  borderBottomColor: '#0077e6',
-                                },
-                                headerTitleStyle:{
-                                    fontFamily: "Roboto",
-                                    fontWeight: "bold",
-                                    color: "#f0f9ff",
-                                },
-                                headerRight: () => (
-                                    <IconSet name="menu" size={21} color="#E0E0E0"
-                                    onPress={() => navigation.navigate('Home')}
-                                  />
-                                ),
-                            })}
+                            options={{
+                                title: t(i18n)`Ride Details`,
+                            }}
                         />
                         <Drawer.Screen
                             name="Login"
@@ -115,16 +113,15 @@ export default function App() {
                     // User is signed in
                     <Drawer.Group navigationKey={"user"}>
                         <Drawer.Screen
-                            name="Home"
-                            component={Screens.Home}
+                            name="Estimates"
+                            component={Screens.Estimates}
                             options={{
-                                title: t(i18n)`Home`,
+                                title: t(i18n)`Estimates`,
                             }}
                         />
                     </Drawer.Group>
                 )}
             </Drawer.Navigator>
         </NavigationContainer>
-        </NativeBaseProvider>
     );
 }

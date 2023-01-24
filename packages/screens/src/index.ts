@@ -8,13 +8,13 @@ export { default as Login } from "./Login";
 export { default as SignUp } from "./SignUp";
 
 export { default as Request } from "./Request";
-export { default as Home } from "./Home";
+export { default as Estimates } from "./Estimates";
 
-import type { PathConfigMap } from "@react-navigation/core";
+import type { PathConfigMap, RootParamList } from "@react-navigation/core";
 
-export const paths: PathConfigMap<ReactNavigation.RootParamList> = {
-    Home: {
-        path: "/",
+export const paths: PathConfigMap<RootParamList> = {
+    Estimates: {
+        path: "/estimates",
     },
     Request: "/request",
     SignUp: "/signup",

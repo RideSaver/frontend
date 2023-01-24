@@ -14,6 +14,3 @@ export default ({startLat = 34.0907883 , startLong = -117.4199699, endLat, endLo
         <Map latitude={startLat} longitude={startLong}></Map>
     );
 };
-
-
-

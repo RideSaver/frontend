@@ -4,76 +4,82 @@
  * @format
  */
 
-import React from 'react';
-import { Box, VStack, Container } from "native-base";
-import { RequestMap, RequestDetails, RequestButtons} from '@RideSaver/components';
+import React from "react";
+import { Box, VStack, Container, useTheme } from "native-base";
+import RequestMap from "./RequestMap";
+import RequestDetails from "./RequestDetails";
+import RequestButtons from "./RequestButtons";
 
 export default ({ initalLat, initalLLong, finalLat, finalLong }) => {
-
+    console.log(useTheme());
     return (
-            <Box /* Parent Container */
-            flex="1" 
-            borderWidth="1" 
+        <Box /* Parent Container */
+            flex="1"
+            borderWidth="1"
             borderTopWidth="0"
             borderBottomLeftRadius={15}
             borderBottomRightRadius={15}
             overflow="hidden"
-            >
-                <VStack /* Contains: 1) Map Container 2) Information Container 3) Buttons/Footer Container */
-                space={0} 
-                alignItems="center" 
-                flex="1" 
-                width="100%" 
+        >
+            <VStack /* Contains: 1) Map Container 2) Information Container 3) Buttons/Footer Container */
+                space={0}
+                alignItems="center"
+                flex="1"
+                width="100%"
                 height="100%"
                 overflow="hidden"
-                >
-                    <Box  /* Map */
-                    width="container" 
+            >
+                <Box /* Map */
+                    width="container"
                     flex="2"
                     overflow="hidden"
                     alignItems="center"
-                    > 
-                        <RequestMap 
-                        startLat={initalLat} 
-                        startLong ={initalLLong}    
-                        endLat={finalLat}  
+                >
+                    <RequestMap
+                        startLat={initalLat}
+                        startLong={initalLLong}
+                        endLat={finalLat}
                         endLong={finalLong}
-                        />
-                    </Box>
-                    
-                    <Box /* Parent Information-Container */
-                    roundedBottom="lg" 
-                    overflow="hidden" 
-                    flex="1" 
-                    backgroundColor={["muted.100", "muted.800"]}
+                    />
+                </Box>
+
+                <Box /* Parent Information-Container */
+                    roundedBottom="lg"
+                    overflow="hidden"
+                    flex="1"
                     width="100%"
-                    borderTopColor="darkBlue.500:alpha.90" 
-                    borderTopWidth="2" 
+                    borderTopColor="darkBlue.500:alpha.90"
+                    borderTopWidth="2"
                     borderTopLeftRadius="15"
                     borderTopRightRadius="15"
                     borderTopStyle="inset"
-                    >    
-                        <Container /* Driver & Car information */
-                        width="100%" 
-                        flex="4" 
-                        justifyContent="center" 
+                    _light={{
+                        backgroundColor: "muted.100",
+                    }}
+                    _dark={{
+                        backgroundColor: "muted.800",
+                    }}
+                >
+                    <Container /* Driver & Car information */
+                        width="100%"
+                        flex="4"
+                        justifyContent="center"
                         alignSelf="center"
-                        > 
-                            <RequestDetails/>
-                        </Container>
+                    >
+                        <RequestDetails />
+                    </Container>
 
-                        <Box  /* Request Footer */
-                        width="100%" 
-                        borderTopWidth="1" 
+                    <Box /* Request Footer */
+                        width="100%"
+                        borderTopWidth="1"
                         borderTopColor="darkBlue.500:alpha.50"
                         borderTopStyle="inset"
                         rounded="lg"
-                        >
-                            <RequestButtons/>
-                        </Box>
+                    >
+                        <RequestButtons />
                     </Box>
-                </VStack>
-            </Box>
-        );
-    };
-      
+                </Box>
+            </VStack>
+        </Box>
+    );
+};

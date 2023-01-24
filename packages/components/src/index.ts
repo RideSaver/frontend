@@ -11,8 +11,4 @@ export { default as PasswordInput } from "./PasswordInput";
 
 export { default as Map } from "./Map";
 
-export { default as RequestMap } from "./RequestMap";
-export { default as RequestDetails } from "./RequestDetails";
-export { default as RequestButtons } from "./RequestButtons";
-
 export { default as useDebounce } from "./utils/useDebounce";
