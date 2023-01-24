@@ -31,6 +31,7 @@ __metadata:
     "@babel/preset-react": ^7.18.6
     "@lingui/core": ^3.16.1
     "@lingui/react": ^3.16.1
+    "@react-navigation/drawer": ^6.5.7
     "@testing-library/jest-native": ^5.4.1
     "@testing-library/react": ^13.4.0
     "@testing-library/react-native": ^11.5.0
@@ -52,13 +53,19 @@ __metadata:
     redux: ^4.2.0
   peerDependencies:
     "@lingui/macro": ^3.16.0
+    "@react-navigation/drawer": "*"
     "@types/react-dom": "*"
     native-base: "*"
     react-dom: "*"
     react-native: "*"
     react-native-web: "*"
     react-redux: "*"
+  dependenciesMeta:
+    "@react-navigation/drawer":
+      optional: true
   peerDependenciesMeta:
+    "@react-navigation/drawer":
+      optional: true
     "@types/react-dom":
       optional: true
     react-dom:
@@ -256,6 +263,7 @@ __metadata:
   resolution: "@RideSaver/web@workspace:packages/web"
   dependencies:
     "@RideSaver/api": ^0.1.15
+    "@RideSaver/components": 0.0.1
     "@RideSaver/internationalization": 0.0.1
     "@RideSaver/screens": 0.0.1
     "@RideSaver/store": 0.0.1

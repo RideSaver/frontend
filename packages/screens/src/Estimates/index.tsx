@@ -12,12 +12,13 @@ import { user, useDispatch } from "@RideSaver/store";
 import {
     LocationSelector,
     NumberInput,
-    RideEstimate,
 } from "@RideSaver/components";
 import { useGetEstimatesQuery } from "@RideSaver/api/redux";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import type { location } from "@RideSaver/components/src/LocationSelector";
+
+import RideEstimate from "./Estimate";
 
 export default ( {navigation} ) => {
     const dispatch = useDispatch();

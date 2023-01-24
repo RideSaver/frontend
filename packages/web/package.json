@@ -4,6 +4,7 @@
     "private": true,
     "main": "src/index.tsx",
     "dependencies": {
+        "@RideSaver/components": "0.0.1",
         "@RideSaver/internationalization": "0.0.1",
         "@RideSaver/screens": "0.0.1",
         "@RideSaver/store": "0.0.1",

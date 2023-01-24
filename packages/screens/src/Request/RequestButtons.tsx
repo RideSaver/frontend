@@ -12,16 +12,16 @@ export default () => {
         <Button.Group
             isAttached
             colorScheme="blue"
-            size="sm"
+            size="lg"
             flex={1}
         >
-            <Button leftIcon={<Icon name="currency-usd" size="sm" />} flex={1}>
+            <Button leftIcon={<Icon name="currency-usd" />} flex={1}>
                 Fare
             </Button>
-            <Button leftIcon={<Icon name="phone" size="sm" />} flex={1}>
+            <Button leftIcon={<Icon name="phone" />} flex={1}>
                 Contact
             </Button>
-            <Button leftIcon={<Icon name="cancel" size="sm" />} flex={1}>
+            <Button leftIcon={<Icon name="cancel" />} flex={1}>
                 Cancel
             </Button>
         </Button.Group>

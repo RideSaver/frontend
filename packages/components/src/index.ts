@@ -5,9 +5,10 @@
  */
 
 export { default as LocationSelector } from "./LocationSelector";
-export { default as RideEstimate } from "./RideEstimate";
 export { default as NumberInput } from "./NumberInput";
 export { default as PasswordInput } from "./PasswordInput";
+
+export { default as CustomDrawer } from "./CustomDrawer";
 
 export { default as Map } from "./Map";
 

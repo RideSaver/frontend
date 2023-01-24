@@ -5,13 +5,12 @@
  */
 
 import React from "react";
-import { Box, VStack, Container, useTheme } from "native-base";
+import { Box, VStack, Container } from "native-base";
 import RequestMap from "./RequestMap";
 import RequestDetails from "./RequestDetails";
 import RequestButtons from "./RequestButtons";
 
 export default ({ initalLat, initalLLong, finalLat, finalLong }) => {
-    console.log(useTheme());
     return (
         <Box /* Parent Container */
             flex="1"

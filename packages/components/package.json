@@ -28,6 +28,7 @@
     },
     "peerDependencies": {
         "@lingui/macro": "^3.16.0",
+        "@react-navigation/drawer": "*",
         "@types/react-dom": "*",
         "native-base": "*",
         "react-dom": "*",
@@ -36,6 +37,9 @@
         "react-redux": "*"
     },
     "peerDependenciesMeta": {
+        "@react-navigation/drawer": {
+            "optional": true
+        },
         "@types/react-dom": {
             "optional": true
         },
@@ -63,5 +67,8 @@
         "babel-plugin-macros": "^3.1.0",
         "metro-react-native-babel-preset": "^0.74.1",
         "react-test-renderer": "^18.2.0"
+    },
+    "optionalDependencies": {
+        "@react-navigation/drawer": "^6.5.7"
     }
 }

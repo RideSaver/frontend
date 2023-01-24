@@ -7,18 +7,18 @@
 import "./App.css";
 
 import React, { useEffect } from "react";
+import { useWindowDimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { useColorScheme } from "react-native";
 import * as Screens from "@RideSaver/screens";
-import { Spinner } from "native-base";
+import { Spinner, Icon, useColorMode, useColorModeValue } from "native-base";
 import { t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { useDispatch, useSelector, user } from "@RideSaver/store";
+import { useDispatch, useSelector, user, language } from "@RideSaver/store";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { language } from "@RideSaver/store";
-import IconSet from "react-native-vector-icons/MaterialCommunityIcons";
+import { CustomDrawer } from "@RideSaver/components";
+import { NavigationTheme } from "./theme";
 
 const Drawer = createDrawerNavigator();
 
@@ -27,17 +27,22 @@ export default function App() {
     const dispatch = useDispatch();
     const isLoading = useSelector(user.getIsLoading) as boolean;
     const token = useSelector(user.getToken) as boolean;
-
-    const scheme = useColorScheme();
-    console.log(scheme);
+    const dimensions = useWindowDimensions();
+    const { toggleColorMode } = useColorMode();
     useEffect(() => {
         dispatch(language.switchLocale("en-US"));
     }, [dispatch]);
+    const navigaionTheme = useColorModeValue(
+        NavigationTheme.Light,
+        NavigationTheme.Dark
+    );
+    const colorMode = useColorModeValue("light", "dark");
 
     if (isLoading) {
         // We haven't finished checking for the token yet
         return <Spinner />;
     }
+    console.log(navigaionTheme);
 
     return (
         <NavigationContainer
@@ -56,6 +61,7 @@ export default function App() {
                 formatter: (options, route) =>
                     t(i18n)`${options?.title ?? route?.name} - RideSaver`,
             }}
+            theme={navigaionTheme}
         >
             <Drawer.Navigator
                 screenListeners={{
@@ -64,25 +70,21 @@ export default function App() {
                 initalRouteName={token === undefined ? "Login" : "Estimates"}
                 useLegacyImplementation
                 options={({ navigation }) => ({
-                    headerTitleAlign: "center",
-                    headerStyle: {
-                        backgroundColor: "#27272a",
-                        borderBottomColor: "#0077e6",
-                    },
-                    headerTitleStyle: {
-                        fontFamily: "Roboto",
-                        fontWeight: "bold",
-                        color: "#f0f9ff",
-                    },
                     headerLeft: () => (
-                        <IconSet
+                        <Icon
                             name="menu"
-                            size={21}
-                            color="#E0E0E0"
-                            onPress={() => navigation.navigate("Home")}
+                            onPress={() => navigation.openDrawer()}
                         />
                     ),
+                    drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
                 })}
+                drawerContent={(props) => (
+                    <CustomDrawer
+                        {...props}
+                        toggleColorMode={toggleColorMode}
+                        colorMode={colorMode}
+                    />
+                )}
             >
                 {token === undefined ? (
                     // No token found, user isn't signed in
