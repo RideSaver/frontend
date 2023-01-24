@@ -5,6 +5,5 @@
     "moduleResolution": "node",
     "module": "CommonJS",
     "jsx": "preserve"
-  },
-  "extends": "expo/tsconfig.base"
+  }
 }

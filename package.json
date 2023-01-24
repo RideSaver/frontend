@@ -4,8 +4,8 @@
     "devDependencies": {
         "@babel/core": "^7.20.12",
         "@lingui/conf": "^3.16.0",
-        "@typescript-eslint/eslint-plugin": "^5.48.2",
-        "@typescript-eslint/parser": "^5.48.2",
+        "@typescript-eslint/eslint-plugin": "^5.49.0",
+        "@typescript-eslint/parser": "^5.49.0",
         "commitizen": "^4.3.0",
         "cz-conventional-changelog": "^3.3.0",
         "eslint": "^8.32.0",
@@ -17,7 +17,7 @@
         "jest-watch-typeahead": "^2.2.1",
         "prettier": "^2.8.3",
         "prettier-eslint": "^15.0.1",
-        "semantic-release": "^20.0.2",
+        "semantic-release": "^20.0.4",
         "semantic-release-helm": "^2.2.0",
         "semantic-release-monorepo": "^7.0.5",
         "semantic-release-react-native": "^1.8.0",
@@ -42,18 +42,5 @@
         }
     },
     "private": true,
-    "packageManager": "yarn@3.3.1",
-    "dependencies": {
-        "@react-navigation/drawer": "^6.5.7",
-        "mapbox-gl": "^2.12.0",
-        "patch-package": "^6.5.1",
-        "react-dev-utils": "^12.0.1",
-        "react-mapbox-gl": "^5.1.1",
-        "react-native-gesture-handler": "^2.9.0",
-        "react-native-linear-gradient": "^2.6.2",
-        "react-native-reanimated": "^2.14.4",
-        "react-native-vector-icons": "^9.2.0",
-        "react-navigation-drawer": "^2.7.2",
-        "workbox-webpack-plugin": "^6.5.4"
-    }
+    "packageManager": "yarn@3.3.1"
 }

@@ -15,7 +15,7 @@ import { t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useDispatch, useSelector, user } from "@RideSaver/store";
 
-import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { language } from "@RideSaver/store";
 import { LinearGradient } from "expo-linear-gradient";
@@ -26,7 +26,7 @@ const config = {
       'linear-gradient': LinearGradient
     }
 };
-const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
     const { i18n } = useLingui();
@@ -66,15 +66,15 @@ export default function App() {
                     t(i18n)`${options?.title ?? route?.name} - RideSaver`,
             }}
         >
-            <Stack.Navigator
+            <Drawer.Navigator
                 screenListeners={{
                     transitionStart: () => console.log("Transition"),
                 }}
             >
                 {token === undefined ? (
                     // No token found, user isn't signed in
-                    <Stack.Group navigationKey={"guest"}>
-                        <Stack.Screen
+                    <Drawer.Group navigationKey={"guest"}>
+                        <Drawer.Screen
                             name="Request"
                             component={Screens.Request}
                             options={({ navigation }) => ({ 
@@ -96,34 +96,34 @@ export default function App() {
                                 ),
                             })}
                         />
-                        <Stack.Screen
+                        <Drawer.Screen
                             name="Login"
                             component={Screens.Login}
                             options={{
                                 title: t(i18n)`Log in`,
                             }}
                         />
-                        <Stack.Screen
+                        <Drawer.Screen
                             name="SignUp"
                             component={Screens.SignUp}
                             options={{
                                 title: t(i18n)`Sign Up`,
                             }}
                         />
-                    </Stack.Group>
+                    </Drawer.Group>
                 ) : (
                     // User is signed in
-                    <Stack.Group navigationKey={"user"}>
-                        <Stack.Screen
+                    <Drawer.Group navigationKey={"user"}>
+                        <Drawer.Screen
                             name="Home"
                             component={Screens.Home}
                             options={{
                                 title: t(i18n)`Home`,
                             }}
                         />
-                    </Stack.Group>
+                    </Drawer.Group>
                 )}
-            </Stack.Navigator>
+            </Drawer.Navigator>
         </NavigationContainer>
         </NativeBaseProvider>
     );

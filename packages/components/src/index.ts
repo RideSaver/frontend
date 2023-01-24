@@ -9,7 +9,6 @@ export { default as RideEstimate } from "./RideEstimate";
 export { default as NumberInput } from "./NumberInput";
 export { default as PasswordInput } from "./PasswordInput";
 
-export { default as NavDrawer } from "./NavDrawer";
 export { default as Map } from "./Map";
 
 export { default as RequestMap } from "./RequestMap";
