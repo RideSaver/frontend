@@ -4,6 +4,7 @@
  * @format
  */
 
+import 'react-native-gesture-handler';
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
@@ -15,6 +16,8 @@ import { Provider as ReduxProvider } from "react-redux";
 import i18n from "@RideSaver/internationalization";
 import { store } from "@RideSaver/store";
 import theme from "./theme";
+
+
 
 /**
  * @brief

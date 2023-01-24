@@ -11,7 +11,7 @@ import { user, useSelector } from "@RideSaver/store";
 import { usePatchUserMutation } from "@RideSaver/api/redux";
 import { useDebounce } from "@RideSaver/components";
 import { Input, FormControl, Avatar, Pressable } from "native-base";
-import ImagePicker from "expo-image-picker";
+import * as ImagePicker from "expo-image-picker";
 
 export default () => {
     const [email, setEmail] = useState(useSelector(user.getEmail) as string);
@@ -27,12 +27,12 @@ export default () => {
 
     const [updateUser] = usePatchUserMutation();
 
-    useEffect(() => {
+    /*useEffect(() => {
         updateUser({
             username: useSelector(user.getUsername) as string,
-            body: debouncedUser,
+            /*body: debouncedUser,
         });
-    }, [debouncedUser]);
+    }, [debouncedUser]);*/
 
     return (
         <View>

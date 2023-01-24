@@ -10,7 +10,7 @@ import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
 import * as Screens from "@RideSaver/screens";
-import { Spinner } from "native-base";
+import { NativeBaseProvider, Spinner, Button, Box } from "native-base";
 import { t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useDispatch, useSelector, user } from "@RideSaver/store";
@@ -18,7 +18,14 @@ import { useDispatch, useSelector, user } from "@RideSaver/store";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { language } from "@RideSaver/store";
+import { LinearGradient } from "expo-linear-gradient";
+import IconSet from 'react-native-vector-icons/MaterialCommunityIcons';
 
+const config = {
+    dependencies: {
+      'linear-gradient': LinearGradient
+    }
+};
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -26,6 +33,8 @@ export default function App() {
     const dispatch = useDispatch();
     const isLoading = useSelector(user.getIsLoading) as boolean;
     const token = useSelector(user.getToken) as boolean;
+
+
 
     const scheme = useColorScheme();
     console.log(scheme);
@@ -39,6 +48,7 @@ export default function App() {
     }
 
     return (
+        <NativeBaseProvider config={config}>
         <NavigationContainer
             linking={{
                 prefixes: [
@@ -64,6 +74,28 @@ export default function App() {
                 {token === undefined ? (
                     // No token found, user isn't signed in
                     <Stack.Group navigationKey={"guest"}>
+                        <Stack.Screen
+                            name="Request"
+                            component={Screens.Request}
+                            options={({ navigation }) => ({ 
+                                title: t(i18n)`Request Details`,
+                                headerTitleAlign: "center",
+                                headerStyle:{
+                                  backgroundColor: '#27272a',
+                                  borderBottomColor: '#0077e6',
+                                },
+                                headerTitleStyle:{
+                                    fontFamily: "Roboto",
+                                    fontWeight: "bold",
+                                    color: "#f0f9ff",
+                                },
+                                headerRight: () => (
+                                    <IconSet name="menu" size={21} color="#E0E0E0"
+                                    onPress={() => navigation.navigate('Home')}
+                                  />
+                                ),
+                            })}
+                        />
                         <Stack.Screen
                             name="Login"
                             component={Screens.Login}
@@ -93,5 +125,6 @@ export default function App() {
                 )}
             </Stack.Navigator>
         </NavigationContainer>
+        </NativeBaseProvider>
     );
 }

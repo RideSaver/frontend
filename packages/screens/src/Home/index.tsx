@@ -6,6 +6,7 @@
 
 import React, { useCallback, useState } from "react";
 import { View } from "react-native";
+import { Button } from "native-base";
 import { t } from "@lingui/macro";
 import { user, useDispatch } from "@RideSaver/store";
 import {
@@ -14,10 +15,11 @@ import {
     RideEstimate,
 } from "@RideSaver/components";
 import { useGetEstimatesQuery } from "@RideSaver/api/redux";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import type { location } from "@RideSaver/components/src/LocationSelector";
 
-export default () => {
+export default ( {navigation} ) => {
     const dispatch = useDispatch();
 
     const [startPoint, setStartPoint] = useState<location>({
@@ -62,6 +64,16 @@ export default () => {
             {estimates.map((estimate) => (
                 <RideEstimate estimate={estimate} key={estimate.id} />
             ))}
+            <Button 
+                onPress={ (  ) => navigation.navigate('Request', {
+                    initalLat: 34.0907883,
+                    initalLong: -117.4199699
+                })}
+
+            >/ 
+            Request 
+            </Button>
         </View>
+        
     );
 };
