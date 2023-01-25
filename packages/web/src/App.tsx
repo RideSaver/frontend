@@ -42,7 +42,6 @@ export default function App() {
         // We haven't finished checking for the token yet
         return <Spinner />;
     }
-    console.log(navigaionTheme);
 
     return (
         <NavigationContainer
@@ -54,7 +53,12 @@ export default function App() {
                     ),
                 ],
                 config: {
-                    screens: Screens.paths,
+                    screens: {
+                        Estimates: "/estimates",
+                        Request: "/request",
+                        SignUp: "/signup",
+                        Login: "/login",
+                    },
                 },
             }}
             documentTitle={{
@@ -64,9 +68,6 @@ export default function App() {
             theme={navigaionTheme}
         >
             <Drawer.Navigator
-                screenListeners={{
-                    transitionStart: () => console.log("Transition"),
-                }}
                 initalRouteName={token === undefined ? "Login" : "Estimates"}
                 useLegacyImplementation
                 options={({ navigation }) => ({
@@ -76,7 +77,6 @@ export default function App() {
                             onPress={() => navigation.openDrawer()}
                         />
                     ),
-                    drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
                 })}
                 drawerContent={(props) => (
                     <CustomDrawer

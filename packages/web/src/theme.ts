@@ -9,6 +9,14 @@ export default extendTheme({
                 as: MaterialIcons,
             },
         },
+        Text: {
+            variants: {
+                info: {
+                    _light: { color: 'muted.500' },
+                    _dark: { color: 'muted.300' },
+                }
+            }
+        }
     },
 });
 
