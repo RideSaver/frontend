@@ -16,6 +16,11 @@ export default extendTheme({
                     _dark: { color: 'muted.300' },
                 }
             }
+        },
+        Divider: {
+            baseStyle: {
+                mt: 4
+            }
         }
     },
 });

@@ -17,7 +17,7 @@ import {
     Icon,
     Avatar,
 } from "native-base";
-import { Trans, Plural } from "@lingui/macro";
+import { Trans, SelectOrdinal } from "@lingui/macro";
 
 export default () => {
     const vehicleImage =
@@ -28,17 +28,30 @@ export default () => {
     return (
         <Box width="100%" height="100%" paddingTop="5" /* Parent Container */>
             <Trans>
-                <Text variant="info">
-                    Your driver will be arriving in{" "}
-                    <Text bold>
-                        <Plural
+                <HStack justifyContent="center">
+                    <Text variant="info">
+                        Your driver will be arriving in
+                        <Box
+                            rounded="md"
+                            backgroundColor="secondary.300"
+                            ml="1"
+                            mr="1"
+                            pr="2"
+                            pl="2"
+                            shadow="10" /* Estimate in minutes */
+                        >
+                            <Text color="dark.50" bold>
+                                {etaMinutes}
+                            </Text>
+                        </Box>
+                        <SelectOrdinal
                             value={etaMinutes}
-                            one="a minute"
-                            other="# minutes"
+                            one="minute"
+                            other="minutes"
                         />
+                        .
                     </Text>
-                    .
-                </Text>
+                </HStack>
             </Trans>
 
             <Divider thickness={1} />
@@ -53,9 +66,7 @@ export default () => {
                     <Box /* Vehicle Information */>
                         <HStack space={2}>
                             <Icon name="car" />
-                            <Text>
-                                2013 Toyota Corolla
-                            </Text>
+                            <Text>2013 Toyota Corolla</Text>
                         </HStack>
                     </Box>
                     <Box /* License Information */>
@@ -73,9 +84,7 @@ export default () => {
                     <Box /* Driver Rating */>
                         <HStack space={2}>
                             <Icon name="star" />
-                            <Text>
-                                4.9
-                            </Text>
+                            <Text>4.9</Text>
                         </HStack>
                     </Box>
                 </VStack>
