@@ -16,7 +16,7 @@ export interface StateType extends Partial<User> {
     avatar?: string;
 }
 
-const rideSettingsSlice = createSlice<StateType, SliceCaseReducers<StateType>>({
+const userSlice = createSlice<StateType, SliceCaseReducers<StateType>>({
     name: "auth",
     // `createSlice` will infer the state type from the `initialState` argument
     initialState: {
@@ -37,4 +37,4 @@ const rideSettingsSlice = createSlice<StateType, SliceCaseReducers<StateType>>({
     }
 });
 
-export default rideSettingsSlice;
+export default userSlice;

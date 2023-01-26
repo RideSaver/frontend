@@ -18,12 +18,16 @@ import {
     Avatar,
 } from "native-base";
 import { Trans, SelectOrdinal } from "@lingui/macro";
+import { Ride } from "@RideSaver/api/redux";
 
-export default () => {
-    const vehicleImage =
-        "https://www.dualdrive.co.uk/wp-content/uploads/2019/07/2019_07_Corolla-Hybrid.png";
-    const driverImage = "https://i.ibb.co/DL3mTks/demo-driver-image.jpg";
-    const etaMinutes = 2;
+export interface RequestDetailsProps {
+    ride: Ride;
+}
+
+export default function RequestDetails({ ride }: RequestDetailsProps) {
+    const vehicleImage = ride.driver.carPicture;
+    const driverImage = ride.driver.avatar;
+    const etaMinutes = ride.estimatedTimeOfArrival;
 
     return (
         <Box width="100%" height="100%" paddingTop="5" /* Parent Container */>
@@ -40,7 +44,7 @@ export default () => {
                             pl="2"
                             shadow="10" /* Estimate in minutes */
                         >
-                            <Text color="dark.50" bold>
+                            <Text bold>
                                 {etaMinutes}
                             </Text>
                         </Box>
@@ -104,4 +108,4 @@ export default () => {
             </HStack>
         </Box>
     );
-};
+}

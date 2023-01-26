@@ -7,7 +7,6 @@
 import "./App.css";
 
 import React, { useEffect } from "react";
-import { useWindowDimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import * as Screens from "@RideSaver/screens";
 import { Spinner, Icon, useColorMode, useColorModeValue } from "native-base";
@@ -15,20 +14,19 @@ import { t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useDispatch, useSelector, user, language } from "@RideSaver/store";
 
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import { CustomDrawer } from "@RideSaver/components";
 import { NavigationTheme } from "./theme";
+import Home from "./navigators/Home";
+import Authentication from "./navigators/Authentication";
 
-const Drawer = createDrawerNavigator();
+const Drawer = createStackNavigator();
 
 export default function App() {
     const { i18n } = useLingui();
     const dispatch = useDispatch();
     const isLoading = useSelector(user.getIsLoading) as boolean;
     const token = useSelector(user.getToken) as boolean;
-    const dimensions = useWindowDimensions();
-    const { toggleColorMode } = useColorMode();
     useEffect(() => {
         dispatch(language.switchLocale("en-US"));
     }, [dispatch]);
@@ -36,7 +34,6 @@ export default function App() {
         NavigationTheme.Light,
         NavigationTheme.Dark
     );
-    const colorMode = useColorModeValue("light", "dark");
 
     if (isLoading) {
         // We haven't finished checking for the token yet
@@ -47,17 +44,24 @@ export default function App() {
         <NavigationContainer
             linking={{
                 prefixes: [
-                    "ridesaver://",
                     ...["https://", "http://", "//", ""].map(
                         (protocol) => protocol + window.location.host
                     ),
                 ],
                 config: {
                     screens: {
-                        Estimates: "/estimates",
-                        Request: "/request",
-                        SignUp: "/signup",
-                        Login: "/login",
+                        Home: {
+                            screens: {
+                                Estimates: "/estimates",
+                                Request: "/request/:id",
+                            },
+                        },
+                        Authentication: {
+                            screens: {
+                                SignUp: "/signup",
+                                Login: "/login",
+                            }
+                        }
                     },
                 },
             }}
@@ -68,60 +72,15 @@ export default function App() {
             theme={navigaionTheme}
         >
             <Drawer.Navigator
-                initalRouteName={token === undefined ? "Login" : "Estimates"}
-                useLegacyImplementation
-                options={({ navigation }) => ({
-                    headerLeft: () => (
-                        <Icon
-                            name="menu"
-                            onPress={() => navigation.openDrawer()}
-                        />
-                    ),
-                })}
-                drawerContent={(props) => (
-                    <CustomDrawer
-                        {...props}
-                        toggleColorMode={toggleColorMode}
-                        colorMode={colorMode}
-                    />
-                )}
+                initalRouteName={token === undefined ? "Authentication" : "Home"}
+                options={{
+                    headerShown: false
+                }}
             >
                 {token === undefined ? (
-                    // No token found, user isn't signed in
-                    <Drawer.Group navigationKey={"guest"}>
-                        <Drawer.Screen
-                            name="Request"
-                            component={Screens.Request}
-                            options={{
-                                title: t(i18n)`Ride Details`,
-                            }}
-                        />
-                        <Drawer.Screen
-                            name="Login"
-                            component={Screens.Login}
-                            options={{
-                                title: t(i18n)`Log in`,
-                            }}
-                        />
-                        <Drawer.Screen
-                            name="SignUp"
-                            component={Screens.SignUp}
-                            options={{
-                                title: t(i18n)`Sign Up`,
-                            }}
-                        />
-                    </Drawer.Group>
+                    <Drawer.Screen name="Authentication" component={Authentication} />
                 ) : (
-                    // User is signed in
-                    <Drawer.Group navigationKey={"user"}>
-                        <Drawer.Screen
-                            name="Estimates"
-                            component={Screens.Estimates}
-                            options={{
-                                title: t(i18n)`Estimates`,
-                            }}
-                        />
-                    </Drawer.Group>
+                    <Drawer.Screen name="Home" component={Home} />
                 )}
             </Drawer.Navigator>
         </NavigationContainer>

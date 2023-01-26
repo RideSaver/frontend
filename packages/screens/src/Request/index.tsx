@@ -10,7 +10,14 @@ import RequestMap from "./RequestMap";
 import RequestDetails from "./RequestDetails";
 import RequestButtons from "./RequestButtons";
 
-export default ({ initalLat, initalLLong, finalLat, finalLong }) => {
+import { useGetRideQuery } from "@RideSaver/api/redux";
+
+export default ({ route }) => {
+    const { id } = route;
+    const { data: request } = useGetRideQuery(id, {
+        pollingInterval: 10000,
+    });
+
     return (
         <Box /* Parent Container */
             flex="1"
@@ -35,10 +42,9 @@ export default ({ initalLat, initalLLong, finalLat, finalLong }) => {
                     alignItems="center"
                 >
                     <RequestMap
-                        startLat={initalLat}
-                        startLong={initalLLong}
-                        endLat={finalLat}
-                        endLong={finalLong}
+                        // startLocation={startLocation}
+                        // endLocation={endLocation}
+                        driverLocation={request.driverLocation}
                     />
                 </Box>
 
@@ -65,7 +71,7 @@ export default ({ initalLat, initalLLong, finalLat, finalLong }) => {
                         justifyContent="center"
                         alignSelf="center"
                     >
-                        <RequestDetails />
+                        <RequestDetails driver={request.driver} />
                     </Container>
 
                     <Box /* Request Footer */

@@ -8,9 +8,17 @@
 import React from "react";
 import { Map } from "@RideSaver/components";
 
-export default ({startLat = 34.0907883 , startLong = -117.4199699, endLat, endLong})  => {
+export default ({
+    startLocation,
+    endLocation,
+    driverLocation
+})  => {
 
     return (
-        <Map latitude={startLat} longitude={startLong}></Map>
+        <Map>
+            {/* <Map.Marker latitude={startLocation.latitude} longitude={startLocation.longitude} />
+            <Map.Marker latitude={endLocation.latitude} longitude={endLocation.longitude} /> */}
+            <Map.Marker latitude={driverLocation.latitude} longitude={driverLocation.longitude} />
+        </Map>
     );
 };
