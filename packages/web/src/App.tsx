@@ -18,9 +18,9 @@ import { NavigationTheme } from "./theme";
 
 import { t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "@react-navigation/stack";
 
-const RootDrawer = createDrawerNavigator();
+const RootStack = createStackNavigator();
 
 export default function App() {
 
@@ -57,12 +57,12 @@ export default function App() {
                 }, 
             }, 
             }}>
-            <RootDrawer.Navigator
+            <RootStack.Navigator
                 initialRouteName={token === undefined ? "Authentication" : "Home"}
                 screenOptions={{ headerShown: false }}
             >       
-               {token === undefined ? (<RootDrawer.Screen name="Authentication" component={Authentication} /> ) : ( <RootDrawer.Screen name="Home" component={Home} />)}
-            </RootDrawer.Navigator>
+               {token === undefined ? (<RootStack.Screen name="Authentication" component={Authentication} /> ) : ( <RootStack.Screen name="Home" component={Home} />)}
+            </RootStack.Navigator>
         </NavigationContainer>
     );
 }

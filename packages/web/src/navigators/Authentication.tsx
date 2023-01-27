@@ -23,7 +23,7 @@ export default function Authentication() {
                     drawerContent={(props) => ( <CustomDrawer {...props} toggleColorMode={toggleColorMode} colorMode={colorMode} />)}
                 >
                         <AuthDrawer.Screen name="Login" component={Screens.Login} options={{ title: t(i18n)`Sign in.` }}/>
-                        <AuthDrawer.Screen name="SignUp" component={Screens.Request} options={{title: t(i18n)`Sign up.` }}/>
+                        <AuthDrawer.Screen name="SignUp" component={Screens.SignUp} options={{title: t(i18n)`Sign up.` }}/>
                 </AuthDrawer.Navigator>
 )}
 

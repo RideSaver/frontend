@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from "native-base";
+import { Input, IInputProps, Container } from "native-base";
 import * as Location from 'expo-location';
 
 export type location = {

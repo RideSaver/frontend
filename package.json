@@ -49,5 +49,8 @@
         "@RideSaver/api@0.1.17": {
             "unplugged": true
         }
+    },
+    "dependencies": {
+        "npm": "^9.4.0"
     }
 }
