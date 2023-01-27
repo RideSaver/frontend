@@ -12,12 +12,11 @@ import RequestButtons from "./RequestButtons";
 
 import { useGetRideQuery } from "@RideSaver/api/redux";
 
-export default ({ route, navigation }) => {
+export default ({ route }) => {
+    
     const { id } = route;
-    const { data: request } = useGetRideQuery(id, {
-        pollingInterval: 10000,
-    });
-
+    const { data: request } = useGetRideQuery(id, { pollingInterval: 10000 });
+    
     return (
         <Box /* Parent Container */
             flex="1"

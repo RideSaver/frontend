@@ -8,17 +8,19 @@ import "./App.css";
 
 import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import { Spinner, useColorModeValue } from "native-base";
 import { useDispatch, useSelector, user, language } from "@RideSaver/store";
-import Authentication from "./navigators/Authentication";
-import Home from "./navigators/Home";
-import { t } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
+import Home from "./navigators/Home";
+import Authentication from "./navigators/Authentication";
+import * as Screens from "@RideSaver/screens";
 import { NavigationTheme } from "./theme";
 
-const Drawer = createStackNavigator();
+import { t } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
+const RootDrawer = createDrawerNavigator();
 
 export default function App() {
 
@@ -27,63 +29,42 @@ export default function App() {
     const isLoading = useSelector(user.getIsLoading) as boolean;
     const token = useSelector(user.getToken) as boolean;
 
-    useEffect(() => {
-        dispatch(language.switchLocale("en-US"));
-    }, [dispatch]);
+    useEffect(() => { dispatch(language.switchLocale("en-US"));}, [dispatch]);
 
-    const navigationTheme = useColorModeValue(
-        NavigationTheme.Light,
-        NavigationTheme.Dark
-    );
+    const navigationTheme = useColorModeValue( NavigationTheme.Light, NavigationTheme.Dark);
 
-    if (isLoading) {
-        // We haven't finished checking for the token yet
-        return <Spinner />;
-    }
-
+    if (isLoading) {  return <Spinner />; }   
+        
     return (
         <NavigationContainer
-            linking={{
-                prefixes: [
-                    ...["https://", "http://", "//", ""].map(
-                        (protocol) => protocol + window.location.host
-                    ),
-                ],
-                config: {
-                    screens: {
-                        Home: {
-                            screens: {
-                                Estimates: "/estimates",
-                                Request: "/request/:id",
-                            },
-                        },
-                        Authentication: {
-                            screens: {
-                                SignUp: "/signup",
-                                Login: "/login",
-                            }}
+            documentTitle={{ formatter: (options, route) => t(i18n)`${options?.title ?? route?.name} - RideSaver`}}
+            theme={navigationTheme}
+            linking={{ prefixes: [...["https://", "http://", "//", ""].map((protocol) => protocol + window.location.host),],
+            config: {
+                screens: {
+                    Home: {
+                        screens: {
+                            Estimates: "/estimates",
+                            Request: "/request/:id",
                         },
                     },
-                }
-            }
-            documentTitle={{
-                formatter: (options, route) =>
-                    t(i18n)`${options?.title ?? route?.name} - RideSaver`,
-            }}
-            theme={navigationTheme}
-        >
-            <Drawer.Navigator
-                initalRouteName={token === undefined ? "Authentication" : "Home"}
-                options={{
-                    headerShown: false
-                }}
-            >
-                {token === undefined ? (
-                    <Drawer.Screen name="Authentication" component={Authentication} />
-                ) : (
-                    <Drawer.Screen name="Home" component={Home} />
-                )}
-            </Drawer.Navigator>
+                    Authentication: {
+                        screens: {
+                            SignUp: "/signup",
+                            Login: "/login",
+                        }
+                    }
+                }, 
+            }, 
+            }}>
+            <RootDrawer.Navigator
+                initialRouteName={token === undefined ? "Authentication" : "Home"}
+                screenOptions={{ headerShown: false }}
+            >       
+               {token === undefined ? (<RootDrawer.Screen name="Authentication" component={Authentication} /> ) : ( <RootDrawer.Screen name="Home" component={Home} />)}
+            </RootDrawer.Navigator>
         </NavigationContainer>
     );
 }
+
+

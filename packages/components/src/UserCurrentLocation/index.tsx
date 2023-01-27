@@ -7,7 +7,7 @@ export type location = {
     longitude: number;
 };
 
-interface Props extends Parial<IInputProps> {
+interface Props extends Partial<IInputProps> {
     userLocation?: location;
     onUpdateLocation: (userLocation: location) => void;
 }

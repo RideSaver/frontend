@@ -25,7 +25,7 @@ export default function CustomDrawerContent({
                                 <FormControl.Label>Dark Mode</FormControl.Label>
                                 <Switch
                                     isChecked={colorMode == "dark"}
-                                    label={t`Dark Mode`}
+                                    accessibilityLabel={t`Dark Mode`}
                                 />
                             </FormControl>
                         </Trans>
