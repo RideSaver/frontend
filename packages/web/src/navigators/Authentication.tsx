@@ -1,5 +1,4 @@
 import React from "react";
-import { useWindowDimensions } from "react-native";
 import { Icon, useColorMode, useColorModeValue } from "native-base";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { t } from "@lingui/macro";
@@ -11,10 +10,11 @@ import * as Screens from "@RideSaver/screens";
 const Drawer = createDrawerNavigator();
 
 export default function Authentication() {
-    const dimensions = useWindowDimensions();
+
     const { toggleColorMode } = useColorMode();
     const colorMode = useColorModeValue("light", "dark");
     const { i18n } = useLingui();
+    
     return (
         <Drawer.Navigator
             useLegacyImplementation

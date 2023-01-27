@@ -5,6 +5,8 @@
  */
 
 export { default as LocationSelector } from "./LocationSelector";
+export { default as UserCurrentLocation } from "./UserCurrentLocation";
+ 
 export { default as NumberInput } from "./NumberInput";
 export { default as PasswordInput } from "./PasswordInput";
 

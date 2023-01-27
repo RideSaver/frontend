@@ -24,10 +24,13 @@ export interface RequestDetailsProps {
     ride: Ride;
 }
 
-export default function RequestDetails({ ride }: RequestDetailsProps) {
-    const vehicleImage = ride.driver.carPicture;
-    const driverImage = ride.driver.avatar;
-    const etaMinutes = ride.estimatedTimeOfArrival;
+export default function RequestDetails(/*{ ride }: RequestDetailsProps*/) {
+    //const vehicleImage = ride.driver.carPicture;
+    //const driverImage = ride.driver.avatar;
+    //const etaMinutes = ride.estimatedTimeOfArrival;
+    const vehicleImage = "https://www.dualdrive.co.uk/wp-content/uploads/2019/07/2019_07_Corolla-Hybrid.png"
+    const driverImage = "https://i.ibb.co/DL3mTks/demo-driver-image.jpg"
+
 
     return (
         <Box width="100%" height="100%" paddingTop="5" /* Parent Container */>
@@ -45,11 +48,11 @@ export default function RequestDetails({ ride }: RequestDetailsProps) {
                             shadow="10" /* Estimate in minutes */
                         >
                             <Text bold>
-                                {etaMinutes}
+                                {/*etaMinutes*/}{2}
                             </Text>
                         </Box>
                         <SelectOrdinal
-                            value={etaMinutes}
+                            value={2}//{etaMinutes}
                             one="minute"
                             other="minutes"
                         />
@@ -92,16 +95,16 @@ export default function RequestDetails({ ride }: RequestDetailsProps) {
                         </HStack>
                     </Box>
                 </VStack>
-                <ZStack flex="1" justifyContent="center">
+                <ZStack flex="1" justifyContent="center" mt="8">
                     <Avatar /* Driver Image */
                         source={{ uri: driverImage }}
                         size="lg"
-                        mb="12"
-                        mr="-12"
+                        mr="-12" ml="110" mb="81"
                     />
                     <Image /* Vehicle Image */
                         source={{ uri: vehicleImage }}
                         size="xl"
+                        ml="25"
                         resizeMode="contain"
                     />
                 </ZStack>

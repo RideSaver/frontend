@@ -26,7 +26,7 @@ export default ({ estimate }: { estimate: Estimate }) => {
             <HStack direction="row-reverse">
                 <Button>
                     <Trans>
-                        Request Ride
+                        Reserve
                     </Trans>
                 </Button>
             </HStack>
