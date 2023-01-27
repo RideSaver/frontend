@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@RideSaver/api": "^0.1.15",
+    "@RideSaver/api": "^0.1.18",
     "@RideSaver/internationalization": "0.0.1",
     "@lingui/core": "^3.16.1",
     "@react-native-async-storage/async-storage": "^1.17.11",
@@ -15,7 +15,7 @@
     "redux": "^4.2.0"
   },
   "devDependencies": {
-    "jest": "^29.4.0",
+    "jest": "^29.4.1",
     "ts-jest": "^29.0.5",
     "typescript": "^4.9.4"
   },

@@ -10,7 +10,7 @@
         "RideSaver;react-native"
     ],
     "dependencies": {
-        "@RideSaver/api": "^0.1.15",
+        "@RideSaver/api": "^0.1.18",
         "@RideSaver/store": "0.0.1",
         "@lingui/core": "^3.16.1",
         "@lingui/react": "^3.16.1",
@@ -60,7 +60,7 @@
         "@babel/preset-react": "^7.18.6",
         "@testing-library/jest-native": "^5.4.1",
         "@testing-library/react": "^13.4.0",
-        "@testing-library/react-native": "^11.5.0",
+        "@testing-library/react-native": "^11.5.1",
         "@types/mapbox-gl": "^2.7.10",
         "@types/react": "^18.0.27",
         "@types/react-native": "^0.71.0",
