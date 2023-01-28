@@ -1,0 +1,22 @@
+import React, { useState, useEffect } from 'react';
+import { Input, IInputProps, Container } from "native-base";
+
+export type location = {
+    latitude: number;
+    longitude: number;
+};
+
+interface Props extends Partial<IInputProps> {
+    userDestination?: location;
+    onUpdateLocation: (userDestination: location) => void;
+}
+
+export default (options: Props) => {
+
+    const userDestinationAddress : { userDestinationAddress : string};
+    const [userDestination, setUserDestination] = useState(null);
+    const [location, setLocation] = useState(null);
+    const [errorMesssage, setErrorMessage] = useState("");
+
+    return(<View></View>)
+}

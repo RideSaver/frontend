@@ -25,16 +25,18 @@ export default ( {navigation} ) => {
         { 
             startPoint: { latitude: startPoint.latitude,  longitude: startPoint.longitude, },
             endPoint: {  latitude: endPoint.latitude, longitude: endPoint.longitude, },
-            seats: riders
-        },{ skip: !startPoint || !endPoint, }
+            seats: riders },{ skip: !startPoint || !endPoint, }
         ).data || [];
+        
     useCallback(() => { dispatch(user.load());}, []);
 
     return (
         <View>
-            <UserCurrentLocation 
+            <UserCurrentLocation
                 onUpdateLocation={setStartPoint}
             />
+
+            
 
             <LocationSelector 
                 onUpdateLocation={setEndPoint} 
