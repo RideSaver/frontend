@@ -10,8 +10,7 @@ import { Trans } from "@lingui/macro";
 import { useLinkProps } from "@react-navigation/native";
 import { PasswordInput } from "@RideSaver/components";
 import { useAuthenticateMutation } from "@RideSaver/api/redux";
-import { user } from "@RideSaver/store";
-import { useDispatch } from "react-redux";
+import { user, useDispatch } from "@RideSaver/store";
 
 export default () => {
 

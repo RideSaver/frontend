@@ -15,7 +15,7 @@ import { NavigationTheme } from "../theme";
 import { i18n } from "@lingui/core";
 
 
-const EstimateStack = createStackNavigator();
+const EstimateStack = createStackNavigator(); // Estimates Screen
 function EstimateStackScreen() { 
     return(
             <EstimateStack.Navigator screenOptions={{ headerShown: false }}>
@@ -23,7 +23,7 @@ function EstimateStackScreen() {
             </EstimateStack.Navigator>
         );}
         
-const RequestStack = createStackNavigator();
+const RequestStack = createStackNavigator(); // Requests Screen
 function RequestStackScreen() { 
     return(
             <RequestStack.Navigator screenOptions={{ headerShown: false }}>
@@ -31,7 +31,7 @@ function RequestStackScreen() {
             </RequestStack.Navigator>
         );}
     
-const LoginStack = createStackNavigator();
+const LoginStack = createStackNavigator(); // Login Screen
 function LoginStackScreen() { 
     return(
             <LoginStack.Navigator screenOptions={{ headerShown: false }}>
@@ -39,7 +39,7 @@ function LoginStackScreen() {
             </LoginStack.Navigator>
         );}
     
-const SignupStack = createStackNavigator();
+const SignupStack = createStackNavigator(); // Signup Screen
 function SignupStackScreen() { 
     return( 
             <SignupStack.Navigator screenOptions={{ headerShown: false }}>
@@ -47,7 +47,7 @@ function SignupStackScreen() {
             </SignupStack.Navigator>
         );}
     
-const RootDrawer = createDrawerNavigator();
+const RootDrawer = createDrawerNavigator(); // Root Drawer Navigator
 function HomeTabs( {token} : {token: boolean} ) {
         
         const { toggleColorMode } = useColorMode();
@@ -56,19 +56,27 @@ function HomeTabs( {token} : {token: boolean} ) {
 
 return( <RootDrawer.Navigator
                 useLegacyImplementation
+                initialRouteName={token === undefined ? "Login" : "Estimates"}
                 screenOptions={({ navigation }) => ({ headerLeft: () => ( <Icon name="menu" onPress={() => navigation.openDrawer()} />), })}       
                 drawerContent={(props) => ( <CustomDrawer {...props} toggleColorMode={toggleColorMode} colorMode={colorMode} />)}>
+
+                                    {token === undefined ? (<RootDrawer.Group navigationKey={"guest"}>
             
-                        <RootDrawer.Screen name="Login" component={LoginStackScreen} options={{ title: t(i18n)`Sign in.` }}/>
-                        <RootDrawer.Screen name="SignUp" component={SignupStackScreen} options={{title: t(i18n)`Sign up.` }}/>
+                        <RootDrawer.Screen name="Login" component={LoginStackScreen} options={{ title: t(i18n)`Login` }}/>
+                        <RootDrawer.Screen name="SignUp" component={SignupStackScreen} options={{title: t(i18n)`Register` }}/>
+                  
+                                        </RootDrawer.Group>):(<RootDrawer.Group navigationKey="{user}">
+                                            
                         <RootDrawer.Screen name="Estimates" component={EstimateStackScreen} options={{ title: t(i18n)`Rides & Services`}} />
                         <RootDrawer.Screen name="Request" component={RequestStackScreen} options={{ title: t(i18n)`Ride Details`}}  />
 
+                                                            </RootDrawer.Group>)}
+        
         </RootDrawer.Navigator>
     )
 }
 
-const RootStack = createStackNavigator();
+const RootStack = createStackNavigator(); // Root Stack Navigator
 export default function AppNavigator({ token } : {token : boolean} ) {
 
     const [userToken, setUserToken] = useState(token); // TODO -> Update user JWT token for nav-groups.
@@ -77,13 +85,13 @@ export default function AppNavigator({ token } : {token : boolean} ) {
     return( 
         <NavigationContainer
             theme={navigationTheme}
-            documentTitle= {{  formatter: (options, route) => t(i18n)`${options?.title ?? route?.name} - RideSaver` }}>
+            documentTitle= {{ formatter: (options, route) => t(i18n)`${options?.title ?? route?.name} - RideSaver` }}>
 
                 <RootStack.Navigator screenOptions={{ headerShown: false }}>
                             <RootStack.Screen 
-                            name="Home" 
+                            name="HomeTabs" 
                             component={HomeTabs}  
-                            options= {({ route, navigation }) =>  ({ headerLeft: () => <Button onPress={navigation.navigate(route)}/>})}
+                            options= {({ route, navigation }) =>  ({ headerLeft: () => <Button onPress={navigation.navigate(route, { token: {userToken}})}/>})}
                             />
                 </RootStack.Navigator>
                 
