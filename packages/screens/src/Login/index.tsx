@@ -13,9 +13,8 @@ import { useAuthenticateMutation } from "@RideSaver/api/redux";
 import { user } from "@RideSaver/store";
 import { useDispatch } from "react-redux";
 
-export default ({
-    navigation
-}) => {
+export default () => {
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
