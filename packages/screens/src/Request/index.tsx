@@ -9,7 +9,6 @@ import { Box, VStack, Container } from "native-base";
 import RequestMap from "./RequestMap";
 import RequestDetails from "./RequestDetails";
 import RequestButtons from "./RequestButtons";
-import Map from "@RideSaver/components"
 
 import { useGetRideQuery } from "@RideSaver/api/redux";
 
@@ -36,13 +35,12 @@ export default ({ route }) => {
                 overflow="hidden"
             >
                 <Box /* Map */
-                    width="container"
+                    width="100%"
+                    height="container"
                     flex="2"
-                    overflow="hidden"
                     alignItems="center"
-                    /* TODO: Add the map back */
                 >
-                    
+                    <RequestMap/>
                 </Box>
 
                 <Box /* Parent Information-Container */

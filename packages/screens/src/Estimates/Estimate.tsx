@@ -8,7 +8,6 @@ import React from "react";
 import { View, HStack, Heading, Text, Button } from "native-base";
 import { Estimate } from "@RideSaver/api";
 import { useLingui } from "@lingui/react";
-import { Trans } from "@lingui/macro";
 
 export default ({ estimate }: { estimate: Estimate }) => {
     const { i18n } = useLingui();
