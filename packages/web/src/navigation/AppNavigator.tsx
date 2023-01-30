@@ -73,7 +73,7 @@ const RegisterStack = createStackNavigator(); // Registration Screen
 function RegisterStackScreen() { 
     return( 
             <RegisterStack.Navigator screenOptions={{ headerShown: false }}>
-                <RegisterStack.Screen name="Signup" component={SignUp} />
+                <RegisterStack.Screen name="signup" component={SignUp} />
             </RegisterStack.Navigator>
         );}
     
