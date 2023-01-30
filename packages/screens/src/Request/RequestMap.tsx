@@ -4,22 +4,18 @@
  * @format
  */
 
-
 import React from "react";
 import { Map } from "@RideSaver/components";
-import { View } from "native-base";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-
-export default (
-    //startLocation,
-    //endLocation,
-    //driverLocation
-)  => {
+export default ({startLat , startLong, endLat, endLong})  => {
 
     return (
-     <View>
-        
-     </View>
+        <Map 
+            startLat={startLat} 
+            startLong={startLong}
+            endLat={endLat}
+            endLong={endLong}
+        />
+
     );
 };

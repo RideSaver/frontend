@@ -14,6 +14,6 @@ export { default as PasswordInput } from "./PasswordInput";
 
 export { default as CustomDrawer } from "./CustomDrawer";
 
-export { default as Map } from "./Map/index.web";
+export { default as Map } from "./Map";
 
 export { default as useDebounce } from "./utils/useDebounce";

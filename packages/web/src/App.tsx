@@ -15,6 +15,7 @@ export default function App() {
 
     const dispatch = useDispatch();
     const isLoading = useSelector(user.getIsLoading) as boolean;
+    
     useEffect(() => { dispatch(language.switchLocale("en-US"));}, [dispatch]);
 
     if (isLoading) {  return <Spinner />; }   

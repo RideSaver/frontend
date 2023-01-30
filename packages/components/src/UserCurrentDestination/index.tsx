@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NumberInput } from "../index"
-import { IInputProps, Input, View, Button } from "native-base";
+import { IInputProps, Input, View , Button, Container, Text, Box, Divider, VStack } from "native-base";
 import * as Location from 'expo-location';
 
 Location.setGoogleApiKey("AIzaSyA3NFMJxqPN_q7JU_ctLAoi4eUaWxCcYtk");
@@ -45,18 +45,35 @@ export default (options: Props) => {
 
     return(
         <View>
-            <Input 
-                onChangeText={handleTextChange}
-            />
-
-            <NumberInput 
-                value={riders} 
-                onChangeValue={changeHandler}
-            />
-
-            <Button onPress={clickHandler}> 
-                Display Available Rides 
-            </Button>
+            <VStack space={1}>
+                <View>
+                    <Box>
+                        <Text>
+                            Where would you like to go?
+                        </Text>
+                    </Box>
+                    <Input 
+                        onChangeText={handleTextChange}
+                     />
+                </View>
+                <View>
+                    <Box>
+                        <Text>
+                           How many Passengers?
+                        </Text>
+                    </Box>
+                    <NumberInput 
+                        value={riders} 
+                        onChangeValue={changeHandler}
+                    />
+                </View>
+                <View mt={2}>
+                    <Button onPress={clickHandler}> 
+                        Display Available Rides
+                    </Button>
+                </View>
+            </VStack>
+            <Divider thickness={1}/>
         </View>
     );
 };
