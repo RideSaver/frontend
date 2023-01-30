@@ -10,7 +10,7 @@ import { Button, Icon, useColorMode, useColorModeValue, Spinner } from "native-b
 import { Login, SignUp, Estimates, Request } from "@RideSaver/screens";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { getStateFromPath, NavigationContainer } from "@react-navigation/native";
 import { CustomDrawer } from "@RideSaver/components";
 import { Provider, useSelector } from "react-redux";
 import { store, user } from "@RideSaver/store";
@@ -19,11 +19,37 @@ import { useLingui } from "@lingui/react";
 import { i18n } from "@lingui/core";
 import { t } from "@lingui/macro";
 
+
+const config = {
+        screens: {
+            HomeTabs: {
+                screens: {
+                    Login,
+                    SignUp,
+                    Estimates,
+                    Request,
+                },
+            },
+        },
+    };
+
+const linking = {
+    prefixes: [
+        ...["https://", "http://", "//", ""].map(
+        (protocol) => protocol + window.location.host),
+    ],
+    config,
+    getStateFromPath: (path, options) => {
+        const newPath = path === 'estimates' ? 'home' : path;
+        return getStateFromPath(newPath, options);
+    },
+};
+
 const EstimateStack = createStackNavigator(); // Estimates Screen
 function EstimateStackScreen() { 
     return(
             <EstimateStack.Navigator screenOptions={{ headerShown: false }}>
-                <EstimateStack.Screen name="Estimates" component={Estimates} />
+                <EstimateStack.Screen name="estimates" component={Estimates} />
             </EstimateStack.Navigator>
         );}
         
@@ -31,7 +57,7 @@ const RequestStack = createStackNavigator(); // Requests Screen
 function RequestStackScreen() { 
     return(
             <RequestStack.Navigator screenOptions={{ headerShown: false }}>
-                <RequestStack.Screen name="Request" component={Request} />
+                <RequestStack.Screen name="request" component={Request} />
             </RequestStack.Navigator>
         );}
     
@@ -39,7 +65,7 @@ const LoginStack = createStackNavigator(); // Login Screen
 function LoginStackScreen() { 
     return(
             <LoginStack.Navigator screenOptions={{ headerShown: false }}>
-                <LoginStack.Screen name="Login" component={Login} />            
+                <LoginStack.Screen name="login" component={Login} />            
             </LoginStack.Navigator>
         );}
     
@@ -47,7 +73,7 @@ const RegisterStack = createStackNavigator(); // Registration Screen
 function RegisterStackScreen() { 
     return( 
             <RegisterStack.Navigator screenOptions={{ headerShown: false }}>
-                <RegisterStack.Screen name="SignUp" component={SignUp} />
+                <RegisterStack.Screen name="Signup" component={SignUp} />
             </RegisterStack.Navigator>
         );}
     
@@ -93,7 +119,8 @@ export default function AppNavigator() {
 
     return( 
         <Provider store={store}>
-            <NavigationContainer theme={navigationTheme}
+            <NavigationContainer 
+                theme={navigationTheme} linking={linking}
                 documentTitle= {{ formatter: (options, route) => t(i18n)`${options?.title ?? route?.name} - RideSaver` }}>
 
                     <RootStack.Navigator screenOptions={{ headerShown: false }}>
