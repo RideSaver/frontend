@@ -42,6 +42,7 @@ __metadata:
     "@zxcvbn-ts/core": ^2.1.0
     babel-plugin-macros: ^3.1.0
     expo-location: ^15.0.1
+    expo-permissions: ^14.0.0
     formik: ^2.2.9
     mapbox-gl: ^2.12.0
     metro-react-native-babel-preset: ^0.74.1
@@ -12058,6 +12059,15 @@ __metadata:
     compare-versions: ^3.4.0
     invariant: ^2.2.4
   checksum: 6a2b6b5d1f56f197ddf8b3f3a638d8f15534657218bdf895bd96c07cb34fc8404761d6a9206527fa5b67baade60858b4530de147fe1f3b7db8205c5d9d059b31
+  languageName: node
+  linkType: hard
+
+"expo-permissions@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "expo-permissions@npm:14.0.0"
+  peerDependencies:
+    expo: "*"
+  checksum: 7e3784b9df5f59040bb47d2fb57205e47eccb55d565ea710d169f1ec96bb51f2c3bced7e44f5cac7e42bf6232380f2fdb9fe9a3acbc990a598091126d4cb219b
   languageName: node
   linkType: hard
 

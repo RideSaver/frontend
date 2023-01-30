@@ -19,7 +19,6 @@ import { useLingui } from "@lingui/react";
 import { i18n } from "@lingui/core";
 import { t } from "@lingui/macro";
 
-
 const EstimateStack = createStackNavigator(); // Estimates Screen
 function EstimateStackScreen() { 
     return(

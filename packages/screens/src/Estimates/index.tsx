@@ -8,7 +8,7 @@ import React, { useCallback, useState } from "react";
 import { View } from "react-native";
 import { Button } from "native-base";
 import { user, useDispatch } from "@RideSaver/store";
-import { LocationSelector, NumberInput, UserCurrentLocation } from "@RideSaver/components";
+import { UserCurrentLocation, UserCurrentDestination } from "@RideSaver/components";
 import { useGetEstimatesQuery } from "@RideSaver/api/redux";
 import type { location } from "@RideSaver/components/src/LocationSelector";
 
@@ -32,20 +32,16 @@ export default ( {navigation} ) => {
 
     return (
         <View>
-            <UserCurrentLocation
+            <UserCurrentLocation /* Gets the user current-location through location-services. TODO: Add an option to manually change pickup location. */
                 onUpdateLocation={setStartPoint}
             />
 
-            
+            <UserCurrentDestination /* Allows the user to input their physical address & geocodes it into lat/long - also controls the seats counter. */
+                onUpdateLocation={setEndPoint}
+                onUpdateSeats={setRiders}
+                seats={riders}
+            />
 
-            <LocationSelector 
-                onUpdateLocation={setEndPoint} 
-            />
-            <NumberInput 
-                value={riders} 
-                onChangeValue={setRiders}
-            />
-    
             {estimates.map((estimate) => (
                 <RideEstimate 
                     estimate={estimate} 
@@ -54,7 +50,7 @@ export default ( {navigation} ) => {
             ))}
 
             <Button mt="5" onPress={() => navigation.navigate("Request")} > 
-                Request Vehicle 
+                Request Ride 
             </Button>
         </View>
         
