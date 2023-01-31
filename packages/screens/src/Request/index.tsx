@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import { Box, VStack, Container } from "native-base";
+import { Box, VStack, Container, View } from "native-base";
 import RequestMap from "./RequestMap";
 import RequestDetails from "./RequestDetails";
 import RequestButtons from "./RequestButtons";
@@ -34,14 +34,14 @@ export default ({ route }) => {
                 height="100%"
                 overflow="hidden"
             >
-                <Box /* Map */
+                <View /* Map */
                     width="100%"
-                    height="container"
+                    height="100%"
                     flex="2"
                     alignItems="center"
                 >
                     <RequestMap/>
-                </Box>
+                </View>
 
                 <Box /* Parent Information-Container */
                     roundedBottom="lg"

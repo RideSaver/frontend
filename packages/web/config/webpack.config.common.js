@@ -54,7 +54,6 @@ module.exports = {
         extensions: paths.moduleFileExtensions.map(ext => `.${ext}`),
         alias: {
             "react-native": "react-native-web",
-            "react-native-maps": "react-native-web-maps",
             // "fs": false,
             // "module": false
         },

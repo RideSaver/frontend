@@ -147,12 +147,14 @@ __metadata:
     "@react-navigation/native": ^6.1.2
     "@reduxjs/toolkit": ^1.9.1
     "@rnmapbox/maps": ^10.0.0-beta.65
+    "@types/geojson": ^0
     "@types/mapbox-gl": ^2
     "@types/react": ^18.0.27
     "@zxcvbn-ts/core": ^2.1.0
     babel-plugin-macros: ^3.1.0
     expo-image-picker: ^14.1.0
     formik: ^2.2.9
+    geojson: ^0.5.0
     jest: ^29.4.1
     jest-watch-typeahead: ^2.2.2
     mapbox-gl: ^2.12.0
@@ -6570,6 +6572,13 @@ __metadata:
   version: 7946.0.8
   resolution: "@types/geojson@npm:7946.0.8"
   checksum: 6049a39b025cfe323d5cf87333d87c133ec963cdbd349c49295bee779827ee4b46a3041fd8bd2e7a4b02d6d1e26f3002968875928941bbed08477bfd5f6f9284
+  languageName: node
+  linkType: hard
+
+"@types/geojson@npm:^0":
+  version: 0.0.32
+  resolution: "@types/geojson@npm:0.0.32"
+  checksum: c69ae32f09d1e810517ebe2c70c8c7ef003051e8add12e354e367e5dbf3107ab14c3c6a4ccdc8d1cec3808a6e7cbe9aeb6f8ee0b88ed51f3a72cfc7ddb0679fb
   languageName: node
   linkType: hard
 
@@ -13153,6 +13162,13 @@ __metadata:
   version: 3.2.1
   resolution: "geojson-vt@npm:3.2.1"
   checksum: 7c7973cfaf9e3bb1c1dc9578ec00e602efb6f8d57f4dd7f6b28baeb7825bcaeb1684018b850211e333ab4b90a4a89a02ff7793732c505d67101ccbc38e307e02
+  languageName: node
+  linkType: hard
+
+"geojson@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "geojson@npm:0.5.0"
+  checksum: 44fbf916dc66d17f1561fb56fd2741f21e26da5dd7daf842a794119c841c7f6d611ccc21d9797c9c62a78c41a0f841c0648042989a5a5a05045835c6ada8612f
   languageName: node
   linkType: hard
 
