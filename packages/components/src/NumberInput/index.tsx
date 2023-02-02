@@ -31,7 +31,7 @@ export default ({
                         name={minusIcon}
                         size={5}
                         mr="2"
-                        color="muted.400"
+                        color="muted.900"
                     />
                 </Pressable>
             }
@@ -41,7 +41,7 @@ export default ({
                         name={plusIcon}
                         size={5}
                         mr="2"
-                        color="muted.400"
+                        color="muted.900"
                     />
                 </Pressable>
             }

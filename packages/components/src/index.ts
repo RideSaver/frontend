@@ -14,5 +14,7 @@ export { default as PasswordInput } from "./PasswordInput";
 
 export { default as CustomDrawer } from "./CustomDrawer";
 
+export { default as ServiceMap } from "./ServiceMap";
+ 
 export { default as useDebounce } from "./utils/useDebounce";
 export { default as onSortOptions } from "./utils/onSortOptions";

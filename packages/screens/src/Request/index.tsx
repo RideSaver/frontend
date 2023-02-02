@@ -6,9 +6,9 @@
 
 import React from "react";
 import { Box, VStack, Container, View } from "native-base";
-import RequestMap from "./RequestMap";
 import RequestDetails from "./RequestDetails";
 import RequestButtons from "./RequestButtons";
+import { ServiceMap } from "@RideSaver/components";
 
 import { useGetRideQuery } from "@RideSaver/api/redux";
 
@@ -40,7 +40,7 @@ export default ({ route }) => {
                     flex="2"
                     alignItems="center"
                 >
-                    <RequestMap/>
+                    <ServiceMap/>
                 </View>
 
                 <Box /* Parent Information-Container */

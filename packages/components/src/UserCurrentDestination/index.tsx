@@ -11,9 +11,9 @@ export type location = {
 };
 
 interface Props extends Partial<IInputProps> {
-    seats: number;
-    onUpdateSeats: (seats : number) => void;
-    onUpdateLocation: (userLocation: location) => void;
+    seats?: number;
+    onUpdateSeats?: (seats : number) => void;
+    onUpdateLocation?: (userLocation: location) => void;
 }
 
 export default (options: Props) => {
@@ -48,21 +48,25 @@ export default (options: Props) => {
             <VStack space={1}>
                 <View>
                     <Box>
-                        <Text>
+                        <Text fontWeight="extraBlack" fontFamily="roboto">
                             Where would you like to go?
                         </Text>
                     </Box>
                     <Input 
+                        borderColor="black"
+                        backgroundColor="muted.400"
                         onChangeText={handleTextChange}
                      />
                 </View>
                 <View>
                     <Box>
-                        <Text>
+                        <Text fontWeight="extraBlack" fontFamily="roboto">
                            How many Passengers?
                         </Text>
                     </Box>
                     <NumberInput 
+                        borderColor="black"
+                        backgroundColor="muted.400"
                         value={riders} 
                         onChangeValue={changeHandler}
                     />
@@ -73,7 +77,7 @@ export default (options: Props) => {
                     </Button>
                 </View>
             </VStack>
-            <Divider thickness={1}/>
+            {/*<Divider thickness={1}/>*/}
         </View>
     );
 };
