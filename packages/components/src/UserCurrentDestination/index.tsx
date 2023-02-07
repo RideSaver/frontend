@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NumberInput } from "../index"
-import { IInputProps, Input, View , Button, Container, Text, Box, Divider, VStack } from "native-base";
+import { IInputProps, Input, View , Button, Text, Box, HStack, VStack, SearchIcon, QuestionIcon } from "native-base";
 import * as Location from 'expo-location';
 
 Location.setGoogleApiKey("AIzaSyA3NFMJxqPN_q7JU_ctLAoi4eUaWxCcYtk");
@@ -14,67 +14,75 @@ interface Props extends Partial<IInputProps> {
     seats?: number;
     onUpdateSeats?: (seats : number) => void;
     onUpdateLocation?: (userLocation: location) => void;
+    onUpdateView?:( userAddress: location) => void;
 }
 
 export default (options: Props) => {
 
     const [userAddress, setUserAddress] = useState("");
-    const [riders, setRiders] = useState(options.seats);
-    const [userLocation, setUserLocation] = useState<location>({latitude: 0, longitude: 0});
-
     const handleTextChange = (text : string) => { setUserAddress(text); }
-    
-    const changeHandler = (value : number) => { 
-        setRiders(value);
-        options.onUpdateSeats(riders)
-    }
-    
+
     const clickHandler = async () => {
             const location = await Location.geocodeAsync(userAddress, { 
                 useGoogleMaps: true 
             });
-            setUserLocation({ 
+            options.onUpdateLocation({ 
                 latitude: location[0].latitude, 
                 longitude: location[0].longitude 
             });
-            options.onUpdateLocation({ 
-                latitude: userLocation.latitude, 
-                longitude: userLocation.longitude 
+            options.onUpdateView({ 
+                latitude: location[0].latitude, 
+                longitude: location[0].longitude 
             });
     }
 
     return(
-        <View>
+        <View backgroundColor="blueGray.900" borderRadius="30px" borderTopRadius="0" paddingBottom={3} shadow="6"> 
             <VStack space={1}>
-                <View>
-                    <Box>
-                        <Text fontWeight="extraBlack" fontFamily="roboto">
-                            Where would you like to go?
-                        </Text>
-                    </Box>
+                <View mt="10px" ml="10px" mr="10px" mb="5px">
                     <Input 
-                        borderColor="black"
-                        backgroundColor="muted.400"
+                        InputLeftElement={<QuestionIcon name="question" marginLeft="2"/>}
+                        color="white"
+                        borderColor="warmGray.500"
+                        backgroundColor="coolGray.800"
+                        placeholder="Where would you like to go?"                       
                         onChangeText={handleTextChange}
                      />
                 </View>
-                <View>
-                    <Box>
-                        <Text fontWeight="extraBlack" fontFamily="roboto">
-                           How many Passengers?
-                        </Text>
-                    </Box>
-                    <NumberInput 
-                        borderColor="black"
-                        backgroundColor="muted.400"
-                        value={riders} 
-                        onChangeValue={changeHandler}
-                    />
-                </View>
-                <View mt={2}>
-                    <Button onPress={clickHandler}> 
-                        Display Available Rides
-                    </Button>
+                <View display="flex" flex="1" width="100%"> 
+                    <View flex="1" flexDirection="row" justifyContent="center">
+                        <Box 
+                            mt="2" 
+                            mr="5">
+                                <Text 
+                                    fontWeight="black" 
+                                    fontFamily="roboto" 
+                                    color="warmGray.300"
+                                    >
+                                        Passengers?
+                                </Text>
+                        </Box>
+                        <NumberInput 
+                            color="white"
+                            maxW="90px"
+                            borderColor="warmGray.500"
+                            backgroundColor="coolGray.800"
+                            textAlign="center"
+                            variant="underlined"
+                            value={options.seats} 
+                            onChangeValue={options.onUpdateSeats}
+                        />
+                        <Button 
+                            onPress={clickHandler} 
+                            borderRadius="full" 
+                            leftIcon={<SearchIcon name="search" />} 
+                            ml="20" 
+                            shadow="9" 
+                            variant="ghost" 
+                            borderColor="warmGray.500" 
+                            borderWidth="1"> 
+                        </Button>
+                    </View>
                 </View>
             </VStack>
             {/*<Divider thickness={1}/>*/}

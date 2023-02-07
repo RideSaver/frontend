@@ -29,9 +29,10 @@ export default ({
                 <Pressable onPress={() => onChangeValue(value - 1)}>
                     <Icon
                         name={minusIcon}
-                        size={5}
+                        size={4}
                         mr="2"
-                        color="muted.900"
+                        ml="1"
+                        color="coolGray.100"
                     />
                 </Pressable>
             }
@@ -39,13 +40,14 @@ export default ({
                 <Pressable onPress={() => onChangeValue(value + 1)}>
                     <Icon
                         name={plusIcon}
-                        size={5}
+                        size={4}
                         mr="2"
-                        color="muted.900"
+                        color="coolGray.100"
                     />
                 </Pressable>
             }
             value={`${value}`}
+            rounded="full"
             onChangeText={(text) => {
                 const filtered = text.replaceAll(/[^\d.]/g, "");
                 const val = floatingPoint

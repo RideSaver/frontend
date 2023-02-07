@@ -46,6 +46,8 @@ export default (options: Props) => {
     }, []);
   
     return (
-            <Container value={userLocation}></Container>
+            <Container>
+                
+            </Container>
     );
 };
