@@ -1,6 +1,9 @@
 node_modules
 .DS_Store
 .env
+.npmrc
+.pnp.cjs
+.yamrc.yml
 
 /coverage
 **/build

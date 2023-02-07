@@ -5,6 +5,13 @@ module.exports = {
         "@babel/preset-react",
         "module:metro-react-native-babel-preset",
     ],
-    plugins: ["macros"],
+    plugins: [
+        "macros",
+        "@rnmapbox/maps",
+        {
+            "RNMapboxMapsImpl": "mapbox",
+            "RNMapboxMapsDownloadToken": "sk.ey...qg"
+        }
+    ],
     // rootMode: "upward"
 };

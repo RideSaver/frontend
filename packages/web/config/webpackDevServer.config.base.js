@@ -1,11 +1,12 @@
 const fs = require("fs");
+const qs = require("qs");
 const evalSourceMapMiddleware = require("react-dev-utils/evalSourceMapMiddleware");
 const noopServiceWorkerMiddleware = require("react-dev-utils/noopServiceWorkerMiddleware");
 const redirectServedPath = require("react-dev-utils/redirectServedPathMiddleware");
 const paths = require("./paths");
 const getHttpsConfig = require("./getHttpsConfig");
 const { createMockMiddleware } = require("openapi-mock-express-middleware");
-const faker = require("@faker-js/faker");
+const { faker } = require("@faker-js/faker");
 const Chance = require("chance");
 
 const host = process.env.HOST || "0.0.0.0";
@@ -97,6 +98,15 @@ module.exports = {
         index: paths.publicUrlOrPath,
     },
     onBeforeSetupMiddleware(devServer) {
+        devServer.app.use(function (req, res, next) {
+            if (req.originalUrl.includes("?")) {
+                const query = req.originalUrl.substring(req.originalUrl.indexOf("?") + 1) || "";
+                console.log(query);
+                req.query = qs.parse(query, { allowDots: true, delimiter: '&' });
+                console.log(req.query);
+            }
+            next();
+        });
         // Keep `evalSourceMapMiddleware`
         // middlewares before `redirectServedPath` otherwise will not have any effect
         // This lets us fetch source contents from webpack for the error overlay
@@ -109,6 +119,9 @@ module.exports = {
             },
             createMockMiddleware({
                 spec: require.resolve("@RideSaver/api/openapi.yaml"),
+                options: {
+                    alwaysFakeOptionals: true
+                },
                 configure: (jsf) => {
                     jsf.extend('faker', () => faker);
                     jsf.extend('chance', () => new Chance());

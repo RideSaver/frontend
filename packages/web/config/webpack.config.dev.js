@@ -10,6 +10,7 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 const getStyleLoaders = require("./getStyleLoaders");
+const { DefinePlugin } = require("webpack");
 
 /** @type {import('webpack').Configuration} */
 const devConfig = {
@@ -119,6 +120,10 @@ const devConfig = {
         // a plugin that prints an error when you attempt to do this.
         // See https://github.com/facebook/create-react-app/issues/240
         new CaseSensitivePathsPlugin(),
+        // Define __DEV__
+        new DefinePlugin({
+            "__DEV__": true
+        }),
     ],
     performance: {
         hints: "warning"

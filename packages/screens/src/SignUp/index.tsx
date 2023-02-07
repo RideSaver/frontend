@@ -113,7 +113,7 @@ export default () => {
                     disabled={signUpResult.isLoading}
                     variant="outline"
                 >
-                    Login
+                    Log In
                 </Button>
                 <Button
                     onPress={() => {

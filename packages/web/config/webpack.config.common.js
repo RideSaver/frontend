@@ -54,7 +54,6 @@ module.exports = {
         extensions: paths.moduleFileExtensions.map(ext => `.${ext}`),
         alias: {
             "react-native": "react-native-web",
-            "react-native-maps": "react-native-web-maps",
             // "fs": false,
             // "module": false
         },
@@ -138,7 +137,7 @@ module.exports = {
                     {
                         test: /\.(js|mjs|jsx|ts|tsx)$/,
                         include: (p) => {
-                            return !p.includes("node_modules") || p.includes("@RideSaver/");
+                            return !p.includes("node_modules") || p.includes("@RideSaver/") || p.includes("@rnmapbox/maps");
                         },
                         loader: require.resolve('babel-loader'),
                         options: {

@@ -5,16 +5,16 @@
  */
 
 import React from "react";
-import { useLingui } from "@lingui/react";
+import { View, HStack, Heading, Text, Button } from "native-base";
 import { Estimate } from "@RideSaver/api";
-import { VStack, HStack, Heading, Text, Button } from "native-base";
-import { Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 export default ({ estimate }: { estimate: Estimate }) => {
     const { i18n } = useLingui();
+    
     return (
-        <VStack>
-            <HStack>
+        <View>
+            <HStack space={4} justifyContent="flex-start">
                 <Heading>{estimate.displayName}</Heading>
                 <Text>
                     {new Intl.NumberFormat(i18n.locale, {
@@ -23,13 +23,6 @@ export default ({ estimate }: { estimate: Estimate }) => {
                     }).format(estimate.price.price)}
                 </Text>
             </HStack>
-            <HStack direction="row-reverse">
-                <Button>
-                    <Trans>
-                        Request Ride
-                    </Trans>
-                </Button>
-            </HStack>
-        </VStack>
+        </View>
     );
 };

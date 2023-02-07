@@ -4,6 +4,7 @@
  * @format
  */
 
+import "react-native-gesture-handler";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
@@ -22,15 +23,13 @@ import theme from "./theme";
 const rootNode = document.getElementById("root");
 let root: ReactDOM.Root;
 const elem = (
-    <React.StrictMode>
-        <NativeBaseProvider theme={theme}>
-            <I18nProvider i18n={i18n}>
-                <ReduxProvider store={store}>
-                        <App />
-                </ReduxProvider>
-            </I18nProvider>
-        </NativeBaseProvider>
-    </React.StrictMode>
+    <NativeBaseProvider theme={theme}>
+        <I18nProvider i18n={i18n}>
+            <ReduxProvider store={store}>
+                <App />
+            </ReduxProvider>
+        </I18nProvider>
+    </NativeBaseProvider>
 );
 if (rootNode.childElementCount > 0) {
     root = ReactDOM.hydrateRoot(rootNode, elem);
