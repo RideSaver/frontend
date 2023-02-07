@@ -137,7 +137,7 @@ module.exports = {
                     {
                         test: /\.(js|mjs|jsx|ts|tsx)$/,
                         include: (p) => {
-                            return !p.includes("node_modules") || p.includes("@RideSaver/") || p.includes("@rnmapbox/maps");
+                            return !p.includes("node_modules") || p.includes("@RideSaver/");
                         },
                         loader: require.resolve('babel-loader'),
                         options: {

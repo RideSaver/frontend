@@ -45,6 +45,7 @@ export default ( {navigation} ) => {
                         {estimates.map((estimate) => 
                             (
                                 <Button 
+                                    key={estimate.id}
                                     mt="3" mb="3" 
                                     minWidth="100%" minHeight="10%" 
                                     alignItems="center" justifyContent="center"
@@ -56,8 +57,7 @@ export default ( {navigation} ) => {
                                     _hover={ {backgroundColor: "muted.300"} }
                                     >
                                         <RideEstimate 
-                                            estimate={estimate}  
-                                            key={estimate.id}
+                                            estimate={estimate}
                                         />
                                 </Button>
                             )      

@@ -7,11 +7,6 @@ module.exports = {
     ],
     plugins: [
         "macros",
-        "@rnmapbox/maps",
-        {
-            "RNMapboxMapsImpl": "mapbox",
-            "RNMapboxMapsDownloadToken": "sk.ey...qg"
-        }
     ],
     // rootMode: "upward"
 };
