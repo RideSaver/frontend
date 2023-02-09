@@ -122,7 +122,8 @@ const devConfig = {
         new CaseSensitivePathsPlugin(),
         // Define __DEV__
         new DefinePlugin({
-            "__DEV__": true
+            "__DEV__": true,
+            "__MAPBOX_API_TOKEN__": process.env.MAPBOX_TOKEN
         }),
     ],
     performance: {

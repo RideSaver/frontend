@@ -1,13 +1,8 @@
-import React, { useMemo } from "react";
-import { useRef, useCallback, useState } from "react";
-import { View, ZStack } from "native-base";
-import MapBox, { MapRef, Marker } from "react-map-gl";
+import React, { useRef, useState } from "react";
+import MapBox, { MapRef } from "react-map-gl";
 import PropTypes, { InferProps } from "prop-types";
 
-const MAPBOX_TOKEN =
-    "pk.eyJ1Ijoiam9obmludGhldXMiLCJhIjoiY2xibmU1dGMzMHFvZzNvb3NhNjhoMzJ5NCJ9.1YGZAf1llc75Jc6LT3Ooaw";
-
-const markerIcon = "https://img.icons8.com/color/48/null/place-marker--v1.png";
+const MAPBOX_TOKEN = process.env.MAPBOX_TOKEN;
 
 export type location = {
     latitude: number;
