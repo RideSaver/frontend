@@ -24,7 +24,7 @@ export default ({ estimate }: { estimate: Estimate }) => {
 
     return (
         <View>
-            <HStack space={4} justifyContent="flex-start">
+            <HStack space={4} justifyContent="space-between">
                 <Heading>{estimate.displayName}</Heading>
                 <Text>
                     {new Intl.NumberFormat(i18n.locale, {
