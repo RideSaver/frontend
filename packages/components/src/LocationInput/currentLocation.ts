@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import * as Location from "expo-location";
 
 export type location = { latitude: number; longitude: number };
@@ -8,25 +8,46 @@ export default async function useCurrentLocation(
     setLocation?: (location: location) => void
 ) {
     useEffect(() => {
-        let int: ReturnType<typeof setInterval>;
-        if(!active) {
-            if(int) clearInterval(int);
-            int = undefined;
+        console.log(active);
+        const runner = new IntervalRunner(setLocation);
+        if (!active) {
+            runner.cancel();
             return;
         }
-        int = setInterval(async () => {
-            const { status } =
-                await Location.requestForegroundPermissionsAsync();
-            if (status !== "granted")
-                throw new Error("Permission not granted for current location");
-            const currentLocation = await Location.getCurrentPositionAsync();
-            setLocation({
-                latitude: currentLocation.coords.latitude,
-                longitude: currentLocation.coords.longitude,
-            });
-        }, 10000);
-        return () => clearInterval(int);
-    }, [setLocation]);
+        runner.run();
+        return () => runner.cancel();
+    }, [active, setLocation]);
+}
 
-    return location;
+class IntervalRunner {
+    int: ReturnType<typeof setTimeout>;
+    setLocation?: (location: location) => void;
+    constructor(setLocation?: (location: location) => void) {
+        this.setLocation = setLocation;
+    }
+    run() {
+        return setTimeout(async () => {
+            const { granted } =
+                await Location.requestForegroundPermissionsAsync();
+            console.log(granted);
+            if (!granted)
+                throw new Error("Permission not granted for current location");
+            try {
+                const currentLocation =
+                    await Location.getCurrentPositionAsync();
+                console.log(currentLocation);
+                this.setLocation({
+                    latitude: currentLocation.coords.latitude,
+                    longitude: currentLocation.coords.longitude,
+                });
+            } catch (error) {
+                console.error(error);
+            }
+            this.int = this.run();
+        }, 10000);
+    }
+    cancel() {
+        this.int && clearTimeout(this.int);
+        this.int = undefined;
+    }
 }

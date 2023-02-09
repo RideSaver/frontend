@@ -36,7 +36,7 @@ export default (options: Props) => {
 
     const [location, setLocation] = useState("");
     const [currentLocationActive, setCurrentLocationActive] = useState(
-        options.startWithCurrentLocation
+        !!options.startWithCurrentLocation
     );
     const [selectedOption, setSelectedOption] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclose(false);
@@ -45,14 +45,22 @@ export default (options: Props) => {
     const { error, locations } = useGeoCode(debouncedLocation);
     useCurrentLocation(currentLocationActive, (currentLocation) => {
         options.onUpdateLocation(currentLocation);
-        setLocation(t(i18n)`Current Location`);
+        console.log(currentLocation);
     });
 
     return (
         <FormControl isInvalid={!!error}>
             <Input
-                onChangeText={setLocation}
-                value={currentLocationActive ? t(i18n)`Current Location` : location}
+                onChangeText={(text) => {
+                    if (currentLocationActive) {
+                        setLocation("");
+                        setCurrentLocationActive(false);
+                    }
+                    setLocation(text);
+                }}
+                value={
+                    currentLocationActive ? t(i18n)`Current Location` : location
+                }
                 {...options}
                 onBlur={(e) => {
                     console.log(locations);
