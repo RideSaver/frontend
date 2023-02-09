@@ -21,14 +21,8 @@ import { t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 
 export default function Estimates() {
-    const [startPoint, setStartPoint] = useState<location>({
-        latitude: 0,
-        longitude: 0,
-    });
-    const [endPoint, setEndPoint] = useState<location>({
-        latitude: 0,
-        longitude: 0,
-    });
+    const [startPoint, setStartPoint] = useState<location>(undefined);
+    const [endPoint, setEndPoint] = useState<location>(undefined);
     const [riders, setRiders] = useState(1);
     const { i18n } = useLingui();
 

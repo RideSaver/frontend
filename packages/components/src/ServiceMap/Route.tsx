@@ -23,6 +23,7 @@ export default function Route({
         longs.length > 0 &&
         map.fitBounds(bbox, {
             padding: { top: 10, bottom: 25, left: 15, right: 5 },
+            maxZoom: 15
         });
     return (
         <>
