@@ -4,7 +4,7 @@
  * @format
  */
 
-export { default as LocationSelector } from "./LocationSelector";
+export { default as LocationInput } from "./LocationInput";
 
 export { default as UserCurrentLocation } from "./UserCurrentLocation";
 export { default as UserCurrentDestination } from "./UserCurrentDestination";
@@ -13,6 +13,9 @@ export { default as NumberInput } from "./NumberInput";
 export { default as PasswordInput } from "./PasswordInput";
 
 export { default as CustomDrawer } from "./CustomDrawer";
+
+export { default as BottomDrawer } from "./BottomDrawer";
+export { default as TopDrawer } from "./TopDrawer";
 
 export { default as ServiceMap } from "./ServiceMap";
  

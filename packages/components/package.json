@@ -16,7 +16,6 @@
         "@lingui/react": "^3.16.1",
         "@zxcvbn-ts/core": "^2.1.0",
         "babel-plugin-macros": "^3.1.0",
-        "expo-location": "^15.0.1",
         "expo-permissions": "^14.0.0",
         "formik": "^2.2.9",
         "opencage-api-client": "^1.0.0",
@@ -32,6 +31,8 @@
         "@lingui/macro": "^3.16.0",
         "@react-navigation/drawer": "*",
         "@types/react-dom": "*",
+        "expo": "*",
+        "expo-location": "^15.0.1",
         "native-base": "*",
         "react-dom": "*",
         "react-native": "*",
@@ -43,6 +44,12 @@
             "optional": true
         },
         "@types/react-dom": {
+            "optional": true
+        },
+        "expo": {
+            "optional": true
+        },
+        "expo-location": {
             "optional": true
         },
         "react-dom": {
@@ -63,6 +70,7 @@
         "@testing-library/jest-native": "^5.4.1",
         "@testing-library/react": "^13.4.0",
         "@testing-library/react-native": "^11.5.1",
+        "@types/prop-types": "^15.7.5",
         "@types/react": "^18.0.27",
         "@types/react-native": "^0.71.0",
         "babel-plugin-macros": "^3.1.0",
@@ -71,6 +79,7 @@
         "react-test-renderer": "^18.2.0"
     },
     "optionalDependencies": {
-        "@react-navigation/drawer": "^6.5.7"
+        "@react-navigation/drawer": "^6.5.7",
+        "expo": "^47.0.13"
     }
 }

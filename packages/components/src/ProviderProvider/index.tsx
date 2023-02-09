@@ -1,16 +1,32 @@
 import React from "react";
+import PropTypes, { InferProps } from "prop-types";
 
-export type ProviderProviderProps = {
-    providers: ((props: {
-        children: React.ReactNode;
-    }) => JSX.Element)[];
+export default function ProviderProvider({
+    providers,
+}: InferProps<typeof ProviderProvider.propTypes>) {
+    return ({ children }) =>
+        providers.reduceRight(
+            (children, provider) =>
+                React.createElement(
+                    typeof provider == "object" ? provider.provider : provider,
+                    typeof provider == "object" ? provider.options : {},
+                    ...children
+                ),
+            children
+        );
+}
+
+ProviderProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+    providers: PropTypes.arrayOf(
+        PropTypes.oneOfType([
+            PropTypes.elementType,
+            PropTypes.shape({
+                provider: PropTypes.elementType.isRequired,
+                options: PropTypes.object,
+            }).isRequired,
+        ]).isRequired
+    ).isRequired,
 };
 
-export default function ProviderProvider({ providers }: ProviderProviderProps) {
-    const Provider = providers[0];
-    return (
-        <Provider>
-            <ProviderProvider providers={providers.slice(1)} />
-        </Provider>
-    );
-}
+export type ProviderProviderProps = InferProps<typeof ProviderProvider.propTypes>;

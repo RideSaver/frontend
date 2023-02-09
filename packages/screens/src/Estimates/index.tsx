@@ -4,79 +4,82 @@
  * @format
  */
 
-import React, { useCallback, useState } from "react";
-import { Button, View, ZStack, VStack } from "native-base";
-import { user, useDispatch } from "@RideSaver/store";
-import { ServiceMap } from "@RideSaver/components";
+import React, { useState } from "react";
+import { View, ScrollView } from "native-base";
+import {
+    ServiceMap,
+    TopDrawer,
+    BottomDrawer,
+    LocationInput,
+} from "@RideSaver/components";
 import { useGetEstimatesQuery } from "@RideSaver/api/redux";
-import type { location } from "@RideSaver/components/src/LocationSelector";
+import type { location } from "@RideSaver/components/src/LocationInput";
 
 import RideEstimate from "./Estimate";
+import { NumberInput } from "@RideSaver/components";
+import { t } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
-export default ( {navigation} ) => {
+import useCurrentLocation from "./currentLocation";
 
-    const dispatch = useDispatch();
-    const [startPoint, setStartPoint] = useState<location>({latitude: 0, longitude: 0});
-    const [endPoint, setEndPoint] = useState<location>({latitude: 0, longitude: 0});
+export default function Estimates() {
+    const [startPoint, setStartPoint] = useState<location>({
+        latitude: 0,
+        longitude: 0,
+    });
+    useCurrentLocation(setStartPoint);
+    const [endPoint, setEndPoint] = useState<location>({
+        latitude: 0,
+        longitude: 0,
+    });
     const [riders, setRiders] = useState(1);
+    const { i18n } = useLingui();
 
-    const estimates = useGetEstimatesQuery(
-        { 
-            startPoint: { latitude: startPoint.latitude,  longitude: startPoint.longitude, },
-            endPoint: {  latitude: endPoint.latitude, longitude: endPoint.longitude, },
-            seats: riders },{ skip: !startPoint || !endPoint, }
+    const estimates =
+        useGetEstimatesQuery(
+            {
+                startPoint: {
+                    latitude: startPoint.latitude,
+                    longitude: startPoint.longitude,
+                },
+                endPoint: {
+                    latitude: endPoint.latitude,
+                    longitude: endPoint.longitude,
+                },
+                seats: riders,
+            },
+            { skip: !startPoint || !endPoint }
         ).data || [];
-        
-    useCallback(() => { dispatch(user.load());}, []);
 
     return (
         <View display="flex" flex="1">
-            <ZStack flex="1" flexDirection="column" justifyContent="flex-end" overflow="hidden">
-                <View flex="3" width="100%" height="100%">
-                    <ServiceMap 
-                        onUpdateLocation={setStartPoint} 
-                        onUpdateDestination={setEndPoint} 
-                        onUpdateSeats={setRiders} 
-                        seats={riders}   
-                    />
-                </View>
-                <View flex="1" width="100%" height={-30}>
-                    <View>
-                        {estimates.map((estimate) => 
-                            (
-                                <Button 
-                                    key={estimate.id}
-                                    mt="3" mb="3" 
-                                    minWidth="100%" minHeight="10%" 
-                                    alignItems="center" justifyContent="center"
-                                    backgroundColor="muted.200" 
-                                    opacity="90%"
-                                    borderWidth="1"
-                                    borderLeftWidth="0"
-                                    borderRightWidth="0"
-                                    _hover={ {backgroundColor: "muted.300"} }
-                                    >
-                                        <RideEstimate 
-                                            estimate={estimate}
-                                        />
-                                </Button>
-                            )      
-                        )}
-                    </View>
-                    <View>
-                        <Button 
-                        borderTopRadius={20} 
-                        mt={5}
-                        shadow={9}
-                        backgroundColor="blueGray.900"
-                        _text={ {fontFamily:"roboto", fontWeight:"extrabold", fontSize:"md"} }
-                        _hover={ {backgroundColor:"blueGray.800"}}
-                        onPress={() => navigation.navigate("Request")} > 
-                           Confirm Ride
-                        </Button>
-                    </View>
-                </View>
-            </ZStack>
+            <TopDrawer>
+                <LocationInput
+                    onUpdateLocation={setStartPoint}
+                    placeholder={t(i18n)`Start Point`}
+                />
+                <LocationInput
+                    onUpdateLocation={setEndPoint}
+                    placeholder={t(i18n)`Destination`}
+                />
+                <NumberInput
+                    value={riders}
+                    onChangeValue={setRiders}
+                    placeholder={t(i18n)`Riders`}
+                />
+            </TopDrawer>
+            <View width="full" height="full">
+                <ServiceMap>
+                    <ServiceMap.Route waypoints={[startPoint, endPoint]} />
+                </ServiceMap>
+            </View>
+            <BottomDrawer>
+                <ScrollView showsHorizontalScrollIndicator={false}>
+                    {estimates.map((estimate) => (
+                        <RideEstimate estimate={estimate} />
+                    ))}
+                </ScrollView>
+            </BottomDrawer>
         </View>
     );
-};
+}

@@ -12,8 +12,8 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import { getStateFromPath, NavigationContainer } from "@react-navigation/native";
 import { CustomDrawer } from "@RideSaver/components";
-import { Provider, useSelector } from "react-redux";
-import { store, user } from "@RideSaver/store";
+import { useSelector } from "react-redux";
+import { user } from "@RideSaver/store";
 import { NavigationTheme } from "../theme";
 import { useLingui } from "@lingui/react";
 import { i18n } from "@lingui/core";
@@ -118,21 +118,19 @@ export default function AppNavigator() {
     const navigationTheme = useColorModeValue( NavigationTheme.Light, NavigationTheme.Dark);
 
     return( 
-        <Provider store={store}>
-            <NavigationContainer 
-                theme={navigationTheme} linking={linking}
-                documentTitle= {{ formatter: (options, route) => t(i18n)`${options?.title ?? route?.name} - RideSaver` }}>
+        <NavigationContainer 
+            theme={navigationTheme} linking={linking}
+            documentTitle= {{ formatter: (options, route) => t(i18n)`${options?.title ?? route?.name} - RideSaver` }}>
 
-                    <RootStack.Navigator screenOptions={{ headerShown: false }}>
+                <RootStack.Navigator screenOptions={{ headerShown: false }}>
 
-                                <RootStack.Screen 
-                                name="HomeTabs" 
-                                component={HomeTabs}  
-                                options= {({ route, navigation }) =>  ({ headerLeft: () => <Button onPress={navigation.navigate(route)}/>})}
-                                />
+                            <RootStack.Screen 
+                            name="HomeTabs" 
+                            component={HomeTabs}  
+                            options= {({ route, navigation }) =>  ({ headerLeft: () => <Button onPress={navigation.navigate(route)}/>})}
+                            />
 
-                    </RootStack.Navigator>
-            </NavigationContainer>
-        </Provider>
+                </RootStack.Navigator>
+        </NavigationContainer>
     );
 }
