@@ -123,7 +123,7 @@ const devConfig = {
         // Define __DEV__
         new DefinePlugin({
             "__DEV__": true,
-            "__MAPBOX_API_TOKEN__": process.env.MAPBOX_TOKEN
+            "process.env.__MAPBOX_API_TOKEN__": `"${process.env.MAPBOX_TOKEN}"`
         }),
     ],
     performance: {

@@ -17,6 +17,7 @@
         "@mapbox/mapbox-sdk": "^0.15.0",
         "@zxcvbn-ts/core": "^2.1.0",
         "babel-plugin-macros": "^3.1.0",
+        "expo-location": "^14.0.0",
         "expo-permissions": "^14.0.0",
         "formik": "^2.2.9",
         "opencage-api-client": "^1.0.0",

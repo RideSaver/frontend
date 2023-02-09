@@ -44,6 +44,7 @@ __metadata:
     "@zxcvbn-ts/core": ^2.1.0
     babel-plugin-macros: ^3.1.0
     expo: ^47.0.13
+    expo-location: ^14.0.0
     expo-permissions: ^14.0.0
     formik: ^2.2.9
     metro-react-native-babel-preset: ^0.74.1
@@ -163,7 +164,6 @@ __metadata:
     "@zxcvbn-ts/core": ^2.1.0
     babel-plugin-macros: ^3.1.0
     expo-image-picker: ^14.1.0
-    expo-location: ^15.0.1
     formik: ^2.2.9
     jest: ^29.4.1
     jest-watch-typeahead: ^2.2.2
@@ -2557,7 +2557,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/config-plugins@npm:5.0.4, @expo/config-plugins@npm:~5.0.3":
+"@expo/config-plugins@npm:5.0.4, @expo/config-plugins@npm:~5.0.0, @expo/config-plugins@npm:~5.0.3":
   version: 5.0.4
   resolution: "@expo/config-plugins@npm:5.0.4"
   dependencies:
@@ -12259,6 +12259,17 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: ef8115405a52cb78f8df8816e7e43f6b0632982d203734a2519dc5dc2712ca2a88bbc40ada401b53d9f160a142071bfa73da20f576917ea4a536883f8e0c507d
+  languageName: node
+  linkType: hard
+
+"expo-location@npm:^14.0.0":
+  version: 14.3.0
+  resolution: "expo-location@npm:14.3.0"
+  dependencies:
+    "@expo/config-plugins": ~5.0.0
+  peerDependencies:
+    expo: "*"
+  checksum: 0433f22aa3ef794997538c1d8d577858ae3e442a62f296c801c43cfe4f5909e6a3f27357b8a4de757cffe84968f5dca2be9e5dbe20e064e73a7206d6768ab6ea
   languageName: node
   linkType: hard
 

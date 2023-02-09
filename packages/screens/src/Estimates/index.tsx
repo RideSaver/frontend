@@ -20,14 +20,11 @@ import { NumberInput } from "@RideSaver/components";
 import { t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 
-import useCurrentLocation from "./currentLocation";
-
 export default function Estimates() {
     const [startPoint, setStartPoint] = useState<location>({
         latitude: 0,
         longitude: 0,
     });
-    useCurrentLocation(setStartPoint);
     const [endPoint, setEndPoint] = useState<location>({
         latitude: 0,
         longitude: 0,
@@ -39,12 +36,12 @@ export default function Estimates() {
         useGetEstimatesQuery(
             {
                 startPoint: {
-                    latitude: startPoint.latitude,
-                    longitude: startPoint.longitude,
+                    latitude: startPoint?.latitude,
+                    longitude: startPoint?.longitude,
                 },
                 endPoint: {
-                    latitude: endPoint.latitude,
-                    longitude: endPoint.longitude,
+                    latitude: endPoint?.latitude,
+                    longitude: endPoint?.longitude,
                 },
                 seats: riders,
             },
@@ -57,6 +54,7 @@ export default function Estimates() {
                 <LocationInput
                     onUpdateLocation={setStartPoint}
                     placeholder={t(i18n)`Start Point`}
+                    startWithCurrentLocation
                 />
                 <LocationInput
                     onUpdateLocation={setEndPoint}
@@ -70,13 +68,13 @@ export default function Estimates() {
             </TopDrawer>
             <View width="full" height="full">
                 <ServiceMap>
-                    <ServiceMap.Route waypoints={[startPoint, endPoint]} />
+                    <ServiceMap.Route waypoints={[startPoint, endPoint].filter(p => !!p)} />
                 </ServiceMap>
             </View>
             <BottomDrawer>
                 <ScrollView showsHorizontalScrollIndicator={false}>
                     {estimates.map((estimate) => (
-                        <RideEstimate estimate={estimate} />
+                        <RideEstimate estimate={estimate} key={estimate.id} />
                     ))}
                 </ScrollView>
             </BottomDrawer>

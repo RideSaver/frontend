@@ -21,14 +21,16 @@ export default function BottomDrawer({
     );
     return (
         <VStack
-            top={isOpen ? "0" : "5/6"}
-            position="absolute"
+            bottom="0"
+            position="fixed"
             zIndex={isOpen ? 50 : 30}
             w="full"
             backgroundColor="tertiary.400"
             maxHeight={isOpen ? "full" : "1/6"}
+            shadow="3"
+            borderTopRadius="md"
         >
-            <DrawerBar onPress={onToggle} />
+            <DrawerBar onPress={onToggle} flex="0" />
             {children}
         </VStack>
     );

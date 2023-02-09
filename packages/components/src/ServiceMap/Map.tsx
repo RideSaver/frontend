@@ -2,8 +2,6 @@ import React, { useRef, useState } from "react";
 import MapBox, { MapRef } from "react-map-gl";
 import PropTypes, { InferProps } from "prop-types";
 
-const MAPBOX_TOKEN = process.env.MAPBOX_TOKEN;
-
 export type location = {
     latitude: number;
     longitude: number;
@@ -18,7 +16,6 @@ type viewState = {
 };
 
 export default function Map({ children }: InferProps<typeof Map.propTypes>) {
-    const mapRef = useRef<MapRef>();
 
     const [viewState, setViewState] = useState<viewState>({
         /* Initial map view state */ latitude: 37.7751,
@@ -27,16 +24,16 @@ export default function Map({ children }: InferProps<typeof Map.propTypes>) {
         bearing: 0,
         pitch: 0,
     });
+    console.log(process.env.__MAPBOX_API_TOKEN__);
 
     return (
         <MapBox
             {...viewState}
-            ref={mapRef}
             onMove={(evt) => {
                 setViewState(evt.viewState);
             }}
             mapStyle="mapbox://styles/mapbox/light-v11"
-            mapboxAccessToken={MAPBOX_TOKEN}
+            mapboxAccessToken={process.env.__MAPBOX_API_TOKEN__}
             attributionControl={false}
             interactive={false}
         >

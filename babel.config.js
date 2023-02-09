@@ -3,8 +3,7 @@
 module.exports = {
     presets: ["@babel/preset-typescript", "@babel/preset-react"],
     plugins: [
-        "macros", 
-        "react-native-reanimated/plugin"
+        "macros"
     ],
     // root: __dirname,
     // rootMode: "root"
