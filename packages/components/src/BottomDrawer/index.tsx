@@ -28,7 +28,7 @@ export default function BottomDrawer({
             backgroundColor="tertiary.400"
             maxHeight={isOpen ? "full" : "1/6"}
             shadow="3"
-            borderTopRadius="md"
+            borderTopRadius="2xl"
         >
             <DrawerBar onPress={onToggle} flex="0" />
             {children}

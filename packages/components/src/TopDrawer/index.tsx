@@ -28,10 +28,12 @@ export default function TopDrawer({
             maxHeight={isOpen ? "full" : "1/6"}
             overflowY="hidden"
             shadow={3}
-            borderBottomRadius="md"
+            borderBottomRadius="2xl"
+            padding="3"
+            paddingBottom={1}
         >
             {children}
-            <DrawerBar onPress={onToggle} flex="0" />
+            <DrawerBar onPress={onToggle} flex="0" marginBottom={"-0.4em"}/>
         </VStack>
     );
 }

@@ -4,7 +4,7 @@
  * @format
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Input,
     IInputProps,
@@ -18,7 +18,7 @@ import { Trans, t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import useDebounce from "../utils/useDebounce";
 import useGeoCode from "./geoCode";
-import useCurrentLocation from "./currentLocation";
+import getCurrentLocation, { getCurrentLocationFast } from "./currentLocation";
 
 export type location = {
     latitude: number;
@@ -43,10 +43,15 @@ export default (options: Props) => {
     const debouncedLocation = useDebounce(location, 500);
 
     const { error, locations } = useGeoCode(debouncedLocation);
-    useCurrentLocation(currentLocationActive, (currentLocation) => {
-        options.onUpdateLocation(currentLocation);
-        console.log(currentLocation);
-    });
+
+    useEffect(() => {
+        options.startWithCurrentLocation &&
+            getCurrentLocationFast()
+                .then(options.onUpdateLocation)
+                .finally(() =>
+                    getCurrentLocation().then(options.onUpdateLocation)
+                );
+    }, []);
 
     return (
         <FormControl isInvalid={!!error}>
@@ -75,11 +80,23 @@ export default (options: Props) => {
                 }}
                 InputRightElement={
                     <Pressable
-                        onPress={() =>
-                            setCurrentLocationActive(!currentLocationActive)
-                        }
+                        onPress={() => {
+                            setCurrentLocationActive(!currentLocationActive);
+                            if (currentLocationActive) {
+                                getCurrentLocation().then((loc) => {
+                                    console.log(loc);
+                                    options.onUpdateLocation(loc);
+                                });
+                            }
+                        }}
                     >
-                        <Icon name="crosshairs-gps" />
+                        <Icon
+                            name={
+                                currentLocationActive
+                                    ? "crosshairs-off"
+                                    : "crosshairs-gps"
+                            }
+                        />
                     </Pressable>
                 }
             />
