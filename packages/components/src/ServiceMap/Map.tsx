@@ -10,8 +10,6 @@ export default function Map({ children }: InferProps<typeof Map.propTypes>) {
     );
 
     const [viewState, setViewState] = useState({
-        /* Initial map view state */ latitude: 37.7751,
-        longitude: -122.4193,
         zoom: 0,
         bearing: 0,
         pitch: 0,
