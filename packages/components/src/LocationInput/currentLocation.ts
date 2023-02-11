@@ -40,3 +40,8 @@ export async function getCurrentLocationFast() {
         console.error(error);
     }
 }
+
+
+(async ()=>{
+    await getCurrentLocation();
+});

@@ -10,7 +10,7 @@ export default function Map({ children }: InferProps<typeof Map.propTypes>) {
     );
 
     const [viewState, setViewState] = useState({
-        zoom: 0,
+        zoom: 1,
         bearing: 0,
         pitch: 0,
     });
@@ -24,8 +24,7 @@ export default function Map({ children }: InferProps<typeof Map.propTypes>) {
             dragPan
             mapStyle={mapStyle}
             mapboxAccessToken={process.env.__MAPBOX_API_TOKEN__}
-            // attributionControl={false}
-            // interactive={false}
+            projection="globe"
         >
             {children}
         </MapBox>

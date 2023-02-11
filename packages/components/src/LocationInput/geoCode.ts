@@ -61,3 +61,45 @@ export default function useGeoCode(
     }, [prox, address]);
     return locations;
 }
+
+export function useReverseGeoCode(location: {
+    latitude: number;
+    longitude: number;
+}) {
+    type GeoCodeError = ReturnType<
+        typeof geocodingClient.forwardGeocode
+    >["emitter"]["error"];
+    const [address, setAddress] = useState<{
+        error?: GeoCodeError;
+        address: string;
+    }>({
+        error: undefined,
+        address: "",
+    });
+    useEffect(() => {
+        if (typeof location == "object" && "latitude" in location && "longitude" in location)
+            geocodingClient
+                .reverseGeocode(
+                    location as unknown as Parameters<
+                        typeof geocodingClient.reverseGeocode
+                    >[0]
+                )
+                .send()
+                .then(({ body: location }) => {
+                    setAddress({
+                        ...location,
+                        address: (
+                            location.features[0] as unknown as { name: string }
+                        ).name,
+                        error: undefined,
+                    });
+                })
+                .catch((error) => {
+                    setAddress({
+                        ...address,
+                        error,
+                    });
+                });
+    }, [location]);
+    return address;
+}

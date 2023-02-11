@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from "react";
-import { View, ScrollView } from "native-base";
+import { View, ScrollView, useDisclose } from "native-base";
 import {
     ServiceMap,
     TopDrawer,
@@ -25,6 +25,7 @@ export default function Estimates() {
     const [endPoint, setEndPoint] = useState<location>(undefined);
     const [riders, setRiders] = useState(1);
     const { i18n } = useLingui();
+    const topBarDisclosure = useDisclose(false);
 
     const estimates =
         useGetEstimatesQuery(
@@ -44,12 +45,15 @@ export default function Estimates() {
 
     return (
         <View display="flex" flex="1">
-            <TopDrawer>
-                <LocationInput
-                    onUpdateLocation={setStartPoint}
-                    placeholder={t(i18n)`Start Point`}
-                    startWithCurrentLocation
-                />
+            <TopDrawer {...topBarDisclosure}>
+                {topBarDisclosure.isOpen ? ( // Restrict rendering to only when this is open
+                    <LocationInput
+                        onUpdateLocation={setStartPoint}
+                        location={startPoint}
+                        placeholder={t(i18n)`Start Point`}
+                        startWithCurrentLocation
+                    />
+                ) : null}
                 <LocationInput
                     onUpdateLocation={setEndPoint}
                     placeholder={t(i18n)`Destination`}
@@ -62,7 +66,9 @@ export default function Estimates() {
             </TopDrawer>
             <View width="full" height="full">
                 <ServiceMap>
-                    <ServiceMap.Route waypoints={[startPoint, endPoint].filter(p => !!p)} />
+                    <ServiceMap.Route
+                        waypoints={[startPoint, endPoint].filter((p) => !!p)}
+                    />
                 </ServiceMap>
             </View>
             <BottomDrawer>

@@ -4,12 +4,11 @@
  * @format
  */
 
-import React, { useState } from "react";
-import { Container, useDisclose, ScrollView, VStack } from "native-base";
+import React, { useImperativeHandle, forwardRef } from "react";
+import { useDisclose, VStack } from "native-base";
 import PropTypes, { InferProps } from "prop-types";
 import DrawerBar from "./DrawerBar";
 
-const Props = {};
 export default function BottomDrawer({
     children,
     ...props
@@ -41,5 +40,5 @@ BottomDrawer.propTypes = {
     isOpen: PropTypes.bool,
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
-    onToggle: PropTypes.func,
+    onToggle: PropTypes.func
 };

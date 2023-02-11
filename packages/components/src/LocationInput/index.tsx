@@ -17,8 +17,9 @@ import {
 import { Trans, t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import useDebounce from "../utils/useDebounce";
-import useGeoCode from "./geoCode";
+import useGeoCode, { useReverseGeoCode } from "./geoCode";
 import getCurrentLocation, { getCurrentLocationFast } from "./currentLocation";
+import { propsFlattener } from "native-base/lib/typescript/hooks/useThemeProps/propsFlattener";
 
 export type location = {
     latitude: number;
@@ -34,7 +35,9 @@ interface Props extends Partial<IInputProps> {
 export default (options: Props) => {
     const { i18n } = useLingui();
 
-    const [location, setLocation] = useState("");
+    const [location, setLocation] = useState<string>(
+        useReverseGeoCode(options.location).address
+    );
     const [currentLocationActive, setCurrentLocationActive] = useState(
         !!options.startWithCurrentLocation
     );
@@ -46,6 +49,7 @@ export default (options: Props) => {
 
     useEffect(() => {
         options.startWithCurrentLocation &&
+            !options.location &&
             getCurrentLocationFast()
                 .then(options.onUpdateLocation)
                 .finally(() =>
