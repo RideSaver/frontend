@@ -41,13 +41,26 @@ export default (options: Props) => {
     const [currentLocationActive, setCurrentLocationActive] = useState(
         !!options.startWithCurrentLocation
     );
+
+    const [currentLocation, setCurrentLocation] = useState(undefined);
+
     const [selectedOption, setSelectedOption] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclose(false);
     const debouncedLocation = useDebounce(location, 500);
 
-    const { error, locations } = useGeoCode(debouncedLocation);
+    const { error, locations } = useGeoCode(debouncedLocation, currentLocation);
 
     useEffect(() => {
+        async () => {
+            let currLoc = await getCurrentLocationFast();
+            setCurrentLocation(currLoc);
+            if (options.startWithCurrentLocation && !options.location)
+                options.onUpdateLocation(currLoc);
+            currLoc = await getCurrentLocation();
+            setCurrentLocation(currLoc);
+            if (options.startWithCurrentLocation && !options.location)
+                options.onUpdateLocation(currLoc);
+        };
         options.startWithCurrentLocation &&
             !options.location &&
             getCurrentLocationFast()

@@ -1,5 +1,5 @@
 import GeocodingService from "@mapbox/mapbox-sdk/services/geocoding";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useLingui } from "@lingui/react";
 
 const geocodingClient = GeocodingService({
@@ -12,6 +12,17 @@ export interface Location {
     latitude: number;
     longitude: number;
 }
+
+let cache: Map<
+    [
+        string,
+        {
+            latitude: number;
+            longitude: number;
+        }
+    ],
+    Location[]
+> = new Map();
 
 export default function useGeoCode(
     address: string,
@@ -32,6 +43,13 @@ export default function useGeoCode(
         locations: [],
     });
     useEffect(() => {
+        if (cache.has([address, prox]))
+            return setLocations({
+                ...locations,
+                error: undefined,
+                locations: cache.get([address, prox]),
+            });
+        console.log(prox);
         geocodingClient
             .forwardGeocode({
                 query: address,
@@ -41,6 +59,15 @@ export default function useGeoCode(
             })
             .send()
             .then(({ body: locations }) => {
+                cache.set(
+                    [address, prox],
+                    locations.features.map((feat) => ({
+                        longitude: feat.geometry.coordinates[0],
+                        latitude: feat.geometry.coordinates[1],
+                        name: feat.place_name,
+                        address: feat.address,
+                    }))
+                );
                 setLocations({
                     ...locations,
                     locations: locations.features.map((feat) => ({
@@ -77,7 +104,11 @@ export function useReverseGeoCode(location: {
         address: "",
     });
     useEffect(() => {
-        if (typeof location == "object" && "latitude" in location && "longitude" in location)
+        if (
+            typeof location == "object" &&
+            "latitude" in location &&
+            "longitude" in location
+        )
             geocodingClient
                 .reverseGeocode(
                     location as unknown as Parameters<

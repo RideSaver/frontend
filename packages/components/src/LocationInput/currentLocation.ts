@@ -3,13 +3,15 @@ import * as Location from "expo-location";
 export type location = { latitude: number; longitude: number };
 
 export default async function getCurrentLocation() {
+    console.time("Current Location Permissions");
     const { granted } = await Location.requestForegroundPermissionsAsync();
-    console.log(granted);
+    console.timeEnd("Current Location Permissions");
     if (!granted)
         throw new Error("Permission not granted for current location");
     try {
+        console.time("Current Location Search");
         const currentLocation = await Location.getCurrentPositionAsync();
-        console.log(currentLocation);
+        console.timeEnd("Current Location Search");
         return {
             latitude: currentLocation.coords.latitude,
             longitude: currentLocation.coords.longitude,
@@ -25,12 +27,10 @@ export default async function getCurrentLocation() {
  */
 export async function getCurrentLocationFast() {
     const { granted } = await Location.requestForegroundPermissionsAsync();
-    console.log(granted);
     if (!granted)
         throw new Error("Permission not granted for current location");
     try {
         const currentLocation = await Location.getLastKnownPositionAsync();
-        console.log(currentLocation);
         if(!currentLocation) return;
         return {
             latitude: currentLocation.coords.latitude,
@@ -42,6 +42,8 @@ export async function getCurrentLocationFast() {
 }
 
 
-(async ()=>{
+export async function warmup(){
+    console.info("Getting current location.");
     await getCurrentLocation();
-});
+    console.info("Got current location, YAY!");
+};

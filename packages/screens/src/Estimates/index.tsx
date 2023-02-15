@@ -4,7 +4,7 @@
  * @format
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, ScrollView, useDisclose } from "native-base";
 import {
     ServiceMap,
@@ -14,6 +14,7 @@ import {
 } from "@RideSaver/components";
 import { useGetEstimatesQuery } from "@RideSaver/api/redux";
 import type { location } from "@RideSaver/components/src/LocationInput";
+import getCurrentLocation from "@RideSaver/components/src/LocationInput/currentLocation";
 
 import RideEstimate from "./Estimate";
 import { NumberInput } from "@RideSaver/components";
@@ -26,6 +27,9 @@ export default function Estimates() {
     const [riders, setRiders] = useState(1);
     const { i18n } = useLingui();
     const topBarDisclosure = useDisclose(false);
+    useEffect(()=>{
+        getCurrentLocation().then(setStartPoint);
+    }, []);
 
     const estimates =
         useGetEstimatesQuery(

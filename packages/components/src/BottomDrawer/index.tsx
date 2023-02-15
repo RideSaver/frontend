@@ -4,7 +4,7 @@
  * @format
  */
 
-import React, { useImperativeHandle, forwardRef } from "react";
+import React from "react";
 import { useDisclose, VStack } from "native-base";
 import PropTypes, { InferProps } from "prop-types";
 import DrawerBar from "./DrawerBar";
@@ -14,10 +14,12 @@ export default function BottomDrawer({
     ...props
 }: InferProps<typeof BottomDrawer.propTypes>) {
     const defaultDisclose = useDisclose(false);
-    const { isOpen, onOpen, onClose, onToggle } = Object.assign(
-        defaultDisclose,
-        props
-    );
+    const {
+        isOpen,
+        onToggle = () => {
+            // Do nothing, we are non-interactive
+        },
+    } = "isOpen" in props ? props : defaultDisclose;
     return (
         <VStack
             bottom="0"
@@ -38,7 +40,5 @@ export default function BottomDrawer({
 BottomDrawer.propTypes = {
     children: PropTypes.node,
     isOpen: PropTypes.bool,
-    onOpen: PropTypes.func,
-    onClose: PropTypes.func,
-    onToggle: PropTypes.func
+    onToggle: PropTypes.func,
 };

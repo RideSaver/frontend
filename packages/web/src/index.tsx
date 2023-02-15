@@ -16,6 +16,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import i18n from "@RideSaver/internationalization";
 import { store } from "@RideSaver/store";
 import theme from "./theme";
+import { warmup } from "@RideSaver/components/src/LocationInput/currentLocation";
 
 /**
  * @brief
@@ -42,3 +43,5 @@ root && root.render(elem);
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+warmup();

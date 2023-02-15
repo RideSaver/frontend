@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Marker as MapBoxMarker } from "react-map-gl";
 import PropTypes, { InferProps } from "prop-types";
-import { Image } from "native-base";
+import { Icon } from "native-base";
 
 export default function Marker({
     latitude,
@@ -9,12 +9,12 @@ export default function Marker({
 }: InferProps<typeof Marker.propTypes>) {
     return useMemo(
         () => (
-            <MapBoxMarker longitude={longitude} latitude={latitude}>
-                <Image
-                    source={{
-                        uri: "https://img.icons8.com/color/48/null/place-marker--v1.png",
-                    }}
-                />
+            <MapBoxMarker
+                longitude={longitude}
+                latitude={latitude}
+                anchor="bottom"
+            >
+                <Icon name="map-marker" size="xl"/>
             </MapBoxMarker>
         ),
         [latitude, longitude]
