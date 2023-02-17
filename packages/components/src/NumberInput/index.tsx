@@ -4,9 +4,12 @@
  * @format
  */
 
-import React from "react";
-import { Platform } from "react-native";
+import React from 'react';
+import { LayoutAnimation, Platform } from "react-native";
 import { Input, IInputProps, Pressable, Icon } from "native-base";
+import { ScaleControl } from 'mapbox-gl';
+import { useIsPressed } from 'native-base/lib/typescript/components/primitives';
+import { background } from 'native-base/lib/typescript/theme/styled-system';
 // import { MaterialIcons } from "react-native-vector-icons";
 
 export default ({
@@ -23,31 +26,52 @@ export default ({
     minusIcon?: string;
     floatingPoint?: boolean;
 } & Omit<Partial<IInputProps>, "value">) => {
+
     return (
         <Input
+            variant="unstyled"
+            textAlign="center"
+            alignSelf="center"
+            width="150px" height="3vh"
+            rounded="sm"
+            _input={{   
+                fontSize:"md",
+                borderWidth:"1",
+                borderRadius:"lg",
+                borderColor:"coolGray.400",
+                color:"coolGray.100",
+                fontStyle:"Roboto",
+                fontWeight:"semibold",
+                ml:"3", mr:"3"
+            }}
             InputLeftElement={
-                <Pressable onPress={() => onChangeValue(value - 1)}>
+                <Pressable onPress={() => {
+                    onChangeValue(value - 1)
+                    }}>
                     <Icon
+                        rounded="sm"
                         name={minusIcon}
-                        size={4}
-                        mr="2"
+                        size={6}
                         ml="1"
                         color="coolGray.100"
+                        shadow="2"
                     />
                 </Pressable>
             }
             InputRightElement={
                 <Pressable onPress={() => onChangeValue(value + 1)}>
                     <Icon
+                        strokeWidth={10}
                         name={plusIcon}
-                        size={4}
-                        mr="2"
+                        size={6}
+                        mr="3"
+                        rounded="sm"
+                        shadow="2"
                         color="coolGray.100"
                     />
                 </Pressable>
             }
             value={`${value}`}
-            rounded="full"
             onChangeText={(text) => {
                 const filtered = text.replaceAll(/[^\d.]/g, "");
                 const val = floatingPoint
@@ -64,3 +88,4 @@ export default ({
         />
     );
 };
+

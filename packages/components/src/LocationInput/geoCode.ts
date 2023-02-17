@@ -3,7 +3,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useLingui } from "@lingui/react";
 
 const geocodingClient = GeocodingService({
-    accessToken: process.env.__MAPBOX_API_TOKEN__,
+    accessToken: "pk.eyJ1Ijoiam9obmludGhldXMiLCJhIjoiY2xibmU1dGMzMHFvZzNvb3NhNjhoMzJ5NCJ9.1YGZAf1llc75Jc6LT3Ooaw"
 });
 
 export interface Location {
@@ -13,7 +13,7 @@ export interface Location {
     longitude: number;
 }
 
-let cache: Map<
+const cache: Map<
     [
         string,
         {

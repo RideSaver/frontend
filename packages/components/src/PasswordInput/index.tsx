@@ -28,7 +28,8 @@ export default ({
     const [secure, setSecure] = React.useState(!visible);
     return (
         <FormControl>
-            <FormControl.Label>
+            <FormControl.Label fontFamily="Roboto" fontSize="sm" color="coolGray.800"
+                     _dark={{ color: "warmGray.50" }}>
                 <Trans>
                     Password
                 </Trans>

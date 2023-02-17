@@ -14,6 +14,7 @@
         "@RideSaver/store": "0.0.1",
         "@lingui/core": "^3.16.1",
         "@lingui/react": "^3.16.1",
+        "@mapbox/mapbox-gl-draw": "^1.4.1",
         "@mapbox/mapbox-sdk": "^0.15.0",
         "@zxcvbn-ts/core": "^2.1.0",
         "babel-plugin-macros": "^3.1.0",

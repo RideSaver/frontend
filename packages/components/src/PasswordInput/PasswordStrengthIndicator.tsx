@@ -33,7 +33,7 @@ export default ({
 
     return (
         <VStack testID={testID}>
-            <Progress
+            <Progress mt="1"
                 value={strength.score * 25}
                 colorScheme={strength.score < 2 ? "warning" : "emerald"}
                 testID="password-score-bar"
@@ -47,8 +47,9 @@ export default ({
                     )
                 }
             >
-                <FormControl.HelperText testID="password-strength-text">
+                <FormControl.HelperText testID="password-strength-text" mb="2">
                     <Trans comment="Number has an added unit">
+                        Password Strength: 
                         <SelectOrdinal
                             value={strength.score}
                             _0="Very Weak"
@@ -57,7 +58,7 @@ export default ({
                             _3="Strong"
                             _4="Very Strong"
                         />
-                        , Time to Crack:{" "}
+                        {/*, Time to Crack:{" "}
                         {Intl.NumberFormat(i18n.locale, {
                             style: "unit",
                             unit: saneTime[1],
@@ -73,7 +74,7 @@ export default ({
                             onlineNoThrottling10PerSecond="Online Cracking, rate limiting bypassed"
                             onlineThrottling100PerHour="Online Cracking"
                             other={undefined}
-                        />
+                        />*/}
                     </Trans>
                 </FormControl.HelperText>
             </Pressable>

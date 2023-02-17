@@ -26,10 +26,17 @@ export default function BottomDrawer({
             position="fixed"
             zIndex={isOpen ? 50 : 30}
             w="full"
-            backgroundColor="tertiary.400"
             maxHeight={isOpen ? "full" : "1/6"}
             shadow="3"
+            borderTopWidth="1"
             borderTopRadius="2xl"
+            _light={{
+                backgroundColor:"trueGray.900"
+            }}
+            _dark={{
+                backgroundColor:"trueGray.900",
+                borderColor:"coolGray.400"
+            }}
         >
             <DrawerBar onPress={onToggle} flex="0" />
             {children}

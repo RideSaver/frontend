@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, useDisclose } from "native-base";
+import { View, ScrollView, useDisclose, Box, Text, HStack, Icon, InfoOutlineIcon } from "native-base";
 import {
     ServiceMap,
     TopDrawer,
@@ -54,19 +54,28 @@ export default function Estimates() {
                     <LocationInput
                         onUpdateLocation={setStartPoint}
                         location={startPoint}
-                        placeholder={t(i18n)`Start Point`}
+                        placeholder={t(i18n)`Pickup Location`}
                         startWithCurrentLocation
                     />
                 ) : null}
                 <LocationInput
                     onUpdateLocation={setEndPoint}
-                    placeholder={t(i18n)`Destination`}
+                    placeholder={t(i18n)`Where would you like to go?`}
+                    _dark={{
+                        placeholderTextColor:"coolGray.100"
+                    }}
                 />
+                <HStack space={4} alignSelf="center">
+                <Text color="coolGray.100" fontSize="md" fontWeight="semibold">
+                  Passengers?
+                </Text>
                 <NumberInput
                     value={riders}
                     onChangeValue={setRiders}
                     placeholder={t(i18n)`Riders`}
                 />
+                </HStack>
+
             </TopDrawer>
             <View width="full" height="full">
                 <ServiceMap>

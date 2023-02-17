@@ -13,6 +13,7 @@ import {
     Select,
     Icon,
     Pressable,
+    QuestionIcon,
 } from "native-base";
 import { Trans, t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
@@ -73,6 +74,17 @@ export default (options: Props) => {
     return (
         <FormControl isInvalid={!!error}>
             <Input
+                margin={3} marginTop={1}
+                _light={{
+                   _input:{
+                    color: "coolGray.200"
+                   }
+                }}
+                _dark={{
+                    _input:{
+                     color: "coolGray.200"
+                    }
+                 }}
                 onChangeText={(text) => {
                     if (currentLocationActive) {
                         setLocation("");
@@ -95,27 +107,7 @@ export default (options: Props) => {
                     if (typeof options.onFocus == "function")
                         options.onFocus(e);
                 }}
-                InputRightElement={
-                    <Pressable
-                        onPress={() => {
-                            setCurrentLocationActive(!currentLocationActive);
-                            if (currentLocationActive) {
-                                getCurrentLocation().then((loc) => {
-                                    console.log(loc);
-                                    options.onUpdateLocation(loc);
-                                });
-                            }
-                        }}
-                    >
-                        <Icon
-                            name={
-                                currentLocationActive
-                                    ? "crosshairs-off"
-                                    : "crosshairs-gps"
-                            }
-                        />
-                    </Pressable>
-                }
+                InputLeftElement={<QuestionIcon name="question" marginLeft="2" color="light.200"/>}
             />
             {isOpen ? (
                 <Select
@@ -132,7 +124,7 @@ export default (options: Props) => {
                 </Select>
             ) : undefined}
             <FormControl.ErrorMessage testID="location-error-message">
-                <Trans>An error occured during geocoding</Trans>
+                <Trans>An error occurred during geocoding</Trans>
             </FormControl.ErrorMessage>
         </FormControl>
     );

@@ -23,7 +23,7 @@ export default function Map({ children }: InferProps<typeof Map.propTypes>) {
             }}
             dragPan
             mapStyle={mapStyle}
-            mapboxAccessToken={process.env.__MAPBOX_API_TOKEN__}
+            mapboxAccessToken=""
             // projection="globe"
         >
             {children}

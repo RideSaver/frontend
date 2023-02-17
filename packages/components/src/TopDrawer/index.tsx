@@ -4,8 +4,8 @@
  * @format
  */
 
-import React, { useState } from "react";
-import { Container, useDisclose, ScrollView, VStack } from "native-base";
+import React from "react";
+import { useDisclose, VStack } from "native-base";
 import PropTypes, { InferProps } from "prop-types";
 import DrawerBar from "./DrawerBar";
 
@@ -23,14 +23,20 @@ export default function TopDrawer({
             top="0"
             position="absolute"
             zIndex={isOpen ? 50 : 30}
-            w="full"
-            backgroundColor="tertiary.400"
+            w="full"            
             maxHeight={isOpen ? "full" : "1/6"}
             overflowY="hidden"
             shadow={3}
-            borderBottomRadius="2xl"
-            padding="3"
-            paddingBottom={1}
+            borderBottomRadius="full"
+            borderBottomWidth="1"
+            padding={2} paddingBottom={1}
+            _light={{
+                backgroundColor: "trueGray.900",
+            }}
+            _dark={{
+                backgroundColor:"trueGray.900",
+                borderColor: "coolGray.400"
+            }}
         >
             {children}
             <DrawerBar onPress={onToggle} flex="0" marginBottom={"-0.4em"}/>

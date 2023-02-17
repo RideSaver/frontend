@@ -91,7 +91,7 @@ function HomeTabs()
         return( 
         <RootDrawer.Navigator
             initialRouteName={token === undefined ? "Login" : "Estimates"} useLegacyImplementation
-            screenOptions={({ navigation }) => ({ headerLeft: () => ( <Icon name="menu" onPress={() => navigation.openDrawer()}/>)})}       
+            screenOptions={({ navigation }) => ({ headerLeft: () => ( <Icon ml="3" name="menu" onPress={() => navigation.openDrawer()}/>)})}       
             drawerContent={(props) => ( <CustomDrawer {...props} toggleColorMode={toggleColorMode} colorMode={colorMode}/>)}>
             {token === undefined ? 
                 (
